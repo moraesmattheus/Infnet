@@ -1,0 +1,11 @@
+{
+  // ==============================================================================
+  // ARQUIVO: .vscode/settings.json
+  // DATA/HORA: 29/10/2026 20:50
+  // AUTOR: Antigravity / Mattheus
+  // FINALIDADE: Configurações do workspace VS Code para o infnet-app
+  // ==============================================================================
+  "files.encoding": "utf8",
+  "files.eol": "\n",
+  "editor.formatOnSave": true
+}

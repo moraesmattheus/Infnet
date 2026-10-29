@@ -1,0 +1,66 @@
+==============================================================================
+DADOS E EXTRAÇÃO DO APLICATIVO INSTITUTO INFNET (SAMSUNG S26 ULTRA)
+Data da extração: 29/10/2026 15:05
+==============================================================================
+
+1. INFORMAÇÕES GERAIS
+------------------------------------------------------------------------------
+Nome do App: Instituto Infnet
+Tipo: WebAPK (Progressive Web App - PWA empacotado pelo Google Chrome)
+Pacote (Package ID): org.chromium.webapk.af61b0fd8cdea50f9_v2
+Navegador Host: com.android.chrome (Google Chrome)
+Data de Instalação: 05/09/2026 05:03:17
+Tamanho do Binário: ~170 KB (293 KB instalado com caches e recursos)
+
+2. ENDEREÇOS E URLs ASSOCIADAS
+------------------------------------------------------------------------------
+URL Inicial (Start URL):
+https://infnet.online/?bb_sso_bypass_cache=5b755696360312d00d8206528980f926
+
+Domínio / Escopo (Scope):
+https://infnet.online/
+
+Ícone Original em Alta Resolução:
+https://infnet.online/wp-content/uploads/2022/10/cropped-infnet_logo-100x100-1-192x192.png
+
+3. CAMINHOS NO CELULAR (SAMSUNG S26 ULTRA)
+------------------------------------------------------------------------------
+- Caminho do APK (Binário):
+  /data/app/~~C4ypQT9tiYDuv_IpyGot1A==/org.chromium.webapk.af61b0fd8cdea50f9_v2-YxHYyZmG53aYEovouf3e0g==/base.apk
+
+- Caminho da pasta interna do WebAPK:
+  /data/user/0/org.chromium.webapk.af61b0fd8cdea50f9_v2/
+
+- Caminho onde ficam as sessões, cookies e dados de login:
+  /data/user/0/com.android.chrome/app_chrome/Default/
+  (Gerenciado pelo Chrome para a origem https://infnet.online)
+
+4. ARQUIVOS NESTA PASTA (NO SEU COMPUTADOR)
+------------------------------------------------------------------------------
+- \binario_apk\base.apk -> O binário APK original extraído do celular.
+- \conteudo_extraido\   -> Todo o conteúdo descompactado do APK:
+    * AndroidManifest.xml (Manifesto com as URLs e intenções de inicialização)
+    * classes.dex (Código compilado do launcher)
+    * resources.arsc (Tabela de recursos compilados)
+    * res\mipmap-nodpi-v4\app_icon_xxxhdpi.png (Ícone em resolução máxima)
+    * res\ (Ícones de splash screen e layout)
+
+5. COMO INSPECIONAR / EXTRAIR OS DADOS DE SESSÃO E COOKIES VIA PC
+------------------------------------------------------------------------------
+Como o aparelho não tem permissão de root (para preservar a garantia e o Samsung Knox),
+o Android isola a pasta /data/user/0/ no sistema de arquivos direto.
+Porém, como se trata de um WebAPK rodando no Chrome com depuração USB ativa:
+
+1. No celular, abra o aplicativo "Instituto Infnet".
+2. No seu computador, abra o Google Chrome (ou Edge / Brave / Vivaldi).
+3. Na barra de endereços do computador, digite:
+   chrome://inspect/#devices
+4. Seu Samsung S26 Ultra aparecerá listado, com o item "Instituto Infnet (infnet.online)".
+5. Clique em "inspect".
+6. Na janela de ferramentas do desenvolvedor (DevTools) que abrir:
+   - Vá na aba "Application" (ou Aplicativo).
+   - No menu lateral esquerdo:
+       * "Storage" -> "Cookies" -> https://infnet.online (Veja todas as sessões e tokens).
+       * "Local Storage" -> Chaves e dados persistidos.
+       * "IndexedDB" -> Dados de banco de dados offline salvos pelo app.
+==============================================================================

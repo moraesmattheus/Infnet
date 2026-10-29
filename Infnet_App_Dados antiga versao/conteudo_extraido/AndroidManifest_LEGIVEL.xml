@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:theme="http://schemas.android.com/apk/res/android" label="http://schemas.android.com/apk/res/android" 1="http://schemas.android.com/apk/res/android" @string/short_name="http://schemas.android.com/apk/res/android" DEV="75" org.chromium.webapk.af61b0fd8cdea50f9_v2="30" @string/short_name="42">
+  <uses-sdk android:theme="http://schemas.android.com/apk/res/android" compileSdkVersionCodename="http://schemas.android.com/apk/res/android">
+  </uses-sdk>
+  <uses-permission android:theme="http://schemas.android.com/apk/res/android">
+  </uses-permission>
+  <uses-permission android:theme="http://schemas.android.com/apk/res/android">
+  </uses-permission>
+  <queries>
+    <intent>
+      <action android:theme="http://schemas.android.com/apk/res/android">
+      </action>
+      <category android:theme="http://schemas.android.com/apk/res/android">
+      </category>
+      <data android:theme="http://schemas.android.com/apk/res/android">
+      </data>
+    </intent>
+    <intent>
+      <action android:theme="http://schemas.android.com/apk/res/android">
+      </action>
+      <data android:theme="http://schemas.android.com/apk/res/android">
+      </data>
+    </intent>
+  </queries>
+  <application android:theme="http://schemas.android.com/apk/res/android" attr_2131230729="http://schemas.android.com/apk/res/android" attr_2131165190="http://schemas.android.com/apk/res/android" theme="http://schemas.android.com/apk/res/android">
+    <activity android:theme="http://schemas.android.com/apk/res/android" attr_16973840="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.h2o.H2OTransparentLauncherActivity="http://schemas.android.com/apk/res/android" attr_4294967295="http://schemas.android.com/apk/res/android" attr_4294967295="http://schemas.android.com/apk/res/android">
+      <intent-filter android:theme="http://schemas.android.com/apk/res/android">
+        <action android:theme="http://schemas.android.com/apk/res/android">
+        </action>
+        <category android:theme="http://schemas.android.com/apk/res/android">
+        </category>
+        <category android:theme="http://schemas.android.com/apk/res/android">
+        </category>
+        <data android:theme="http://schemas.android.com/apk/res/android" https="http://schemas.android.com/apk/res/android" infnet.online="http://schemas.android.com/apk/res/android">
+        </data>
+      </intent-filter>
+      <intent-filter>
+        <action android:theme="http://schemas.android.com/apk/res/android">
+        </action>
+        <category android:theme="http://schemas.android.com/apk/res/android">
+        </category>
+        <data android:theme="http://schemas.android.com/apk/res/android" https="http://schemas.android.com/apk/res/android" infnet.online="http://schemas.android.com/apk/res/android">
+        </data>
+      </intent-filter>
+    </activity>
+    <activity android:theme="http://schemas.android.com/apk/res/android" attr_16973840="http://schemas.android.com/apk/res/android">
+    </activity>
+    <activity android:theme="http://schemas.android.com/apk/res/android" attr_2131296257="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.h2o.H2OOpaqueMainActivity="http://schemas.android.com/apk/res/android" attr_4294967295="http://schemas.android.com/apk/res/android" attr_4294967295="http://schemas.android.com/apk/res/android" icon="http://schemas.android.com/apk/res/android">
+      <intent-filter>
+        <action android:theme="http://schemas.android.com/apk/res/android">
+        </action>
+        <category android:theme="http://schemas.android.com/apk/res/android">
+        </category>
+      </intent-filter>
+      <meta-data android:theme="http://schemas.android.com/apk/res/android" android.app.shortcuts="http://schemas.android.com/apk/res/android">
+      </meta-data>
+    </activity>
+    <activity android:theme="http://schemas.android.com/apk/res/android" attr_2131296257="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.h2o.SplashActivity="http://schemas.android.com/apk/res/android" icon="http://schemas.android.com/apk/res/android">
+    </activity>
+    <provider android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.h2o.SplashContentProvider="http://schemas.android.com/apk/res/android" attr_4294967295="http://schemas.android.com/apk/res/android">
+    </provider>
+    <activity android:theme="http://schemas.android.com/apk/res/android" attr_16973840="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.h2o.H2OMainActivity="http://schemas.android.com/apk/res/android" theme="http://schemas.android.com/apk/res/android" attr_4294967295="http://schemas.android.com/apk/res/android">
+      <intent-filter>
+        <action android:theme="http://schemas.android.com/apk/res/android">
+        </action>
+        <category android:theme="http://schemas.android.com/apk/res/android">
+        </category>
+      </intent-filter>
+      <meta-data android:theme="http://schemas.android.com/apk/res/android" android.app.shortcuts="http://schemas.android.com/apk/res/android">
+      </meta-data>
+    </activity>
+    <activity android:theme="http://schemas.android.com/apk/res/android" attr_2131296256="http://schemas.android.com/apk/res/android">
+    </activity>
+    <meta-data android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.shellApkVersion="http://schemas.android.com/apk/res/android">
+    </meta-data>
+    <meta-data android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.runtimeHost="http://schemas.android.com/apk/res/android">
+    </meta-data>
+    <meta-data android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.runtimeHostApplicationName="http://schemas.android.com/apk/res/android">
+    </meta-data>
+    <meta-data android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.startUrl="http://schemas.android.com/apk/res/android">
+    </meta-data>
+    <meta-data android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.scope="http://schemas.android.com/apk/res/android">
+    </meta-data>
+    <meta-data android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.displayMode="http://schemas.android.com/apk/res/android">
+    </meta-data>
+    <meta-data android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.orientation="http://schemas.android.com/apk/res/android">
+    </meta-data>
+    <meta-data android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.themeColor="http://schemas.android.com/apk/res/android">
+    </meta-data>
+    <meta-data android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.darkThemeColor="http://schemas.android.com/apk/res/android">
+    </meta-data>
+    <meta-data android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.backgroundColor="http://schemas.android.com/apk/res/android">
+    </meta-data>
+    <meta-data android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.darkBackgroundColor="http://schemas.android.com/apk/res/android">
+    </meta-data>
+    <meta-data android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.defaultBackgroundColorId="http://schemas.android.com/apk/res/android">
+    </meta-data>
+    <meta-data android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.iconId="http://schemas.android.com/apk/res/android">
+    </meta-data>
+    <meta-data android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.splashId="http://schemas.android.com/apk/res/android">
+    </meta-data>
+    <meta-data android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.isSplashIconMaskableBooleanId="http://schemas.android.com/apk/res/android">
+    </meta-data>
+    <meta-data android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.distributor="http://schemas.android.com/apk/res/android">
+    </meta-data>
+    <meta-data android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.iconUrlsAndIconMurmur2Hashes="http://schemas.android.com/apk/res/android">
+    </meta-data>
+    <meta-data android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.webManifestUrl="http://schemas.android.com/apk/res/android">
+    </meta-data>
+    <meta-data android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.webManifestId="http://schemas.android.com/apk/res/android">
+    </meta-data>
+    <meta-data android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.appKey="http://schemas.android.com/apk/res/android">
+    </meta-data>
+    <meta-data android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.isArcChromeOs="http://schemas.android.com/apk/res/android">
+    </meta-data>
+    <meta-data android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.enableSiteSettingsShortcut="http://schemas.android.com/apk/res/android">
+    </meta-data>
+    <meta-data android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.hasCustomName="http://schemas.android.com/apk/res/android">
+    </meta-data>
+    <service android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.WebApkServiceFactory="http://schemas.android.com/apk/res/android">
+      <intent-filter>
+        <action android:theme="http://schemas.android.com/apk/res/android">
+        </action>
+        <category android:theme="http://schemas.android.com/apk/res/android">
+        </category>
+      </intent-filter>
+    </service>
+    <service android:theme="http://schemas.android.com/apk/res/android" org.chromium.webapk.shell_apk.IdentityService="http://schemas.android.com/apk/res/android">
+      <intent-filter>
+        <action android:theme="http://schemas.android.com/apk/res/android">
+        </action>
+      </intent-filter>
+    </service>
+  </application>
+</manifest>

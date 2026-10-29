@@ -1,0 +1,30 @@
+{
+  // ==============================================================================
+  // ARQUIVO: .vscode/tasks.json
+  // DATA/HORA: 29/10/2026 18:05
+  // AUTOR: Antigravity / Mattheus
+  // FINALIDADE: Tarefa do VS Code para abrir o frontend no emulador Pixel_Orion
+  //             com o atalho Ctrl+Shift+B ou pelo menu Terminal -> Run Task
+  // ==============================================================================
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "📱 Abrir no Emulador Pixel_Orion",
+      "type": "shell",
+      "command": ".\\abrir_no_emulador.bat",
+      "windows": {
+        "command": ".\\abrir_no_emulador.bat"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}

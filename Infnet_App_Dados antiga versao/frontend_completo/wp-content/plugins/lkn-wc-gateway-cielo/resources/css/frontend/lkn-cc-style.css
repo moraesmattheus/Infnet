@@ -1,0 +1,36 @@
+#lkn_ccno {
+    line-height: 1.6em;
+}
+
+#lkn_cc_expdate {
+    line-height: 1.6em;
+}
+
+#lkn_cc_cvc {
+    line-height: 1.6em;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.lkn-wc-gateway-cielo-input {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: .5em .8em !important;
+    line-height: 1.6em;
+    font-size: 1rem !important;
+    margin: 0px !important;
+}
+
+.input-select {
+    font-size: medium !important;
+    background-size: .8em !important;
+    padding: .5em .8em !important;
+}
+
+.credit-card-description {
+    text-align: center;
+    margin-bottom: 20px;
+}
