@@ -2,15 +2,19 @@
 <!--
 ================================================================================
 ARQUIVO: index.html
-DATA/HORA: 29/10/2026 23:55
+DATA/HORA: 30/10/2026 00:45
 AUTOR: Mattheus Moraes ("Marez") & Antigravity
-FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padrão.
-            Design System proprietário com inspiração em grifes de tecnologia
-            (Linear, Apple Developer, Vercel), logotipo vetorial em SVG puro
-            (zero pixelização), iluminação 3D com sombras em camadas (ambient +
-            key light contact + specular rim highlight), glassmorphism refinado,
-            suporte perfeito a Modo Escuro/Claro com persistência, dados 100%
-            reais do aluno Mattheus Phelipe (Bloco 26E4) e acessibilidade WCAG AAA.
+FINALIDADE: Portal do Aluno do Instituto Infnet — Versão Master Consolidada.
+            Seguindo à risca as diretrizes visuais e insights enviados pelo usuário:
+            1) Logotipo oficial original da Infnet (sem alteração) e cores da marca (#004B87).
+            2) Menu lateral deslizante (Drawer) estilo Figma/University App.
+            3) Tela de Login refinada em Glassmorphism com SSO Google (@al.infnet.edu.br).
+            4) Dashboard de Trilhas de Aprendizado com anéis de atividade (estilo Apple Rings)
+               e gráfico semanal de performance/frequência.
+            5) Pomodoro de Estudos interativo para foco por matéria (React Native / Python).
+            6) Página inicial completa com busca, banner de presença, aula ao vivo no Zoom,
+               prazos de TPs, materiais reais (Aula06.zip e lousa) e caderno offline.
+            7) Suporte nativo e persistente a Modo Escuro e Claro.
 ================================================================================
 -->
 <html lang="pt-BR" data-theme="dark">
@@ -20,52 +24,48 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
   <meta name="google" content="notranslate">
   <title>Instituto Infnet — Portal Acadêmico</title>
   
-  <!-- Favicon e Ícones Vetoriais em Alta Definição -->
-  <link rel="icon" type="image/svg+xml" href="assets/infnet_logo.svg">
+  <!-- Favicon Oficial da Infnet -->
+  <link rel="icon" type="image/png" href="assets/cropped-infnet_logo-100x100-1-192x192.png">
   <link rel="apple-touch-icon" href="assets/cropped-infnet_logo-100x100-1-192x192.png">
 
   <!-- Tipografia Oficial de Alta Performance: Plus Jakarta Sans + Inter + JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     /* ==========================================================================
-       BLOCO 1: TOKENS DE DESIGN SYSTEM & ELEVAÇÃO 3D (LIGHT & DARK MODES)
-       Data: 29/10/2026 23:55
-       Finalidade: Paleta institucional da Infnet (#004B87) com iluminação 3D,
-                   reflexos especulares (rim highlights) e glassmorphism de luxo.
+       BLOCO 1: TOKENS DE DESIGN SYSTEM & PALETA OFICIAL INSTITUTO INFNET
+       Data/Hora: 30/10/2026 00:45
+       Finalidade: Paleta institucional da Infnet (#004B87) e acabamento em vidro 3D.
        ========================================================================== */
     :root {
-      /* Identidade Oficial Instituto Infnet */
+      /* Identidade Oficial e Inegociável Instituto Infnet */
       --infnet-primary: #004B87;
-      --infnet-primary-glow: rgba(0, 75, 135, 0.45);
-      --infnet-deep: #002244;
-      --infnet-midnight: #001428;
+      --infnet-primary-glow: rgba(0, 75, 135, 0.4);
+      --infnet-navy-deep: #002747;
+      --infnet-navy-mid: #003865;
       --infnet-cyan: #0099FF;
       --infnet-sky: #38BDF8;
-      --infnet-electric: #00D2FF;
 
-      /* Tons Semânticos e Status Acadêmicos */
+      /* Tons Semânticos */
       --emerald: #10B981;
       --emerald-glow: rgba(16, 185, 129, 0.25);
       --emerald-subtle: rgba(16, 185, 129, 0.12);
       
       --amber: #F59E0B;
-      --amber-glow: rgba(245, 158, 11, 0.25);
       --amber-subtle: rgba(245, 158, 11, 0.12);
 
       --rose: #F43F5E;
-      --rose-glow: rgba(244, 63, 94, 0.25);
       --rose-subtle: rgba(244, 63, 94, 0.12);
 
-      /* Dimensões e Raios Ergonômicos */
+      /* Dimensões e Raios */
       --radius-sm: 10px;
       --radius-md: 16px;
-      --radius-lg: 24px;
-      --radius-xl: 32px;
+      --radius-lg: 22px;
+      --radius-xl: 30px;
       --radius-full: 9999px;
-      --header-h: 70px;
+      --header-h: 68px;
       --nav-h: 74px;
 
       /* Tipografia */
@@ -74,93 +74,74 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
       --font-mono: 'JetBrains Mono', monospace;
     }
 
-    /* MODO ESCURO (TEMA PADRÃO: DEEP TECH OLED / TITANIUM INFNET) */
+    /* TEMA ESCURO (DEEP TECH OLED COM CORES OFICIAIS INFNET) */
     [data-theme="dark"] {
-      --bg-base: #06090f;
-      --bg-gradient: radial-gradient(circle at 50% 0%, #0c1a30 0%, #06090f 75%);
-      --bg-mesh-1: rgba(0, 75, 135, 0.22);
-      --bg-mesh-2: rgba(0, 153, 255, 0.12);
+      --bg-base: #040811;
+      --bg-gradient: radial-gradient(circle at 50% 0%, #002244 0%, #040811 75%);
       
-      --surface: #0b111c;
-      --surface-glass: rgba(11, 17, 28, 0.82);
-      --surface-card: rgba(15, 23, 40, 0.75);
-      --surface-card-hover: rgba(21, 32, 54, 0.85);
-      --surface-elevated: #152033;
-      --surface-inset: #070c14;
+      --surface: #0a111e;
+      --surface-glass: rgba(10, 17, 30, 0.85);
+      --surface-card: rgba(14, 23, 42, 0.75);
+      --surface-card-hover: rgba(20, 32, 58, 0.85);
+      --surface-elevated: #152238;
+      --surface-inset: #060c16;
 
-      /* Bordas com Efeito Bisel 3D (Luz Incidente Superior) */
       --border-card: rgba(255, 255, 255, 0.08);
       --border-card-hover: rgba(56, 189, 248, 0.35);
       --border-subtle: rgba(255, 255, 255, 0.06);
       --border-rim: rgba(255, 255, 255, 0.14);
 
-      /* Tipografia */
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --text-subtle: #64748b;
-      --text-inverse: #06090f;
+      --text-inverse: #040811;
 
-      /* Sombras Profissionais em Múltiplas Camadas (3D Depth) */
-      --shadow-ambient: 0 1px 3px rgba(0, 0, 0, 0.5);
       --shadow-card: 
         0 1px 2px rgba(0, 0, 0, 0.5),
         0 8px 24px -4px rgba(0, 0, 0, 0.7),
         inset 0 1px 0 0 var(--border-rim);
-      --shadow-elevated: 
-        0 0 0 1px rgba(255, 255, 255, 0.08),
-        0 16px 40px -8px rgba(0, 0, 0, 0.85),
-        inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
       --shadow-hero:
-        0 20px 50px -10px rgba(0, 75, 135, 0.45),
+        0 20px 50px -10px rgba(0, 75, 135, 0.5),
         0 0 0 1px rgba(56, 189, 248, 0.25),
         inset 0 1px 0 0 rgba(255, 255, 255, 0.35);
-      --shadow-glow-cyan: 0 0 25px rgba(0, 153, 255, 0.35);
     }
 
-    /* MODO CLARO (ARQUITETURAL CRISTALINO / PORCELANA SUÍÇA) */
+    /* TEMA CLARO (CRISTALINO COM AZUL INSTITUCIONAL INFNET) */
     [data-theme="light"] {
       --bg-base: #f4f6fa;
-      --bg-gradient: radial-gradient(circle at 50% -10%, #e8f0fe 0%, #f4f6fa 65%);
-      --bg-mesh-1: rgba(0, 75, 135, 0.06);
-      --bg-mesh-2: rgba(2, 132, 199, 0.04);
+      --bg-gradient: radial-gradient(circle at 50% -10%, #e2ecf9 0%, #f4f6fa 65%);
 
       --surface: #ffffff;
       --surface-glass: rgba(255, 255, 255, 0.88);
-      --surface-card: rgba(255, 255, 255, 0.92);
+      --surface-card: rgba(255, 255, 255, 0.94);
       --surface-card-hover: #ffffff;
       --surface-elevated: #ffffff;
-      --surface-inset: #edf2f7;
+      --surface-inset: #edf2f8;
 
-      --border-card: rgba(0, 56, 101, 0.09);
-      --border-card-hover: rgba(0, 75, 135, 0.25);
+      --border-card: rgba(0, 75, 135, 0.1);
+      --border-card-hover: rgba(0, 75, 135, 0.3);
       --border-subtle: rgba(226, 232, 240, 0.85);
       --border-rim: rgba(255, 255, 255, 1.0);
 
-      --text-main: #0a1628;
+      --text-main: #002244;
       --text-muted: #475569;
       --text-subtle: #8292a6;
       --text-inverse: #ffffff;
 
-      --shadow-ambient: 0 1px 3px rgba(0, 39, 71, 0.05);
       --shadow-card: 
         0 1px 3px rgba(0, 39, 71, 0.04),
-        0 8px 24px -6px rgba(0, 39, 71, 0.07),
+        0 8px 24px -6px rgba(0, 39, 71, 0.08),
         inset 0 1px 0 0 var(--border-rim);
-      --shadow-elevated: 
-        0 0 0 1px rgba(0, 75, 135, 0.08),
-        0 16px 36px -8px rgba(0, 39, 71, 0.12),
-        inset 0 1px 0 0 rgba(255, 255, 255, 1.0);
       --shadow-hero:
-        0 16px 40px -8px rgba(0, 75, 135, 0.25),
+        0 16px 40px -8px rgba(0, 75, 135, 0.3),
         0 0 0 1px rgba(0, 75, 135, 0.15),
         inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
-      --shadow-glow-cyan: 0 0 20px rgba(0, 75, 135, 0.18);
     }
 
     /* ==========================================================================
-       BLOCO 2: RESET DE ALTA PERFORMANCE & ESTRUTURA GERAL
-       Data: 29/10/2026 23:55
-       Finalidade: Comportamento nativo de app iOS/Android, sem rolagem quebrada.
+       BLOCO 2: RESET & ESTRUTURA GERAL
+       Data/Hora: 30/10/2026 00:45
+       Finalidade: Comportamento nativo mobile e responsivo no desktop.
        ========================================================================== */
     * {
       box-sizing: border-box;
@@ -192,26 +173,12 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Efeito de Textura Microscópica de Luxo (Subtle Noise / Tech Grid) */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      background-image: radial-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 1px);
-      background-size: 24px 24px;
-      opacity: 0.6;
-    }
-
-    /* Moldura Principal do App (Proporção Premium Mobile & Desktop) */
     .app-frame {
       width: 100%;
       max-width: 480px;
       min-height: 100vh;
       background: var(--surface);
       position: relative;
-      z-index: 2;
       display: flex;
       flex-direction: column;
       box-shadow: 0 0 80px rgba(0, 20, 45, 0.25);
@@ -222,24 +189,21 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
         max-width: 480px;
         margin: 20px auto;
         min-height: calc(100vh - 40px);
-        border-radius: 40px;
+        border-radius: 36px;
         border: 1px solid var(--border-card);
-        box-shadow: 
-          0 25px 70px -15px rgba(0, 20, 50, 0.4),
-          0 0 0 1px var(--border-rim);
         overflow: hidden;
       }
     }
 
     /* ==========================================================================
-       BLOCO 3: HEADER GLASSMORPHIC & LOGOTIPO VETORIAL OFICIAL
-       Data: 29/10/2026 23:55
-       Finalidade: Barra com logotipo vetorial nítido (zero pixel) e ações rápidas.
+       BLOCO 3: HEADER COM MENU HAMBÚRGUER, LOGO OFICIAL & AÇÕES
+       Data/Hora: 30/10/2026 00:45
+       Finalidade: Barra superior com logotipo oficial da Infnet inegociável.
        ========================================================================== */
     .app-header {
       position: sticky;
       top: 0;
-      z-index: 50;
+      z-index: 40;
       height: var(--header-h);
       background: var(--surface-glass);
       backdrop-filter: blur(24px) saturate(190%);
@@ -248,111 +212,102 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 18px;
+      padding: 0 16px;
       box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.15);
-      transition: all 0.25s ease;
     }
 
-    .brand-link {
+    .header-left-group {
       display: flex;
       align-items: center;
-      text-decoration: none;
-      gap: 10px;
-      flex-shrink: 0;
+      gap: 12px;
     }
 
-    .brand-seal-img {
-      width: 42px;
-      height: 42px;
-      display: block;
-      flex-shrink: 0;
-      filter: drop-shadow(0 2px 6px rgba(0, 39, 71, 0.25));
-      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .brand-link:hover .brand-seal-img {
-      transform: scale(1.05);
-    }
-
-    .brand-text-col {
+    /* Botão Hambúrguer para Abrir o Menu Lateral (Drawer) */
+    .btn-hamburger {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-card);
+      background: var(--surface-card);
+      color: var(--text-main);
       display: flex;
       flex-direction: column;
+      align-items: center;
       justify-content: center;
+      gap: 4.5px;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      transition: all 0.2s;
     }
 
-    .brand-main-text {
+    .btn-hamburger span {
+      width: 18px;
+      height: 2px;
+      background: currentColor;
+      border-radius: var(--radius-full);
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .btn-hamburger:hover {
+      background: var(--surface-card-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Logotipo Oficial Original da Infnet */
+    .official-infnet-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .official-infnet-logo-img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: contain;
+      box-shadow: 0 2px 8px rgba(0, 75, 135, 0.3);
+      border: 1px solid rgba(0, 75, 135, 0.2);
+    }
+
+    .official-brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .official-brand-sub {
       font-family: var(--font-display);
-      font-size: 15px;
-      font-weight: 800;
-      color: var(--text-main);
-      letter-spacing: -0.02em;
-      line-height: 1.15;
-    }
-
-    .brand-tag-text {
-      font-family: var(--font-mono);
-      font-size: 9.5px;
+      font-size: 9px;
       font-weight: 700;
-      color: #0066b3;
-      letter-spacing: 0.12em;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
-      line-height: 1.2;
-      margin-top: 2px;
+      color: var(--text-muted);
+      line-height: 1;
     }
 
-    [data-theme="dark"] .brand-tag-text {
-      color: #38bdf8;
+    .official-brand-title {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--infnet-primary);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    [data-theme="dark"] .official-brand-title {
+      color: #ffffff;
     }
 
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
-    /* Status do Campus ao Vivo (Pill com Beacon Pulsante) */
-    .campus-live-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 5px 11px;
-      border-radius: var(--radius-full);
-      background: var(--emerald-subtle);
-      border: 1px solid rgba(16, 185, 129, 0.25);
-      color: var(--emerald);
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-    }
-
-    .beacon-pulse {
-      width: 7px;
-      height: 7px;
-      background: var(--emerald);
-      border-radius: 50%;
-      position: relative;
-    }
-
-    .beacon-pulse::after {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border-radius: 50%;
-      background: var(--emerald);
-      opacity: 0.6;
-      animation: beaconRipple 2s infinite ease-out;
-    }
-
-    @keyframes beaconRipple {
-      0% { transform: scale(1); opacity: 0.8; }
-      100% { transform: scale(2.6); opacity: 0; }
-    }
-
-    /* Botões Táteis com Acabamento 3D */
     .btn-action-glass {
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
       border-radius: var(--radius-sm);
       border: 1px solid var(--border-card);
       background: var(--surface-card);
@@ -362,55 +317,42 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
       justify-content: center;
       cursor: pointer;
       position: relative;
-      box-shadow: var(--shadow-ambient);
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.2s;
     }
 
     .btn-action-glass:hover {
       background: var(--surface-card-hover);
       color: var(--infnet-sky);
-      border-color: var(--border-card-hover);
       transform: translateY(-1px);
-    }
-
-    .btn-action-glass:active {
-      transform: scale(0.94) translateY(1px);
     }
 
     .badge-counter-3d {
       position: absolute;
-      top: -4px;
-      right: -4px;
-      background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+      top: -3px;
+      right: -3px;
+      background: var(--rose);
       color: white;
       font-family: var(--font-mono);
       font-size: 10px;
       font-weight: 700;
-      min-width: 18px;
-      height: 18px;
-      line-height: 18px;
+      min-width: 17px;
+      height: 17px;
+      line-height: 17px;
       text-align: center;
       border-radius: var(--radius-full);
       border: 2px solid var(--surface);
-      box-shadow: 0 2px 8px var(--rose-glow);
     }
 
     .user-avatar-top {
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
       border-radius: var(--radius-sm);
       border: 2px solid var(--infnet-primary);
       overflow: hidden;
       cursor: pointer;
       padding: 0;
-      position: relative;
       background: none;
       box-shadow: 0 0 10px var(--infnet-primary-glow);
-      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .user-avatar-top:hover {
-      transform: scale(1.05);
     }
 
     .user-avatar-top img {
@@ -420,202 +362,591 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
     }
 
     /* ==========================================================================
-       BLOCO 4: CONTEÚDO PRINCIPAL (MAIN & SEÇÕES)
-       Data: 29/10/2026 23:55
-       Finalidade: Organização tátil, fluida e com respiração visual.
+       BLOCO 4: MENU LATERAL DESLIZANTE (DRAWER COMO NO FIGMA DA UNIVERSITY APP)
+       Data/Hora: 30/10/2026 00:45
+       Finalidade: Drawer completo com perfil de Mattheus, navegação e ações.
        ========================================================================== */
-    .app-main {
-      flex: 1;
-      padding: 20px 18px calc(var(--nav-h) + 26px) 18px;
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .drawer-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 310px;
+      max-width: 85%;
+      background: var(--surface);
+      border-right: 1px solid var(--border-card);
+      box-shadow: 10px 0 40px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      transform: translateX(-100%);
+      transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 101;
       overflow-y: auto;
-      scroll-behavior: smooth;
     }
 
-    .view-pane {
-      display: none;
-      animation: paneEnter 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    .drawer-overlay.open .drawer-content {
+      transform: translateX(0);
     }
 
-    .view-pane.active {
-      display: block;
+    .drawer-profile-card {
+      padding: 24px 20px 20px 20px;
+      background: linear-gradient(135deg, rgba(0, 75, 135, 0.15) 0%, transparent 100%);
+      border-bottom: 1px solid var(--border-subtle);
     }
 
-    @keyframes paneEnter {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ==========================================================================
-       BLOCO 5: SAUDAÇÃO EXECUTIVA & BENTO DE STATUS ACADÊMICO
-       Data: 29/10/2026 23:55
-       Finalidade: Identificação refinada de Mattheus Moraes sem cards poluídos.
-       ========================================================================== */
-    .executive-welcome {
-      margin-bottom: 20px;
-    }
-
-    .welcome-topline {
+    .drawer-profile-avatar-row {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      margin-bottom: 4px;
+      gap: 12px;
+      margin-bottom: 12px;
     }
 
-    .greeting-title {
+    .drawer-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-md);
+      border: 2px solid var(--infnet-primary);
+      overflow: hidden;
+      box-shadow: 0 4px 12px var(--infnet-primary-glow);
+    }
+
+    .drawer-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .drawer-user-info h3 {
       font-family: var(--font-display);
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: -0.025em;
+      font-size: 15px;
+      font-weight: 700;
       color: var(--text-main);
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
 
-    .course-chip {
-      font-family: var(--font-mono);
+    .drawer-user-info p {
       font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .drawer-course-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
       font-weight: 600;
       color: var(--infnet-sky);
       background: rgba(56, 189, 248, 0.12);
       border: 1px solid rgba(56, 189, 248, 0.25);
       padding: 3px 8px;
       border-radius: var(--radius-full);
+      display: inline-block;
     }
 
-    .welcome-subtitle {
-      font-size: 13px;
-      color: var(--text-muted);
-      font-weight: 500;
-      margin-bottom: 14px;
-    }
-
-    /* Bento Row de 3 Métricas Acadêmicas Reais */
-    .bento-metrics-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .bento-metric-tile {
-      background: var(--surface-card);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-md);
-      padding: 12px 10px;
-      box-shadow: var(--shadow-card);
+    .drawer-menu-list {
+      padding: 14px 12px;
       display: flex;
       flex-direction: column;
-      position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(16px);
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      gap: 4px;
+      flex: 1;
     }
 
-    .bento-metric-tile:hover {
-      transform: translateY(-2px);
-      border-color: var(--border-card-hover);
+    .drawer-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border-radius: var(--radius-md);
+      color: var(--text-main);
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s;
     }
 
-    .bento-metric-tile::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.5), transparent);
+    .drawer-item:hover, .drawer-item.active {
+      background: var(--surface-card);
+      color: var(--infnet-sky);
+      border: 1px solid var(--border-card);
     }
 
-    .metric-label {
+    .drawer-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .drawer-icon {
+      font-size: 16px;
+      width: 20px;
+      text-align: center;
+    }
+
+    .drawer-pill-badge {
       font-family: var(--font-mono);
       font-size: 10px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-subtle);
-      margin-bottom: 4px;
+      padding: 2px 7px;
+      border-radius: var(--radius-full);
+      background: var(--surface-inset);
+      color: var(--text-muted);
     }
 
-    .metric-value-row {
+    .drawer-footer {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border-subtle);
       display: flex;
-      align-items: baseline;
-      gap: 4px;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-subtle);
     }
 
-    .metric-value {
+    /* ==========================================================================
+       BLOCO 5: TELA MODAL DE LOGIN EM VIDRO FOSCO (GLASSMORPHISM REFINADO)
+       Data/Hora: 30/10/2026 00:45
+       Finalidade: Modal de login/autenticação estilo imagem enviada pelo usuário.
+       ========================================================================== */
+    .login-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 120;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .login-modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .login-glass-card {
+      width: 100%;
+      max-width: 400px;
+      background: var(--surface-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-xl);
+      padding: 28px 24px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      position: relative;
+      animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalPop {
+      from { transform: scale(0.92) translateY(12px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .login-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--surface-inset);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .login-header-group {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .login-logo-mini {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: contain;
+      margin: 0 auto 10px auto;
+      display: block;
+      box-shadow: 0 4px 14px var(--infnet-primary-glow);
+    }
+
+    .login-header-group h2 {
       font-family: var(--font-display);
       font-size: 20px;
       font-weight: 800;
       color: var(--text-main);
-      letter-spacing: -0.03em;
+      letter-spacing: -0.02em;
     }
 
-    .metric-sub {
+    .login-header-group p {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Botão SSO Google Workspace Infnet */
+    .btn-google-infnet {
+      width: 100%;
+      height: 46px;
+      border-radius: var(--radius-md);
+      background: #ffffff;
+      color: #1f2937;
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      margin-bottom: 18px;
+      transition: all 0.2s;
+    }
+
+    .btn-google-infnet:hover {
+      background: #f8fafc;
+      transform: translateY(-1px);
+    }
+
+    .login-divider-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .login-divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border-subtle);
+    }
+
+    .login-divider-text {
+      font-family: var(--font-mono);
       font-size: 11px;
-      font-weight: 600;
+      color: var(--text-subtle);
+      text-transform: uppercase;
     }
 
-    .sub-emerald { color: var(--emerald); }
-    .sub-sky { color: var(--infnet-sky); }
+    .login-form-field {
+      margin-bottom: 14px;
+    }
+
+    .login-label {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-main);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .login-input-wrap {
+      position: relative;
+    }
+
+    .login-input {
+      width: 100%;
+      height: 44px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-card);
+      background: var(--surface-inset);
+      padding: 0 14px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-main);
+      transition: border-color 0.2s;
+    }
+
+    .login-input:focus {
+      border-color: var(--infnet-sky);
+    }
+
+    .btn-submit-login {
+      width: 100%;
+      height: 46px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--infnet-primary) 0%, #0070f3 100%);
+      color: #ffffff;
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 18px var(--infnet-primary-glow);
+      margin-top: 10px;
+      transition: transform 0.2s;
+    }
+
+    .btn-submit-login:active {
+      transform: scale(0.97);
+    }
 
     /* ==========================================================================
-       BLOCO 6: O CORAÇÃO DO PORTAL — "LIVE BROADCAST UNIT" (AULA DE HOJE)
-       Data: 29/10/2026 23:55
-       Finalidade: Hero card nível Apple / Linear com acabamento 3D espetacular.
+       BLOCO 6: CONTEÚDO PRINCIPAL (MAIN & SEÇÕES)
+       Data/Hora: 30/10/2026 00:45
+       Finalidade: Gerenciador de visualizações sem quebra de fluxo.
        ========================================================================== */
+    .app-main {
+      flex: 1;
+      padding: 18px 16px calc(var(--nav-h) + 26px) 16px;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+
+    .view-pane {
+      display: none;
+      animation: paneFade 0.25s ease-out forwards;
+    }
+
+    .view-pane.active {
+      display: block;
+    }
+
+    @keyframes paneFade {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================================
+       BLOCO 7: PÁGINA INICIAL (HOJE) COM BUSCA, ACHIEVEMENT & CONTEÚDO
+       Data/Hora: 30/10/2026 00:45
+       Finalidade: Home inspirada nos designs de Behance, Figma e Dribbble.
+       ========================================================================== */
+    /* Barra de Busca Inteligente com Filtro */
+    .smart-search-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .search-input-wrap {
+      flex: 1;
+      position: relative;
+    }
+
+    .search-input-field {
+      width: 100%;
+      height: 42px;
+      border-radius: var(--radius-full);
+      background: var(--surface-card);
+      border: 1px solid var(--border-card);
+      padding: 0 16px 0 38px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-main);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: border-color 0.2s;
+    }
+
+    .search-input-field:focus {
+      border-color: var(--infnet-sky);
+    }
+
+    .search-icon-lens {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-subtle);
+      pointer-events: none;
+    }
+
+    .btn-search-filter {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-card);
+      background: var(--surface-card);
+      color: var(--infnet-sky);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Banner de Conquista / Presença (Inspirado no Figma University App) */
+    .achievement-tracker-banner {
+      background: linear-gradient(135deg, rgba(0, 75, 135, 0.15) 0%, rgba(16, 185, 129, 0.1) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .achievement-text-col h4 {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .achievement-text-col p {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    .attendance-gauge-wrap {
+      width: 54px;
+      height: 54px;
+      position: relative;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .attendance-gauge-svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .gauge-bg-circle {
+      stroke: var(--surface-inset);
+      stroke-width: 4;
+      fill: none;
+    }
+
+    .gauge-fill-circle {
+      stroke: var(--emerald);
+      stroke-width: 4;
+      stroke-linecap: round;
+      fill: none;
+      stroke-dasharray: 140;
+      stroke-dashoffset: 14; /* 98% */
+      transition: stroke-dashoffset 1s ease;
+    }
+
+    .gauge-number-center {
+      position: absolute;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--emerald);
+    }
+
+    /* Fileira Horizontal de "Choose Subjects" (Inspirado no Behance) */
+    .subjects-chips-scroller {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 22px;
+      scrollbar-width: none;
+    }
+
+    .subjects-chips-scroller::-webkit-scrollbar { display: none; }
+
+    .subject-tile-square {
+      flex: 0 0 110px;
+      background: var(--surface-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 12px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      transition: all 0.2s;
+    }
+
+    .subject-tile-square:hover {
+      transform: translateY(-2px);
+      border-color: var(--infnet-sky);
+    }
+
+    .subject-icon-box {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .box-react { background: rgba(0, 153, 255, 0.15); color: #0099ff; }
+    .box-python { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+    .box-grad { background: rgba(168, 85, 247, 0.15); color: #a855f7; }
+
+    .subject-name-label {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+
+    /* CARD DE AULA AO VIVO (LIVE BROADCAST COM INFNET BLUE) */
     .hero-live-unit {
       position: relative;
       background: linear-gradient(135deg, #001e3b 0%, #003666 50%, #004b87 100%);
       border-radius: var(--radius-xl);
-      padding: 22px 20px;
+      padding: 20px 18px;
       color: #ffffff;
       box-shadow: var(--shadow-hero);
       overflow: hidden;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
       border: 1px solid rgba(255, 255, 255, 0.16);
-    }
-
-    /* Brilho Radial Ambient Tridimensional Atrás do Card */
-    .hero-live-unit::before {
-      content: '';
-      position: absolute;
-      top: -40px;
-      right: -40px;
-      width: 180px;
-      height: 180px;
-      background: radial-gradient(circle, rgba(0, 210, 255, 0.3) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    /* Reflexo Especular 3D de Vidro Curvado */
-    .hero-live-unit::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.6) 50%, transparent 100%);
     }
 
     .hero-header-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .broadcast-tag {
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      padding: 5px 12px;
+      padding: 4px 10px;
       border-radius: var(--radius-full);
       background: rgba(0, 0, 0, 0.35);
       border: 1px solid rgba(255, 255, 255, 0.18);
-      backdrop-filter: blur(12px);
       font-family: var(--font-mono);
       font-size: 11px;
       font-weight: 700;
@@ -625,8 +956,8 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
     }
 
     .broadcast-dot-live {
-      width: 8px;
-      height: 8px;
+      width: 7px;
+      height: 7px;
       background: #ff3b30;
       border-radius: 50%;
       box-shadow: 0 0 10px #ff3b30;
@@ -638,66 +969,38 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
       50% { opacity: 0.5; transform: scale(0.85); }
     }
 
-    .module-code-badge {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 0.7);
-      background: rgba(255, 255, 255, 0.1);
-      padding: 3px 8px;
-      border-radius: var(--radius-sm);
-    }
-
     .hero-class-title {
       font-family: var(--font-display);
-      font-size: 21px;
+      font-size: 19px;
       font-weight: 800;
       line-height: 1.25;
       letter-spacing: -0.025em;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       color: #ffffff;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
 
     .hero-instructor-row {
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 20px;
-    }
-
-    .instructor-avatar-mini {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      margin-bottom: 18px;
       font-size: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-    }
-
-    .instructor-name {
-      font-size: 13px;
-      font-weight: 500;
       color: rgba(255, 255, 255, 0.9);
     }
 
-    /* Botões de Ação Táctil do Broadcast */
     .hero-actions-grid {
       display: grid;
-      grid-template-columns: 1fr 48px;
+      grid-template-columns: 1fr 46px;
       gap: 10px;
     }
 
     .btn-enter-broadcast {
-      height: 48px;
+      height: 46px;
       border-radius: var(--radius-md);
       background: #ffffff;
-      color: var(--infnet-deep);
+      color: var(--infnet-navy-deep);
       font-family: var(--font-display);
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       border: none;
       display: flex;
@@ -705,149 +1008,95 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
       justify-content: center;
       gap: 8px;
       cursor: pointer;
-      box-shadow: 
-        0 4px 15px rgba(0, 0, 0, 0.25),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+      transition: all 0.2s;
     }
 
     .btn-enter-broadcast:hover {
       background: #f8fafc;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    }
-
-    .btn-enter-broadcast:active {
-      transform: scale(0.97) translateY(1px);
+      transform: translateY(-1px);
     }
 
     .btn-copy-broadcast {
-      height: 48px;
+      height: 46px;
       border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.15);
       border: 1px solid rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(12px);
       color: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.2s;
     }
 
-    .btn-copy-broadcast:hover {
-      background: rgba(255, 255, 255, 0.25);
-      transform: translateY(-2px);
-    }
-
-    .btn-copy-broadcast:active {
-      transform: scale(0.93);
-    }
-
-    /* ==========================================================================
-       BLOCO 7: BENTO DE ACESSO RÁPIDO (4 TILES TÁTEIS)
-       Data: 29/10/2026 23:55
-       Finalidade: Navegação instantânea com microinterações 3D.
-       ========================================================================== */
-    .quick-tiles-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 26px;
-    }
-
-    .quick-tile {
+    /* WIDGET DO POMODORO DE ESTUDOS NA HOME */
+    .home-pomodoro-widget {
       background: var(--surface-card);
       border: 1px solid var(--border-card);
       border-radius: var(--radius-lg);
       padding: 16px;
-      box-shadow: var(--shadow-card);
-      cursor: pointer;
       display: flex;
-      flex-direction: column;
+      align-items: center;
       justify-content: space-between;
-      min-height: 104px;
-      position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(16px);
-      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      margin-bottom: 22px;
+      box-shadow: var(--shadow-card);
     }
 
-    .quick-tile:hover {
-      transform: translateY(-2px);
-      border-color: var(--border-card-hover);
-      box-shadow: var(--shadow-elevated);
+    .pomo-widget-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
-    .quick-tile:active {
-      transform: scale(0.97);
-    }
-
-    .tile-icon-bubble {
-      width: 38px;
-      height: 38px;
-      border-radius: var(--radius-sm);
+    .pomo-widget-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: rgba(244, 63, 94, 0.12);
+      border: 1px solid rgba(244, 63, 94, 0.25);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
-      margin-bottom: 8px;
+      font-size: 20px;
     }
 
-    .bubble-blue {
-      background: rgba(0, 153, 255, 0.12);
-      color: #0099ff;
-      border: 1px solid rgba(0, 153, 255, 0.25);
-    }
-
-    .bubble-emerald {
-      background: rgba(16, 185, 129, 0.12);
-      color: #10b981;
-      border: 1px solid rgba(16, 185, 129, 0.25);
-    }
-
-    .bubble-amber {
-      background: rgba(245, 158, 11, 0.12);
-      color: #f59e0b;
-      border: 1px solid rgba(245, 158, 11, 0.25);
-    }
-
-    .bubble-purple {
-      background: rgba(168, 85, 247, 0.12);
-      color: #a855f7;
-      border: 1px solid rgba(168, 85, 247, 0.25);
-    }
-
-    .tile-title {
+    .pomo-widget-info h4 {
       font-family: var(--font-display);
       font-size: 13px;
       font-weight: 700;
       color: var(--text-main);
-      margin-bottom: 2px;
     }
 
-    .tile-meta {
+    .pomo-widget-info p {
       font-size: 11px;
       color: var(--text-muted);
-      font-weight: 500;
     }
 
-    /* ==========================================================================
-       BLOCO 8: CABEÇALHOS DE SEÇÃO & PRAZOS CRÍTICOS (TPS E ATS REAIS)
-       Data: 29/10/2026 23:55
-       Finalidade: Cards de entregas de alto valor com barra de progresso.
-       ========================================================================== */
-    .section-header-modern {
+    .btn-open-pomodoro {
+      padding: 7px 14px;
+      border-radius: var(--radius-full);
+      background: var(--infnet-primary);
+      color: #ffffff;
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--infnet-primary-glow);
+    }
+
+    /* PRAZOS DE TPS E ATS */
+    .section-headline-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 12px;
     }
 
-    .section-header-modern h3 {
+    .section-headline-bar h3 {
       font-family: var(--font-display);
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 800;
       letter-spacing: -0.02em;
       color: var(--text-main);
@@ -856,32 +1105,14 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
       gap: 8px;
     }
 
-    .section-pill-tag {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 700;
-      padding: 3px 8px;
-      border-radius: var(--radius-full);
-      background: var(--surface-inset);
-      color: var(--text-muted);
-      border: 1px solid var(--border-subtle);
-    }
-
-    /* Card de Prazo com Indicador de Urgência & Barra 3D */
     .deadline-card-luxury {
       background: var(--surface-card);
       border: 1px solid var(--border-card);
       border-radius: var(--radius-lg);
-      padding: 16px;
+      padding: 15px;
       box-shadow: var(--shadow-card);
-      margin-bottom: 12px;
-      backdrop-filter: blur(16px);
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .deadline-card-luxury:hover {
-      transform: translateY(-2px);
-      border-color: var(--border-card-hover);
+      margin-bottom: 10px;
+      transition: all 0.2s;
     }
 
     .deadline-top-line {
@@ -889,69 +1120,45 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
       align-items: flex-start;
       justify-content: space-between;
       gap: 12px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .deadline-info h4 {
       font-family: var(--font-display);
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       color: var(--text-main);
-      margin-bottom: 2px;
     }
 
     .deadline-info p {
-      font-size: 12px;
+      font-size: 11px;
       color: var(--text-muted);
-      font-weight: 500;
     }
 
-    /* Badges de Contagem Regressiva Elegantes */
     .countdown-pill {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
-      padding: 4px 9px;
+      padding: 3px 8px;
       border-radius: var(--radius-sm);
       white-space: nowrap;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
     }
 
-    .pill-urgent {
-      background: var(--rose-subtle);
-      color: var(--rose);
-      border: 1px solid rgba(244, 63, 94, 0.3);
-    }
+    .pill-urgent { background: var(--rose-subtle); color: var(--rose); border: 1px solid rgba(244,63,94,0.3); }
+    .pill-warning { background: var(--amber-subtle); color: var(--amber); border: 1px solid rgba(245,158,11,0.3); }
 
-    .pill-warning {
-      background: var(--amber-subtle);
-      color: var(--amber);
-      border: 1px solid rgba(245, 158, 11, 0.3);
-    }
-
-    .pill-safe {
-      background: var(--emerald-subtle);
-      color: var(--emerald);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-    }
-
-    /* Barra de Progresso Fina e Elegante */
     .timeline-progress-track {
       width: 100%;
       height: 4px;
       background: var(--surface-inset);
       border-radius: var(--radius-full);
       overflow: hidden;
-      margin-top: 10px;
-      position: relative;
+      margin: 8px 0;
     }
 
     .timeline-progress-fill {
       height: 100%;
       border-radius: var(--radius-full);
-      transition: width 0.6s ease;
     }
 
     .fill-rose { background: linear-gradient(90deg, #f43f5e, #fb7185); }
@@ -961,38 +1168,27 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 8px;
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: 10px;
       color: var(--text-subtle);
     }
 
-    /* ==========================================================================
-       BLOCO 9: MATERIAIS DE AULA (ARQUIVOS REAIS DA AULA 6)
-       Data: 29/10/2026 23:55
-       Finalidade: Lista limpa de downloads (Aula06.zip & lousa_aula6-1.pdf).
-       ========================================================================== */
+    /* MATERIAIS DE AULA */
     .material-card-row {
       background: var(--surface-card);
       border: 1px solid var(--border-card);
       border-radius: var(--radius-md);
-      padding: 14px 16px;
+      padding: 12px 14px;
       box-shadow: var(--shadow-card);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 10px;
-      transition: all 0.2s ease;
+      margin-bottom: 8px;
     }
 
-    .material-card-row:hover {
-      border-color: var(--border-card-hover);
-      transform: translateY(-1px);
-    }
-
-    .file-type-badge {
-      width: 40px;
-      height: 40px;
+    .file-badge-mini {
+      width: 36px;
+      height: 36px;
       border-radius: var(--radius-sm);
       display: flex;
       align-items: center;
@@ -1000,41 +1196,18 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
       font-family: var(--font-mono);
       font-size: 11px;
       font-weight: 800;
-      flex-shrink: 0;
     }
 
-    .file-zip {
-      background: rgba(0, 153, 255, 0.12);
-      color: #0099ff;
-      border: 1px solid rgba(0, 153, 255, 0.25);
-    }
+    .badge-zip { background: rgba(0, 153, 255, 0.15); color: #0099ff; border: 1px solid rgba(0, 153, 255, 0.3); }
+    .badge-pdf { background: rgba(244, 63, 94, 0.15); color: #f43f5e; border: 1px solid rgba(244, 63, 94, 0.3); }
 
-    .file-pdf {
-      background: rgba(244, 63, 94, 0.12);
-      color: #f43f5e;
-      border: 1px solid rgba(244, 63, 94, 0.25);
-    }
-
-    .material-info {
-      flex: 1;
-      margin: 0 14px;
-    }
-
-    .material-info h5 {
-      font-family: var(--font-display);
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text-main);
-    }
-
-    .material-info p {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
+    .material-meta { flex: 1; margin: 0 12px; }
+    .material-meta h5 { font-family: var(--font-display); font-size: 13px; font-weight: 700; color: var(--text-main); }
+    .material-meta p { font-size: 11px; color: var(--text-muted); }
 
     .btn-download-tactile {
-      width: 36px;
-      height: 36px;
+      width: 34px;
+      height: 34px;
       border-radius: var(--radius-sm);
       border: 1px solid var(--border-card);
       background: var(--surface-inset);
@@ -1043,205 +1216,320 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .btn-download-tactile:hover {
-      background: var(--infnet-primary);
-      color: #ffffff;
-      border-color: var(--infnet-primary);
-    }
-
-    .btn-download-tactile:active {
-      transform: scale(0.92);
     }
 
     /* ==========================================================================
-       BLOCO 10: CADERNO DIGITAL DE AULA (OFFLINE LOCALSTORAGE)
-       Data: 29/10/2026 23:55
-       Finalidade: Bloco de anotações persistente com contador e badge verde.
+       BLOCO 8: DASHBOARD DE TRILHAS & PERFORMANCE (ESTILO DRIBBLE / APPLE RINGS)
+       Data/Hora: 30/10/2026 00:45
+       Finalidade: Visualização com anéis de atividade e gráfico semanal.
        ========================================================================== */
-    .digital-notebook-card {
+    .rings-overview-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-xl);
+      padding: 20px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .activity-rings-svg-wrap {
+      width: 110px;
+      height: 110px;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .rings-legend-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .ring-legend-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+    }
+
+    .legend-dot-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .dot-infnet { width: 8px; height: 8px; border-radius: 50%; background: #004b87; }
+    .dot-cyan { width: 8px; height: 8px; border-radius: 50%; background: #0099ff; }
+    .dot-emerald { width: 8px; height: 8px; border-radius: 50%; background: #10b981; }
+
+    .legend-value {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    /* Gráfico Semanal de Horas & Frequência */
+    .weekly-chart-card {
       background: var(--surface-card);
       border: 1px solid var(--border-card);
       border-radius: var(--radius-lg);
       padding: 16px;
+      margin-bottom: 22px;
       box-shadow: var(--shadow-card);
-      margin-top: 20px;
     }
 
-    .notebook-header {
+    .chart-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .chart-header h4 {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .chart-bars-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      height: 110px;
+      padding: 0 4px 10px 4px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .bar-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .bar-track {
+      width: 14px;
+      height: 90px;
+      background: var(--surface-inset);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      width: 100%;
+      background: linear-gradient(180deg, var(--infnet-sky) 0%, var(--infnet-primary) 100%);
+      border-radius: var(--radius-full);
+      transition: height 0.6s ease;
+    }
+
+    .bar-day-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-subtle);
+      font-weight: 600;
+    }
+
+    /* Trilhas Curriculares Bloco 26E4 */
+    .track-course-box {
+      background: var(--surface-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .track-top-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 10px;
     }
 
-    .notebook-title {
+    .track-top-row h4 {
       font-family: var(--font-display);
       font-size: 13px;
       font-weight: 700;
       color: var(--text-main);
+    }
+
+    .track-steps-dots {
       display: flex;
-      align-items: center;
       gap: 6px;
+      margin-top: 10px;
     }
 
-    .sync-pill-ok {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: var(--emerald);
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .notebook-textarea {
-      width: 100%;
-      min-height: 84px;
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
+    .step-dot {
+      flex: 1;
+      height: 6px;
+      border-radius: var(--radius-full);
       background: var(--surface-inset);
-      padding: 12px;
-      font-family: var(--font-body);
-      font-size: 13px;
-      color: var(--text-main);
-      resize: vertical;
-      line-height: 1.5;
-      transition: border-color 0.2s;
     }
 
-    .notebook-textarea:focus {
-      border-color: var(--infnet-sky);
+    .step-done { background: var(--infnet-primary); }
+    .step-current { background: var(--infnet-sky); animation: stepGlow 1.5s infinite; }
+
+    @keyframes stepGlow {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
     }
 
     /* ==========================================================================
-       BLOCO 11: ASSISTENTE DO MANUAL DO ALUNO IA (RAG STREAM)
-       Data: 29/10/2026 23:55
-       Finalidade: Chat com IA respondendo regras acadêmicas da Infnet.
+       BLOCO 9: POMODORO DE ESTUDOS INTERATIVO (FOCO ACADÊMICO)
+       Data/Hora: 30/10/2026 00:45
+       Finalidade: Timer funcional para estudos do aluno Mattheus Moraes.
        ========================================================================== */
-    .ai-chat-interface {
+    .pomodoro-full-card {
       background: var(--surface-card);
       border: 1px solid var(--border-card);
-      border-radius: var(--radius-lg);
-      padding: 16px;
+      border-radius: var(--radius-xl);
+      padding: 26px 20px;
       box-shadow: var(--shadow-card);
-      display: flex;
-      flex-direction: column;
-      height: calc(100vh - 210px);
+      text-align: center;
+      margin-bottom: 20px;
     }
 
-    .chat-messages-container {
-      flex: 1;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      padding-right: 4px;
+    .pomo-subject-selector {
+      margin-bottom: 20px;
     }
 
-    .chat-bubble {
-      max-width: 88%;
-      padding: 12px 16px;
-      border-radius: 18px;
+    .pomo-select-dropdown {
+      width: 100%;
+      height: 42px;
+      border-radius: var(--radius-md);
+      background: var(--surface-inset);
+      border: 1px solid var(--border-card);
+      padding: 0 14px;
+      font-family: var(--font-display);
       font-size: 13px;
-      line-height: 1.55;
-    }
-
-    .bubble-bot {
-      align-self: flex-start;
-      background: var(--surface-inset);
-      color: var(--text-main);
-      border: 1px solid var(--border-subtle);
-      border-bottom-left-radius: 4px;
-    }
-
-    .bubble-user {
-      align-self: flex-end;
-      background: linear-gradient(135deg, #004b87 0%, #0070f3 100%);
-      color: #ffffff;
-      border-bottom-right-radius: 4px;
-      box-shadow: 0 4px 14px rgba(0, 112, 243, 0.35);
-    }
-
-    .chat-chips-scroll {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding: 10px 0;
-      scrollbar-width: none;
-    }
-
-    .chat-chips-scroll::-webkit-scrollbar { display: none; }
-
-    .chip-suggest-btn {
-      white-space: nowrap;
-      padding: 7px 12px;
-      border-radius: var(--radius-full);
-      background: var(--surface-inset);
-      border: 1px solid var(--border-subtle);
-      font-family: var(--font-body);
-      font-size: 11px;
       font-weight: 600;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all 0.2s ease;
+      color: var(--text-main);
     }
 
-    .chip-suggest-btn:hover {
-      background: var(--surface-elevated);
-      color: var(--infnet-sky);
-      border-color: var(--infnet-sky);
-    }
-
-    .chat-composer-box {
+    .pomo-circle-timer-wrap {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 20px auto;
+      position: relative;
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding-top: 8px;
-      border-top: 1px solid var(--border-subtle);
+      justify-content: center;
     }
 
-    .chat-input-field {
-      flex: 1;
-      height: 44px;
-      border-radius: var(--radius-full);
-      border: 1px solid var(--border-card);
-      background: var(--surface-inset);
-      padding: 0 16px;
-      font-family: var(--font-body);
-      font-size: 13px;
+    .pomo-svg-ring {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .pomo-ring-bg {
+      stroke: var(--surface-inset);
+      stroke-width: 8;
+      fill: none;
+    }
+
+    .pomo-ring-progress {
+      stroke: var(--rose);
+      stroke-width: 8;
+      stroke-linecap: round;
+      fill: none;
+      stroke-dasharray: 471;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 1s linear;
+    }
+
+    .pomo-digits-display {
+      position: absolute;
+      font-family: var(--font-mono);
+      font-size: 38px;
+      font-weight: 800;
       color: var(--text-main);
+      letter-spacing: -0.04em;
     }
 
-    .chat-input-field:focus {
-      border-color: var(--infnet-sky);
+    .pomo-mode-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--rose);
+      background: var(--rose-subtle);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      display: inline-block;
+      margin-bottom: 16px;
     }
 
-    .btn-chat-send {
+    .pomo-controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .btn-pomo-primary {
+      height: 48px;
+      padding: 0 28px;
+      border-radius: var(--radius-full);
+      background: linear-gradient(135deg, var(--rose) 0%, #e11d48 100%);
+      color: #ffffff;
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(244, 63, 94, 0.4);
+      transition: transform 0.2s;
+    }
+
+    .btn-pomo-secondary {
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      background: var(--infnet-primary);
-      color: #ffffff;
-      border: none;
+      background: var(--surface-inset);
+      border: 1px solid var(--border-card);
+      color: var(--text-main);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 4px 12px var(--infnet-primary-glow);
-      transition: transform 0.2s;
     }
 
-    .btn-chat-send:active {
-      transform: scale(0.92);
+    .pomo-stats-strip {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .pomo-stat-item h5 {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .pomo-stat-item p {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
     }
 
     /* ==========================================================================
-       BLOCO 12: BOTTOM FLOATING DOCK (TABS TÁTEIS COM VIDRO E PILL INDICATOR)
-       Data: 29/10/2026 23:55
-       Finalidade: Barra de navegação ultra-polida com haptic feedback visual.
+       BLOCO 10: BOTTOM NAVIGATION DOCK (FIXO COM VIDRO)
+       Data/Hora: 30/10/2026 00:45
+       Finalidade: 5 abas principais de acesso ultra-rápido.
        ========================================================================== */
     .bottom-dock {
       position: fixed;
@@ -1258,8 +1546,8 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
       display: flex;
       align-items: center;
       justify-content: space-around;
-      padding: 0 8px;
-      z-index: 60;
+      padding: 0 6px;
+      z-index: 50;
       box-shadow: 0 -4px 20px -8px rgba(0, 0, 0, 0.15);
     }
 
@@ -1274,44 +1562,33 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
       border: none;
       color: var(--text-subtle);
       font-family: var(--font-display);
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
       cursor: pointer;
-      padding: 8px 4px;
+      padding: 6px 2px;
       border-radius: var(--radius-md);
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.2s;
       position: relative;
     }
 
     .tab-item-dock svg {
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
       stroke-width: 2;
-      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .tab-item-dock:hover {
-      color: var(--text-main);
     }
 
     .tab-item-dock.active {
       color: var(--infnet-sky);
     }
 
-    .tab-item-dock.active svg {
-      transform: translateY(-2px);
-      stroke: var(--infnet-sky);
-    }
-
     .tab-item-dock.active::after {
       content: '';
       position: absolute;
-      bottom: 4px;
-      width: 16px;
-      height: 3px;
+      bottom: 2px;
+      width: 14px;
+      height: 2.5px;
       background: var(--infnet-sky);
       border-radius: var(--radius-full);
-      box-shadow: 0 0 8px var(--infnet-sky);
     }
   </style>
 </head>
@@ -1320,24 +1597,34 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
   <div class="app-frame">
 
     <!-- =======================================================================
-         BLOCO HEADER: BARRA DE NAVEGAÇÃO COM LOGO VETORIAL OFICIAL EM SVG
+         BLOCO HEADER: BARRA DE NAVEGAÇÃO COM LOGO OFICIAL INEGOCIÁVEL
          ======================================================================= -->
     <header class="app-header">
-      <a href="#" class="brand-link" aria-label="Instituto Infnet" onclick="switchView('pane-hoje'); return false;">
-        <img src="assets/infnet_seal_official.svg" alt="Instituto Infnet" class="brand-seal-img">
-        <div class="brand-text-col">
-          <span class="brand-main-text">Instituto Infnet</span>
-          <span class="brand-tag-text">PORTAL ACADÊMICO</span>
+      <div class="header-left-group">
+        <!-- Botão Hambúrguer (Abre o Drawer Lateral) -->
+        <button class="btn-hamburger" id="openDrawerBtn" title="Abrir Menu Lateral" aria-label="Menu Lateral">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <!-- Logotipo Oficial Original Instituto Infnet -->
+        <div class="official-infnet-brand" onclick="switchView('pane-hoje');">
+          <img src="assets/cropped-infnet_logo-100x100-1-192x192.png" alt="Instituto Infnet" class="official-infnet-logo-img">
+          <div class="official-brand-text">
+            <span class="official-brand-sub">INSTITUTO</span>
+            <span class="official-brand-title">INFNET</span>
+          </div>
         </div>
-      </a>
+      </div>
 
       <div class="header-actions">
         <!-- Alternador Dark / Light Mode -->
         <button class="btn-action-glass" id="themeToggleBtn" title="Alternar Modo Escuro / Claro" aria-label="Alternar tema">
-          <svg id="moonIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg id="moonIcon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
-          <svg id="sunIcon" style="display:none;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg id="sunIcon" style="display:none;" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -1350,16 +1637,16 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
           </svg>
         </button>
 
-        <!-- Sino de Notificações com Contador 3D -->
+        <!-- Sino de Notificações com Badge 3D -->
         <button class="btn-action-glass" onclick="openNotificationsModal()" title="Notificações Acadêmicas" aria-label="Notificações">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
             <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
           </svg>
           <span class="badge-counter-3d">2</span>
         </button>
 
-        <!-- Avatar do Estudante Mattheus Moraes -->
+        <!-- Avatar do Aluno Mattheus Moraes -->
         <button class="user-avatar-top" onclick="switchView('pane-perfil')" title="Meu Perfil">
           <img src="assets/mattheus_avatar.png" alt="Mattheus Phelipe">
         </button>
@@ -1367,61 +1654,227 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
     </header>
 
     <!-- =======================================================================
-         CONTEÚDO PRINCIPAL (MAIN COM AS 5 TELAS NATIVAS)
+         MENU LATERAL DESLIZANTE (DRAWER ESTILO FIGMA UNIVERSITY APP)
+         ======================================================================= -->
+    <div class="drawer-overlay" id="drawerOverlay">
+      <div class="drawer-content">
+        <!-- Perfil do Aluno no Topo do Menu -->
+        <div class="drawer-profile-card">
+          <div class="drawer-profile-avatar-row">
+            <div class="drawer-avatar">
+              <img src="assets/mattheus_avatar.png" alt="Mattheus Phelipe">
+            </div>
+            <div class="drawer-user-info">
+              <h3>Mattheus Phelipe</h3>
+              <p>mattheus.faria@al.infnet.edu.br</p>
+            </div>
+          </div>
+          <span class="drawer-course-tag">Engenharia de Software • 26E4</span>
+        </div>
+
+        <!-- Links de Navegação do Drawer -->
+        <div class="drawer-menu-list">
+          <a class="drawer-item active" onclick="navigateFromDrawer('pane-hoje')">
+            <div class="drawer-item-left">
+              <span class="drawer-icon">🏠</span>
+              <span>Página Inicial</span>
+            </div>
+          </a>
+
+          <a class="drawer-item" onclick="navigateFromDrawer('pane-trilhas')">
+            <div class="drawer-item-left">
+              <span class="drawer-icon">📊</span>
+              <span>Trilhas & Performance</span>
+            </div>
+            <span class="drawer-pill-badge">98% OK</span>
+          </a>
+
+          <a class="drawer-item" onclick="navigateFromDrawer('pane-pomodoro')">
+            <div class="drawer-item-left">
+              <span class="drawer-icon">⏱️</span>
+              <span>Pomodoro de Foco</span>
+            </div>
+            <span class="drawer-pill-badge" style="color: var(--rose);">25 min</span>
+          </a>
+
+          <a class="drawer-item" onclick="navigateFromDrawer('pane-materias')">
+            <div class="drawer-item-left">
+              <span class="drawer-icon">📚</span>
+              <span>Minhas Disciplinas</span>
+            </div>
+            <span class="drawer-pill-badge">2 ativas</span>
+          </a>
+
+          <a class="drawer-item" onclick="navigateFromDrawer('pane-feed')">
+            <div class="drawer-item-left">
+              <span class="drawer-icon">📢</span>
+              <span>Feed da Graduação</span>
+            </div>
+            <span class="drawer-pill-badge" style="color: var(--infnet-sky);">Novo</span>
+          </a>
+
+          <a class="drawer-item" onclick="navigateFromDrawer('pane-mensagens')">
+            <div class="drawer-item-left">
+              <span class="drawer-icon">💬</span>
+              <span>Recados & Coaching</span>
+            </div>
+            <span class="drawer-pill-badge" style="background: var(--rose); color: white;">1</span>
+          </a>
+
+          <a class="drawer-item" onclick="navigateFromDrawer('pane-manual')">
+            <div class="drawer-item-left">
+              <span class="drawer-icon">🤖</span>
+              <span>Manual do Aluno IA</span>
+            </div>
+          </a>
+
+          <a class="drawer-item" onclick="openLoginModal()">
+            <div class="drawer-item-left">
+              <span class="drawer-icon">🔐</span>
+              <span>Autenticação / SSO</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="drawer-footer">
+          <span>Instituto Infnet © 1994-2026</span>
+          <span style="font-family: var(--font-mono);">v2.4.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         MODAL DE LOGIN REFINADO EM VIDRO (GLASSMORPHISM)
+         ======================================================================= -->
+    <div class="login-modal-overlay" id="loginModalOverlay">
+      <div class="login-glass-card">
+        <button class="login-modal-close" onclick="closeLoginModal()">✕</button>
+
+        <div class="login-header-group">
+          <img src="assets/cropped-infnet_logo-100x100-1-192x192.png" alt="Infnet" class="login-logo-mini">
+          <h2>Portal Acadêmico</h2>
+          <p>Acesse com sua conta institucional Infnet</p>
+        </div>
+
+        <!-- Botão Google Workspace Oficial da Infnet -->
+        <button class="btn-google-infnet" onclick="alert('Autenticado com sucesso via Google Workspace Infnet:\nmattheus.faria@al.infnet.edu.br'); closeLoginModal();">
+          <svg width="18" height="18" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          <span>Entrar com Google (@al.infnet.edu.br)</span>
+        </button>
+
+        <div class="login-divider-row">
+          <div class="login-divider-line"></div>
+          <span class="login-divider-text">ou com matrícula</span>
+          <div class="login-divider-line"></div>
+        </div>
+
+        <form onsubmit="event.preventDefault(); alert('Login efetuado!'); closeLoginModal();">
+          <div class="login-form-field">
+            <label class="login-label">E-mail ou Matrícula</label>
+            <div class="login-input-wrap">
+              <input type="text" class="login-input" value="mattheus.faria@al.infnet.edu.br" required>
+            </div>
+          </div>
+
+          <div class="login-form-field">
+            <label class="login-label">Senha</label>
+            <div class="login-input-wrap">
+              <input type="password" class="login-input" value="••••••••••••" required>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit-login">
+            Acessar Portal
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         CONTEÚDO PRINCIPAL (MAIN COM AS VIEWS DO APLICATIVO)
          ======================================================================= -->
     <main class="app-main">
 
       <!-- =====================================================================
-           VIEW 1: 🏠 HOJE (HUB PRINCIPAL DO ALUNO)
+           VIEW 1: 🏠 PÁGINA INICIAL (HOJE)
            ===================================================================== -->
       <section id="pane-hoje" class="view-pane active">
 
-        <!-- Saudação e Identificação Executiva do Aluno -->
-        <div class="executive-welcome">
-          <div class="welcome-topline">
-            <h1 class="greeting-title">
-              Boa noite, Mattheus
-            </h1>
-            <span class="course-chip">Engenharia • 26E4</span>
+        <!-- Barra de Busca Inteligente (Inspirada no Behance / Travel App) -->
+        <div class="smart-search-row">
+          <div class="search-input-wrap">
+            <svg class="search-icon-lens" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" class="search-input-field" placeholder="Buscar aulas, TPs, materiais...">
           </div>
-          <p class="welcome-subtitle">Quinta-feira, 29 de Outubro • 2 entregas prioritárias</p>
+          <button class="btn-search-filter" onclick="switchView('pane-trilhas')" title="Ver Indicadores">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="4" y1="21" x2="4" y2="14"></line>
+              <line x1="4" y1="10" x2="4" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12" y2="3"></line>
+              <line x1="20" y1="21" x2="20" y2="16"></line>
+              <line x1="20" y1="12" x2="20" y2="3"></line>
+            </svg>
+          </button>
+        </div>
 
-          <!-- Bento Row de 3 Métricas Acadêmicas em Tempo Real -->
-          <div class="bento-metrics-row">
-            <div class="bento-metric-tile">
-              <span class="metric-label">CR Geral</span>
-              <div class="metric-value-row">
-                <span class="metric-value">9.4</span>
-                <span class="metric-sub sub-emerald">Top 5%</span>
-              </div>
-            </div>
-
-            <div class="bento-metric-tile">
-              <span class="metric-label">Presença</span>
-              <div class="metric-value-row">
-                <span class="metric-value">98%</span>
-                <span class="metric-sub sub-emerald">100% OK</span>
-              </div>
-            </div>
-
-            <div class="bento-metric-tile">
-              <span class="metric-label">Entregas</span>
-              <div class="metric-value-row">
-                <span class="metric-value">2</span>
-                <span class="metric-sub sub-sky">Em dia</span>
-              </div>
-            </div>
+        <!-- Banner de Conquista e Frequência (Inspirado no Figma University App) -->
+        <div class="achievement-tracker-banner">
+          <div class="achievement-text-col">
+            <h4>
+              <span>🎉</span>
+              <span>Parabéns, Mattheus!</span>
+            </h4>
+            <p>Você atingiu 98% de presença no trimestre. Critério acadêmico de 75% garantido.</p>
+          </div>
+          <div class="attendance-gauge-wrap">
+            <svg class="attendance-gauge-svg" viewBox="0 0 54 54">
+              <circle cx="27" cy="27" r="22" class="gauge-bg-circle"></circle>
+              <circle cx="27" cy="27" r="22" class="gauge-fill-circle"></circle>
+            </svg>
+            <span class="gauge-number-center">98%</span>
           </div>
         </div>
 
-        <!-- HERO CARD: LIVE BROADCAST UNIT (A AULA DE HOJE) -->
+        <!-- Seção: Escolha sua Disciplina (Choose Subjects do Behance) -->
+        <div class="subjects-chips-scroller">
+          <div class="subject-tile-square" onclick="openDisciplineDetails('React Native')">
+            <div class="subject-icon-box box-react">⚛️</div>
+            <span class="subject-name-label">React Native</span>
+          </div>
+
+          <div class="subject-tile-square" onclick="openDisciplineDetails('Processamento de Dados')">
+            <div class="subject-icon-box box-python">🐍</div>
+            <span class="subject-name-label">Python & Dados</span>
+          </div>
+
+          <div class="subject-tile-square" onclick="switchView('pane-trilhas')">
+            <div class="subject-icon-box" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">📊</div>
+            <span class="subject-name-label">Performance</span>
+          </div>
+
+          <div class="subject-tile-square" onclick="switchView('pane-pomodoro')">
+            <div class="subject-icon-box" style="background: rgba(244, 63, 94, 0.15); color: #f43f5e;">⏱️</div>
+            <span class="subject-name-label">Pomodoro</span>
+          </div>
+        </div>
+
+        <!-- CARD: AULA AO VIVO (LIVE CLASSES) -->
         <div class="hero-live-unit">
           <div class="hero-header-row">
             <div class="broadcast-tag">
               <span class="broadcast-dot-live"></span>
-              <span>Ao Vivo • Hoje às 19:00</span>
+              <span>Ao Vivo Hoje • 19:00</span>
             </div>
-            <span class="module-code-badge">Bloco 26E4</span>
+            <span style="font-family: var(--font-mono); font-size: 11px; background: rgba(255,255,255,0.1); padding: 3px 8px; border-radius: 6px;">Bloco 26E4</span>
           </div>
 
           <h2 class="hero-class-title">
@@ -1429,8 +1882,7 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
           </h2>
 
           <div class="hero-instructor-row">
-            <div class="instructor-avatar-mini">👩‍🏫</div>
-            <span class="instructor-name">Profa. Maria Cecília Rodrigues • Sala Virtual Zoom</span>
+            <span>👩‍🏫 Profa. Maria Cecília Rodrigues • Sala Virtual Zoom</span>
           </div>
 
           <div class="hero-actions-grid">
@@ -1451,45 +1903,24 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
           </div>
         </div>
 
-        <!-- BENTO TILES DE ACESSO RÁPIDO (4 TILES TÁTEIS) -->
-        <div class="quick-tiles-grid">
-          <div class="quick-tile" onclick="switchView('pane-materias')">
-            <div class="tile-icon-bubble bubble-blue">⚛️</div>
-            <div>
-              <div class="tile-title">Minhas Matérias</div>
-              <div class="tile-meta">2 ativas no bloco</div>
+        <!-- WIDGET RÁPIDO DO POMODORO DE ESTUDOS -->
+        <div class="home-pomodoro-widget">
+          <div class="pomo-widget-left">
+            <div class="pomo-widget-icon">🍅</div>
+            <div class="pomo-widget-info">
+              <h4>Modo Foco • Pomodoro</h4>
+              <p>Ciclos de 25 min para os TPs do Bloco</p>
             </div>
           </div>
-
-          <div class="quick-tile" onclick="switchView('pane-manual')">
-            <div class="tile-icon-bubble bubble-emerald">🤖</div>
-            <div>
-              <div class="tile-title">Manual IA</div>
-              <div class="tile-meta">Dúvidas acadêmicas</div>
-            </div>
-          </div>
-
-          <div class="quick-tile" onclick="switchView('pane-mensagens')">
-            <div class="tile-icon-bubble bubble-amber">💬</div>
-            <div>
-              <div class="tile-title">Recados & Coaching</div>
-              <div class="tile-meta">1 nova mensagem</div>
-            </div>
-          </div>
-
-          <div class="quick-tile" onclick="switchView('pane-feed')">
-            <div class="tile-icon-bubble bubble-purple">📢</div>
-            <div>
-              <div class="tile-title">Feed da Graduação</div>
-              <div class="tile-meta">Comunicados oficiais</div>
-            </div>
-          </div>
+          <button class="btn-open-pomodoro" onclick="switchView('pane-pomodoro')">
+            Iniciar Foco
+          </button>
         </div>
 
         <!-- SEÇÃO: PRAZOS CRÍTICOS (TPS E ATS REAIS) -->
-        <div class="section-header-modern">
+        <div class="section-headline-bar">
           <h3>
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
               <line x1="16" y1="2" x2="16" y2="6"></line>
               <line x1="8" y1="2" x2="8" y2="6"></line>
@@ -1497,30 +1928,26 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
             </svg>
             Prazos Críticos de Entregas
           </h3>
-          <span class="section-pill-tag">2 Pendentes</span>
+          <span style="font-family: var(--font-mono); font-size: 10px; color: var(--text-muted);">2 pendentes</span>
         </div>
 
-        <!-- Card: TP 1 React Native -->
         <div class="deadline-card-luxury">
           <div class="deadline-top-line">
             <div class="deadline-info">
               <h4>TP 1 • React Native & Expo</h4>
-              <p>Desenvolvimento Mobile [26E4] • Entrega no GitHub</p>
+              <p>Desenvolvimento Mobile [26E4] • GitHub</p>
             </div>
             <span class="countdown-pill pill-urgent">Faltam 4 dias</span>
           </div>
-
           <div class="timeline-progress-track">
             <div class="timeline-progress-fill fill-rose" style="width: 65%;"></div>
           </div>
-
           <div class="deadline-footer-row">
             <span>Prazo: 02/11 às 23:59</span>
-            <span style="color: var(--infnet-sky); font-weight: 600; cursor: pointer;" onclick="alert('Repositório: Envie a URL do GitHub no portal acadêmico.')">Ver Instruções ›</span>
+            <span style="color: var(--infnet-sky); font-weight: 600; cursor: pointer;" onclick="alert('Repositório: Envie o link do GitHub pelo portal.')">Instruções ›</span>
           </div>
         </div>
 
-        <!-- Card: TP 1 Processamento de Dados -->
         <div class="deadline-card-luxury">
           <div class="deadline-top-line">
             <div class="deadline-info">
@@ -1529,95 +1956,260 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
             </div>
             <span class="countdown-pill pill-warning">Faltam 8 dias</span>
           </div>
-
           <div class="timeline-progress-track">
             <div class="timeline-progress-fill fill-amber" style="width: 35%;"></div>
           </div>
-
           <div class="deadline-footer-row">
             <span>Prazo: 06/11 às 23:59</span>
-            <span style="color: var(--infnet-sky); font-weight: 600; cursor: pointer;" onclick="alert('Enunciado: Arquivo Jupyter Notebook e scripts na pasta da matéria.')">Ver Instruções ›</span>
+            <span style="color: var(--infnet-sky); font-weight: 600; cursor: pointer;" onclick="alert('Enunciado: Arquivos disponíveis na pasta da disciplina.')">Instruções ›</span>
           </div>
         </div>
 
-        <!-- SEÇÃO: MATERIAIS DA ÚLTIMA AULA (ARQUIVOS REAIS) -->
-        <div class="section-header-modern" style="margin-top: 24px;">
+        <!-- SEÇÃO: MATERIAIS DA AULA 6 (ARQUIVOS REAIS) -->
+        <div class="section-headline-bar" style="margin-top: 20px;">
           <h3>
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
               <polyline points="7 10 12 15 17 10"></polyline>
               <line x1="12" y1="15" x2="12" y2="3"></line>
             </svg>
             Materiais da Aula de Ontem
           </h3>
-          <span class="section-pill-tag">Aula 6</span>
+          <span style="font-family: var(--font-mono); font-size: 10px; color: var(--text-muted);">Aula 6</span>
         </div>
 
         <div class="material-card-row">
-          <div class="file-type-badge file-zip">ZIP</div>
-          <div class="material-info">
+          <div class="file-badge-mini badge-zip">ZIP</div>
+          <div class="material-meta">
             <h5>Aula06.zip</h5>
             <p>Códigos Python • Prof. Claudio Bonel (4 KB)</p>
           </div>
-          <button class="btn-download-tactile" title="Baixar arquivo" onclick="triggerDownload('Aula06.zip')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-          </button>
+          <button class="btn-download-tactile" onclick="triggerDownload('Aula06.zip')">⬇️</button>
         </div>
 
         <div class="material-card-row">
-          <div class="file-type-badge file-pdf">PDF</div>
-          <div class="material-info">
+          <div class="file-badge-mini badge-pdf">PDF</div>
+          <div class="material-meta">
             <h5>lousa_aula6-1.pdf</h5>
             <p>770 KB • Anotações do quadro virtual</p>
           </div>
-          <button class="btn-download-tactile" title="Baixar arquivo" onclick="triggerDownload('lousa_aula6-1.pdf')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-          </button>
-        </div>
-
-        <!-- CADERNO DIGITAL DE ANOTAÇÕES OFFLINE -->
-        <div class="digital-notebook-card">
-          <div class="notebook-header">
-            <div class="notebook-title">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 20h9"></path>
-                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-              </svg>
-              <span>Caderno de Aula (Persistência Offline)</span>
-            </div>
-            <div class="sync-pill-ok">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              <span>Salvo no dispositivo</span>
-            </div>
-          </div>
-          <textarea class="notebook-textarea" id="studentNotebook" placeholder="Anote conceitos importantes da aula ao vivo aqui..."></textarea>
+          <button class="btn-download-tactile" onclick="triggerDownload('lousa_aula6-1.pdf')">⬇️</button>
         </div>
 
       </section>
 
       <!-- =====================================================================
-           VIEW 2: 📚 MATÉRIAS DO BLOCO (DISCIPLINAS REAIS)
+           VIEW 2: 📊 TRILHAS & PERFORMANCE (DASHBOARD COM APPLE RINGS & GRÁFICO)
            ===================================================================== -->
-      <section id="pane-materias" class="view-pane">
-        <div class="section-header-modern">
-          <h3>Disciplinas em Andamento</h3>
-          <span class="section-pill-tag">Bloco 26E4</span>
+      <section id="pane-trilhas" class="view-pane">
+        <div class="section-headline-bar">
+          <h3>Trilhas & Performance Acadêmica</h3>
+          <span style="font-family: var(--font-mono); font-size: 10px; color: var(--emerald);">Atualizado Hoje</span>
         </div>
 
-        <!-- Card: React Native -->
+        <!-- Card de Anéis de Atividade (Inspirado no Apple Fitness / Dribbble) -->
+        <div class="rings-overview-card">
+          <div class="activity-rings-svg-wrap">
+            <svg viewBox="0 0 100 100" style="width: 100%; height: 100%; transform: rotate(-90deg);">
+              <!-- Anel 1: Presença (Infnet Blue #004B87) -->
+              <circle cx="50" cy="50" r="40" stroke="var(--surface-inset)" stroke-width="7" fill="none"/>
+              <circle cx="50" cy="50" r="40" stroke="#004B87" stroke-width="7" stroke-linecap="round" fill="none" stroke-dasharray="251" stroke-dashoffset="5"/>
+
+              <!-- Anel 2: TPs Entregues (Cyan #0099FF) -->
+              <circle cx="50" cy="50" r="28" stroke="var(--surface-inset)" stroke-width="7" fill="none"/>
+              <circle cx="50" cy="50" r="28" stroke="#0099FF" stroke-width="7" stroke-linecap="round" fill="none" stroke-dasharray="175" stroke-dashoffset="26"/>
+
+              <!-- Anel 3: CR Geral (Emerald #10B981) -->
+              <circle cx="50" cy="50" r="16" stroke="var(--surface-inset)" stroke-width="7" fill="none"/>
+              <circle cx="50" cy="50" r="16" stroke="#10B981" stroke-width="7" stroke-linecap="round" fill="none" stroke-dasharray="100" stroke-dashoffset="6"/>
+            </svg>
+          </div>
+
+          <div class="rings-legend-col">
+            <div class="ring-legend-item">
+              <span class="legend-dot-label">
+                <span class="dot-infnet"></span>
+                <span>Presença</span>
+              </span>
+              <span class="legend-value">98%</span>
+            </div>
+
+            <div class="ring-legend-item">
+              <span class="legend-dot-label">
+                <span class="dot-cyan"></span>
+                <span>TPs em Dia</span>
+              </span>
+              <span class="legend-value">85%</span>
+            </div>
+
+            <div class="ring-legend-item">
+              <span class="legend-dot-label">
+                <span class="dot-emerald"></span>
+                <span>CR Geral</span>
+              </span>
+              <span class="legend-value">9.4</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gráfico Semanal de Horas de Estudo (Inspirado no Dribbble Data App) -->
+        <div class="weekly-chart-card">
+          <div class="chart-header">
+            <h4>Horas de Estudo & Aulas (Esta Semana)</h4>
+            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--infnet-sky); font-weight: 700;">18.5h Total</span>
+          </div>
+
+          <div class="chart-bars-row">
+            <div class="bar-column">
+              <div class="bar-track"><div class="bar-fill" style="height: 50%;"></div></div>
+              <span class="bar-day-label">Seg</span>
+            </div>
+            <div class="bar-column">
+              <div class="bar-track"><div class="bar-fill" style="height: 80%;"></div></div>
+              <span class="bar-day-label">Ter</span>
+            </div>
+            <div class="bar-column">
+              <div class="bar-track"><div class="bar-fill" style="height: 95%;"></div></div>
+              <span class="bar-day-label">Qua</span>
+            </div>
+            <div class="bar-column">
+              <div class="bar-track"><div class="bar-fill" style="height: 100%;"></div></div>
+              <span class="bar-day-label" style="color: var(--infnet-sky); font-weight: 800;">Hoje</span>
+            </div>
+            <div class="bar-column">
+              <div class="bar-track"><div class="bar-fill" style="height: 40%;"></div></div>
+              <span class="bar-day-label">Sex</span>
+            </div>
+            <div class="bar-column">
+              <div class="bar-track"><div class="bar-fill" style="height: 25%;"></div></div>
+              <span class="bar-day-label">Sáb</span>
+            </div>
+            <div class="bar-column">
+              <div class="bar-track"><div class="bar-fill" style="height: 15%;"></div></div>
+              <span class="bar-day-label">Dom</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trilhas Disciplinares do Bloco 26E4 -->
+        <div class="section-headline-bar">
+          <h3>Trilha do Bloco 26E4</h3>
+        </div>
+
+        <div class="track-course-box">
+          <div class="track-top-row">
+            <h4>React Native & Mobile</h4>
+            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--infnet-sky);">Aula 7 de 8</span>
+          </div>
+          <p style="font-size: 11px; color: var(--text-muted);">Profa. Maria Cecília Rodrigues • TP 1 em andamento</p>
+          <div class="track-steps-dots">
+            <div class="step-dot step-done"></div>
+            <div class="step-dot step-done"></div>
+            <div class="step-dot step-done"></div>
+            <div class="step-dot step-done"></div>
+            <div class="step-dot step-done"></div>
+            <div class="step-dot step-done"></div>
+            <div class="step-dot step-current"></div>
+            <div class="step-dot"></div>
+          </div>
+        </div>
+
+        <div class="track-course-box">
+          <div class="track-top-row">
+            <h4>Processamento de Dados com Python</h4>
+            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--infnet-sky);">Aula 6 de 8</span>
+          </div>
+          <p style="font-size: 11px; color: var(--text-muted);">Prof. Claudio Bonel Da Silva • Aula 6 concluída</p>
+          <div class="track-steps-dots">
+            <div class="step-dot step-done"></div>
+            <div class="step-dot step-done"></div>
+            <div class="step-dot step-done"></div>
+            <div class="step-dot step-done"></div>
+            <div class="step-dot step-done"></div>
+            <div class="step-dot step-done"></div>
+            <div class="step-dot"></div>
+            <div class="step-dot"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           VIEW 3: ⏱️ POMODORO DE ESTUDOS INTERATIVO (FOCO)
+           ===================================================================== -->
+      <section id="pane-pomodoro" class="view-pane">
+        <div class="section-headline-bar">
+          <h3>Pomodoro de Foco Acadêmico</h3>
+          <span style="font-family: var(--font-mono); font-size: 10px; color: var(--rose);">Técnica 25/5</span>
+        </div>
+
+        <div class="pomodoro-full-card">
+          <div class="pomo-subject-selector">
+            <select class="pomo-select-dropdown" id="pomoSubjectSelect">
+              <option value="React Native">⚛️ Estudando: Desenvolvimento Mobile com React Native</option>
+              <option value="Python">🐍 Estudando: Fundamentos do Processamento de Dados</option>
+              <option value="TPs">📋 Trabalhando no TP 1 (GitHub)</option>
+            </select>
+          </div>
+
+          <div class="pomo-mode-badge" id="pomoModeBadge">MODO FOCO (25 MIN)</div>
+
+          <div class="pomo-circle-timer-wrap">
+            <svg class="pomo-svg-ring" viewBox="0 0 160 160">
+              <circle cx="80" cy="80" r="70" class="pomo-ring-bg"></circle>
+              <circle cx="80" cy="80" r="70" class="pomo-ring-progress" id="pomoRingProgress"></circle>
+            </svg>
+            <div class="pomo-digits-display" id="pomoTimerText">25:00</div>
+          </div>
+
+          <div class="pomo-controls-row">
+            <button class="btn-pomo-secondary" title="Reiniciar Timer" onclick="resetPomodoro()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M23 4v6h-6"></path>
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+              </svg>
+            </button>
+
+            <button class="btn-pomo-primary" id="pomoStartBtn" onclick="togglePomodoro()">
+              Iniciar Foco
+            </button>
+
+            <button class="btn-pomo-secondary" title="Pular para Descanso" onclick="skipPomodoro()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="5 4 15 12 5 20 5 4"></polygon>
+                <line x1="19" y1="5" x2="19" y2="19"></line>
+              </svg>
+            </button>
+          </div>
+
+          <div class="pomo-stats-strip">
+            <div class="pomo-stat-item">
+              <h5 id="pomoCycleCounter">3</h5>
+              <p>Ciclos Hoje</p>
+            </div>
+            <div class="pomo-stat-item">
+              <h5 id="pomoFocusTime">75m</h5>
+              <p>Tempo Foco</p>
+            </div>
+            <div class="pomo-stat-item">
+              <h5 style="color: var(--emerald);">100%</h5>
+              <p>Meta Diária</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           VIEW 4: 📚 MINHAS MATÉRIAS (DISCIPLINAS DO BLOCO 26E4)
+           ===================================================================== -->
+      <section id="pane-materias" class="view-pane">
+        <div class="section-headline-bar">
+          <h3>Disciplinas em Andamento</h3>
+          <span style="font-family: var(--font-mono); font-size: 10px; color: var(--text-muted);">Bloco 26E4</span>
+        </div>
+
         <div class="deadline-card-luxury" style="cursor: pointer;" onclick="openDisciplineDetails('React Native')">
           <div style="display: flex; align-items: center; gap: 14px;">
-            <div class="file-type-badge file-zip" style="width: 44px; height: 44px; font-size: 18px;">⚛️</div>
+            <div class="file-badge-mini badge-zip" style="width: 44px; height: 44px; font-size: 18px;">⚛️</div>
             <div>
               <h4>Desenvolvimento Mobile com React Native</h4>
               <p>Turma [26E4] • Profa. Maria Cecília Rodrigues</p>
@@ -1625,193 +2217,126 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
           </div>
         </div>
 
-        <!-- Card: Processamento de Dados -->
         <div class="deadline-card-luxury" style="cursor: pointer;" onclick="openDisciplineDetails('Processamento de Dados')">
           <div style="display: flex; align-items: center; gap: 14px;">
-            <div class="file-type-badge file-zip" style="width: 44px; height: 44px; font-size: 18px; background: rgba(16, 185, 129, 0.12); color: #10B981; border-color: rgba(16, 185, 129, 0.25);">🐍</div>
+            <div class="file-badge-mini badge-zip" style="width: 44px; height: 44px; font-size: 18px; background: rgba(16, 185, 129, 0.15); color: #10B981;">🐍</div>
             <div>
               <h4>Fundamentos do Processamento de Dados</h4>
               <p>Turma GRLPDAR0C2-N2-L1 • Prof. Claudio Bonel</p>
             </div>
           </div>
         </div>
-
-        <div class="section-header-modern" style="margin-top: 24px;">
-          <h3>Comunidades Acadêmicas</h3>
-        </div>
-
-        <div class="material-card-row" style="cursor: pointer;" onclick="switchView('pane-feed')">
-          <div class="material-info">
-            <h5>📢 Avisos e Novidades da Graduação</h5>
-            <p>Comunicados oficiais da diretoria e reitoria</p>
-          </div>
-          <span style="font-size: 13px; font-weight: 700; color: var(--infnet-sky);">Acessar ›</span>
-        </div>
-
-        <div class="material-card-row" style="cursor: pointer;" onclick="alert('Histórias que Inspiram: Comunidade oficial de networking de alunos Infnet.')">
-          <div class="material-info">
-            <h5>💡 Histórias que Inspiram</h5>
-            <p>Projetos de alunos, artigos e vagas no mercado</p>
-          </div>
-          <span style="font-size: 13px; font-weight: 700; color: var(--infnet-sky);">Acessar ›</span>
-        </div>
       </section>
 
       <!-- =====================================================================
-           VIEW 3: 📰 FEED & COMUNICADOS OFICIAIS
+           VIEW 5: 📰 FEED ACADÊMICO
            ===================================================================== -->
       <section id="pane-feed" class="view-pane">
-        <div class="section-header-modern">
+        <div class="section-headline-bar">
           <h3>Feed da Graduação</h3>
-          <span class="section-pill-tag">Oficial</span>
+          <span style="font-family: var(--font-mono); font-size: 10px; color: var(--infnet-sky);">Tempo Real</span>
         </div>
 
-        <!-- Post 1: Reitoria -->
         <div class="deadline-card-luxury">
-          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
-            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=120" style="width: 42px; height: 42px; border-radius: 12px; object-fit: cover;" alt="Andre">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=120" style="width: 40px; height: 40px; border-radius: 12px; object-fit: cover;" alt="Andre">
             <div>
-              <h4 style="font-size: 14px;">Andre Kischinevsky</h4>
+              <h4 style="font-size: 13px;">Andre Kischinevsky</h4>
               <span style="font-size: 11px; color: var(--text-muted);">Reitoria • Avisos da Graduação</span>
             </div>
           </div>
           <p style="font-size: 13px; line-height: 1.6; color: var(--text-main); margin-bottom: 12px;">
             <strong>Novo Manual do Aluno em Beta 🚀</strong><br>
-            Em breve vamos substituir a forma tradicional de consulta do Manual por um portal inteligente interativo. Você pode perguntar sobre cálculos de média, limites de faltas e atividades complementares direto pelo assistente no app.
+            Em breve vamos substituir a forma tradicional de consulta do Manual por um portal inteligente interativo para dúvidas rápidas.
           </p>
-          <button class="btn-enter-broadcast" style="height: 40px; font-size: 13px; background: var(--surface-inset); color: var(--infnet-sky); border: 1px solid var(--border-card);" onclick="switchView('pane-manual')">
-            Testar no Assistente IA ›
-          </button>
         </div>
 
-        <!-- Post 2: Prof. Claudio Bonel -->
         <div class="deadline-card-luxury">
-          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120" style="width: 42px; height: 42px; border-radius: 12px; object-fit: cover;" alt="Claudio Bonel">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120" style="width: 40px; height: 40px; border-radius: 12px; object-fit: cover;" alt="Claudio Bonel">
             <div>
-              <h4 style="font-size: 14px;">Claudio Bonel Da Silva</h4>
+              <h4 style="font-size: 13px;">Claudio Bonel Da Silva</h4>
               <span style="font-size: 11px; color: var(--text-muted);">Fundamentos do Processamento de Dados</span>
             </div>
           </div>
-          <p style="font-size: 13px; line-height: 1.6; color: var(--text-main); margin-bottom: 12px;">
-            <strong>Aula 6 - Introdução à Programação com Python</strong><br>
-            Falaí! Passando para avisar que o referencial bibliográfico e os scripts de manipulação de strings da aula 6 já estão disponíveis para download.
+          <p style="font-size: 13px; line-height: 1.6; color: var(--text-main);">
+            <strong>Aula 6 - Introdução a Programação com Python</strong><br>
+            Falaí! Passando para avisar que o referencial bibliográfico e os códigos da aula 6 já estão disponíveis na pasta da disciplina.
           </p>
         </div>
       </section>
 
       <!-- =====================================================================
-           VIEW 4: 💬 RECADOS & COACHING ACADÊMICO
+           VIEW 6: 💬 RECADOS & COACHING
            ===================================================================== -->
       <section id="pane-mensagens" class="view-pane">
-        <div class="section-header-modern">
+        <div class="section-headline-bar">
           <h3>Mensagens & Coaching</h3>
-          <span class="countdown-pill pill-urgent" style="font-size: 10px;">1 Nova</span>
+          <span class="countdown-pill pill-urgent">1 Nova</span>
         </div>
 
         <div class="material-card-row" style="cursor: pointer;" onclick="openChatWindow('Luana (Coaching Acadêmico)')">
           <div style="display: flex; align-items: center; gap: 12px;">
-            <div class="file-type-badge file-zip">👩‍💼</div>
-            <div>
+            <div class="file-badge-mini badge-zip">👩‍💼</div>
+            <div class="material-meta">
               <h5>Atendimento • Coaching Acadêmico</h5>
               <p style="color: var(--infnet-sky); font-weight: 600;">[Luana aqui] Oi Mattheus, tudo bem?...</p>
             </div>
           </div>
-          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">14:20</span>
+          <span style="font-family: var(--font-mono); font-size: 10px; color: var(--text-muted);">14:20</span>
         </div>
 
         <div class="material-card-row" style="cursor: pointer;" onclick="openChatWindow('Profa. Maria Cecília')">
           <div style="display: flex; align-items: center; gap: 12px;">
-            <div class="file-type-badge file-zip" style="background: rgba(16, 185, 129, 0.12); color: #10B981;">👩‍🏫</div>
-            <div>
+            <div class="file-badge-mini badge-zip" style="background: rgba(16, 185, 129, 0.15); color: #10B981;">👩‍🏫</div>
+            <div class="material-meta">
               <h5>Maria Cecilia Rodrigues</h5>
               <p>Você: Boa tarde Professora, sobre o TP 1...</p>
             </div>
           </div>
-          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">Ontem</span>
-        </div>
-
-        <div class="material-card-row" style="cursor: pointer;" onclick="openChatWindow('Secretaria')">
-          <div style="display: flex; align-items: center; gap: 12px;">
-            <div class="file-type-badge file-zip" style="background: rgba(100, 116, 139, 0.12); color: #94a3b8;">🏛️</div>
-            <div>
-              <h5>Secretaria da Graduação</h5>
-              <p>Link de acesso e credenciais de aula...</p>
-            </div>
-          </div>
-          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">26/10</span>
+          <span style="font-family: var(--font-mono); font-size: 10px; color: var(--text-muted);">Ontem</span>
         </div>
       </section>
 
       <!-- =====================================================================
-           VIEW 5: 🤖 ASSISTENTE DE IA DO MANUAL DO ALUNO (RAG ACADÊMICO)
+           VIEW 7: 🤖 MANUAL DO ALUNO IA (RAG)
            ===================================================================== -->
       <section id="pane-manual" class="view-pane">
-        <div class="section-header-modern">
+        <div class="section-headline-bar">
           <h3>Assistente Acadêmico Oficial (IA)</h3>
-          <span class="countdown-pill pill-safe">Online</span>
+          <span class="countdown-pill" style="background: var(--emerald-subtle); color: var(--emerald);">Online</span>
         </div>
 
-        <div class="ai-chat-interface">
-          <div class="chat-messages-container" id="chatStream">
-            <div class="chat-bubble bubble-bot">
-              Olá, <strong>Mattheus</strong>! Sou o assistente de inteligência acadêmica do <strong>Instituto Infnet</strong>.<br><br>
-              Posso te orientar sobre o cálculo da média final com TPs e AT, limite de faltas (75%), requerimentos de segunda chamada e atividades complementares. Como posso te ajudar agora?
-            </div>
+        <div class="deadline-card-luxury" style="padding: 16px; min-height: 280px; display: flex; flex-direction: column; justify-content: space-between;">
+          <div id="chatStreamBox" style="font-size: 13px; line-height: 1.6; color: var(--text-main);">
+            Olá, <strong>Mattheus</strong>! Sou o assistente oficial de regras do <strong>Instituto Infnet</strong>.<br><br>
+            Tire dúvidas sobre: cálculo da média final (TPs 40% + AT 60%), limite de faltas (75%), requerimentos de segunda chamada ou atividades complementares.
           </div>
 
-          <div class="chat-chips-scroll">
-            <button class="chip-suggest-btn" onclick="askPreset('Como funciona o cálculo da média final com TPs e AT?')">📊 Cálculo da Média (TPs + AT)</button>
-            <button class="chip-suggest-btn" onclick="askPreset('Qual o limite de faltas permitido na Infnet?')">🚨 Limite de Faltas (75%)</button>
-            <button class="chip-suggest-btn" onclick="askPreset('Como funciona o pedido de Segunda Chamada para o AT?')">📄 Segunda Chamada do AT</button>
-            <button class="chip-suggest-btn" onclick="askPreset('O que são as Atividades Complementares obrigatórias?')">🎓 Atividades Complementares</button>
+          <div style="display: flex; gap: 8px; margin-top: 14px;">
+            <input type="text" id="queryInput" class="login-input" placeholder="Pergunte sobre notas, faltas, TPs...">
+            <button class="btn-pomo-primary" style="height: 44px; padding: 0 18px;" onclick="sendAssistantQuery()">Perguntar</button>
           </div>
-
-          <form class="chat-composer-box" id="chatComposerForm" onsubmit="handleSendQuery(event)">
-            <input type="text" id="queryInput" class="chat-input-field" placeholder="Pergunte sobre notas, provas, faltas...">
-            <button type="submit" class="btn-chat-send" title="Enviar Mensagem">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <line x1="22" y1="2" x2="11" y2="13"></line>
-                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-              </svg>
-            </button>
-          </form>
         </div>
       </section>
 
       <!-- =====================================================================
-           VIEW 6: 👤 PERFIL DO ALUNO MATTHEUS PHELIPE
+           VIEW 8: 👤 PERFIL DO ALUNO
            ===================================================================== -->
       <section id="pane-perfil" class="view-pane">
-        <div class="deadline-card-luxury" style="text-align: center; padding: 24px;">
-          <div style="width: 88px; height: 88px; margin: 0 auto 14px auto; border-radius: 24px; overflow: hidden; border: 3px solid var(--infnet-primary); box-shadow: 0 0 15px var(--infnet-primary-glow);">
+        <div class="deadline-card-luxury" style="text-align: center; padding: 22px;">
+          <div style="width: 84px; height: 84px; margin: 0 auto 12px auto; border-radius: 22px; overflow: hidden; border: 3px solid var(--infnet-primary); box-shadow: 0 0 15px var(--infnet-primary-glow);">
             <img src="assets/mattheus_avatar.png" alt="Mattheus Phelipe" style="width: 100%; height: 100%; object-fit: cover;">
           </div>
-          <h2 style="font-size: 18px; margin-bottom: 4px;">Mattheus Phelipe Moraes Faria</h2>
-          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 10px;">mattheus.faria@al.infnet.edu.br</p>
-          <span class="course-chip">Engenharia de Software • Bacharelado</span>
+          <h2 style="font-size: 17px; margin-bottom: 2px;">Mattheus Phelipe Moraes Faria</h2>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">mattheus.faria@al.infnet.edu.br</p>
+          <span class="drawer-course-tag">Engenharia de Software • Bacharelado</span>
         </div>
 
-        <div class="material-card-row" style="cursor: pointer;" onclick="alert('Requerimentos de Secretaria: Nenhum processo pendente.')">
-          <div class="material-info">
-            <h5>📋 Requerimentos de Secretaria</h5>
-            <p>Declaração de matrícula, histórico e protocolos</p>
-          </div>
-          <span>›</span>
-        </div>
-
-        <div class="material-card-row" style="cursor: pointer;" onclick="alert('Calendário Acadêmico 2026: Trimestre 4 encerra em Dezembro/2026.')">
-          <div class="material-info">
-            <h5>📅 Calendário Acadêmico</h5>
-            <p>Datas de provas, entregas e recessos</p>
-          </div>
-          <span>›</span>
-        </div>
-
-        <div class="material-card-row" style="cursor: pointer;" onclick="alert('Biblioteca Virtual: Acesso ilimitado ao acervo Pearson e Minha Biblioteca.')">
-          <div class="material-info">
-            <h5>📖 Biblioteca Virtual</h5>
-            <p>Milhares de livros técnicos e periódicos</p>
+        <div class="material-card-row" style="cursor: pointer;" onclick="openLoginModal()">
+          <div class="material-meta">
+            <h5>🔐 Gerenciar Conta e Sessão</h5>
+            <p>Login SSO Google e credenciais acadêmicas</p>
           </div>
           <span>›</span>
         </div>
@@ -1820,7 +2345,7 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
     </main>
 
     <!-- =======================================================================
-         BLOCO BOTTOM DOCK: BARRA DE NAVEGAÇÃO INFERIOR COM VIDRO FOSCO
+         BOTTOM DOCK: 5 ABAS TÁTEIS PRINCIPAIS
          ======================================================================= -->
     <nav class="bottom-dock" role="tablist">
       <button class="tab-item-dock active" onclick="switchView('pane-hoje', this)" role="tab" aria-selected="true">
@@ -1829,6 +2354,23 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
           <polyline points="9 22 9 12 15 12 15 22"></polyline>
         </svg>
         <span>Hoje</span>
+      </button>
+
+      <button class="tab-item-dock" onclick="switchView('pane-trilhas', this)" role="tab" aria-selected="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <line x1="18" y1="20" x2="18" y2="10"></line>
+          <line x1="12" y1="20" x2="12" y2="4"></line>
+          <line x1="6" y1="20" x2="6" y2="14"></line>
+        </svg>
+        <span>Trilhas</span>
+      </button>
+
+      <button class="tab-item-dock" onclick="switchView('pane-pomodoro', this)" role="tab" aria-selected="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        <span>Foco</span>
       </button>
 
       <button class="tab-item-dock" onclick="switchView('pane-materias', this)" role="tab" aria-selected="false">
@@ -1845,66 +2387,78 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
         </svg>
         <span>Feed</span>
       </button>
-
-      <button class="tab-item-dock" onclick="switchView('pane-mensagens', this)" role="tab" aria-selected="false">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-          <polyline points="22,6 12,13 2,6"></polyline>
-        </svg>
-        <span>Recados</span>
-      </button>
-
-      <button class="tab-item-dock" onclick="switchView('pane-manual', this)" role="tab" aria-selected="false">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <circle cx="12" cy="12" r="10"></circle>
-          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-          <line x1="12" y1="17" x2="12.01" y2="17"></line>
-        </svg>
-        <span>Manual IA</span>
-      </button>
     </nav>
 
   </div>
 
   <!-- =========================================================================
-       BLOCO 13: SCRIPT DE INTERAÇÕES TÁTEIS & PERSISTÊNCIA NATIVA
-       Data/Hora: 29/10/2026 23:55
-       Finalidade: Alternância instantânea de abas, modo escuro, notas e regras.
+       BLOCO 11: SCRIPTS INTERATIVOS, POMODORO & DRAWER
+       Data/Hora: 30/10/2026 00:45
+       Finalidade: Lógica de controle de estado, timer, alternância e regras.
        ========================================================================= -->
   <script>
-    // 1. Alternador de Abas SPA sem reload
+    // 1. Alternador de Abas SPA
     function switchView(viewId, triggerBtn) {
       document.querySelectorAll('.view-pane').forEach(v => v.classList.remove('active'));
       const target = document.getElementById(viewId);
       if (target) target.classList.add('active');
 
+      const allTabs = document.querySelectorAll('.tab-item-dock');
+      allTabs.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+
       if (triggerBtn) {
-        document.querySelectorAll('.tab-item-dock').forEach(b => {
-          b.classList.remove('active');
-          b.setAttribute('aria-selected', 'false');
-        });
         triggerBtn.classList.add('active');
         triggerBtn.setAttribute('aria-selected', 'true');
       } else {
-        // Encontra o botão correspondente se chamado programaticamente
         const navMap = {
           'pane-hoje': 0,
-          'pane-materias': 1,
-          'pane-feed': 2,
-          'pane-mensagens': 3,
-          'pane-manual': 4
+          'pane-trilhas': 1,
+          'pane-pomodoro': 2,
+          'pane-materias': 3,
+          'pane-feed': 4
         };
-        const index = navMap[viewId];
-        if (index !== undefined) {
-          const allTabs = document.querySelectorAll('.tab-item-dock');
-          allTabs.forEach(b => b.classList.remove('active'));
-          if (allTabs[index]) allTabs[index].classList.add('active');
+        const idx = navMap[viewId];
+        if (idx !== undefined && allTabs[idx]) {
+          allTabs[idx].classList.add('active');
+          allTabs[idx].setAttribute('aria-selected', 'true');
         }
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 2. Modo Escuro / Claro com Persistência
+    // 2. Menu Lateral (Drawer)
+    const drawerOverlay = document.getElementById('drawerOverlay');
+    const openDrawerBtn = document.getElementById('openDrawerBtn');
+
+    openDrawerBtn.addEventListener('click', () => {
+      drawerOverlay.classList.add('open');
+    });
+
+    drawerOverlay.addEventListener('click', (e) => {
+      if (e.target === drawerOverlay) {
+        drawerOverlay.classList.remove('open');
+      }
+    });
+
+    function navigateFromDrawer(viewId) {
+      drawerOverlay.classList.remove('open');
+      switchView(viewId);
+    }
+
+    // 3. Modal de Login Glass
+    const loginModal = document.getElementById('loginModalOverlay');
+    function openLoginModal() {
+      drawerOverlay.classList.remove('open');
+      loginModal.classList.add('open');
+    }
+    function closeLoginModal() {
+      loginModal.classList.remove('open');
+    }
+
+    // 4. Modo Escuro / Claro
     const htmlElem = document.documentElement;
     const themeBtn = document.getElementById('themeToggleBtn');
     const moonIcon = document.getElementById('moonIcon');
@@ -1912,7 +2466,7 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
 
     function applyTheme(theme) {
       htmlElem.setAttribute('data-theme', theme);
-      localStorage.setItem('infnet_elite_theme', theme);
+      localStorage.setItem('infnet_master_theme', theme);
       if (theme === 'dark') {
         moonIcon.style.display = 'none';
         sunIcon.style.display = 'block';
@@ -1922,7 +2476,7 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
       }
     }
 
-    const savedTheme = localStorage.getItem('infnet_elite_theme') || 'dark';
+    const savedTheme = localStorage.getItem('infnet_master_theme') || 'dark';
     applyTheme(savedTheme);
 
     themeBtn.addEventListener('click', () => {
@@ -1930,91 +2484,103 @@ FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padr
       applyTheme(active === 'dark' ? 'light' : 'dark');
     });
 
-    // 3. Caderno Digital de Aula (Persistência Offline em LocalStorage)
-    const notebook = document.getElementById('studentNotebook');
-    notebook.value = localStorage.getItem('infnet_notes_data') || '';
-    notebook.addEventListener('input', (e) => {
-      localStorage.setItem('infnet_notes_data', e.target.value);
-    });
+    // 5. Pomodoro de Estudos Interativo
+    let pomoSeconds = 25 * 60;
+    let pomoTotal = 25 * 60;
+    let pomoInterval = null;
+    let isPomoRunning = false;
+    let pomoCycles = 3;
 
-    // 4. Copiar Link Zoom
+    const pomoDisplay = document.getElementById('pomoTimerText');
+    const pomoRing = document.getElementById('pomoRingProgress');
+    const pomoBtn = document.getElementById('pomoStartBtn');
+
+    function updatePomoDisplay() {
+      const mins = Math.floor(pomoSeconds / 60).toString().padStart(2, '0');
+      const secs = (pomoSeconds % 60).toString().padStart(2, '0');
+      pomoDisplay.textContent = `${mins}:${secs}`;
+
+      // 471 é a circunferência aproximada para r=70 (2 * PI * 70 ≈ 440)
+      const maxOffset = 440;
+      const progress = (pomoTotal - pomoSeconds) / pomoTotal;
+      pomoRing.style.strokeDashoffset = (progress * maxOffset).toString();
+    }
+
+    function togglePomodoro() {
+      if (isPomoRunning) {
+        clearInterval(pomoInterval);
+        isPomoRunning = false;
+        pomoBtn.textContent = 'Retomar Foco';
+      } else {
+        isPomoRunning = true;
+        pomoBtn.textContent = 'Pausar';
+        pomoInterval = setInterval(() => {
+          if (pomoSeconds > 0) {
+            pomoSeconds--;
+            updatePomoDisplay();
+          } else {
+            clearInterval(pomoInterval);
+            isPomoRunning = false;
+            pomoCycles++;
+            document.getElementById('pomoCycleCounter').textContent = pomoCycles;
+            document.getElementById('pomoFocusTime').textContent = `${pomoCycles * 25}m`;
+            alert('🎉 Parabéns! Ciclo de foco de 25 minutos concluído com sucesso!');
+            resetPomodoro();
+          }
+        }, 1000);
+      }
+    }
+
+    function resetPomodoro() {
+      clearInterval(pomoInterval);
+      isPomoRunning = false;
+      pomoSeconds = 25 * 60;
+      pomoTotal = 25 * 60;
+      pomoBtn.textContent = 'Iniciar Foco';
+      pomoRing.style.strokeDashoffset = '0';
+      updatePomoDisplay();
+    }
+
+    function skipPomodoro() {
+      clearInterval(pomoInterval);
+      isPomoRunning = false;
+      pomoSeconds = 5 * 60;
+      pomoTotal = 5 * 60;
+      document.getElementById('pomoModeBadge').textContent = 'DESCANSO (5 MIN)';
+      pomoBtn.textContent = 'Iniciar Descanso';
+      updatePomoDisplay();
+    }
+
+    updatePomoDisplay();
+
+    // 6. Ações Auxiliares
     function copyZoomLink() {
       navigator.clipboard.writeText('https://infnet.online/zoom/aula-ao-vivo');
-      alert('Link direto da sala Zoom copiado para a área de transferência!');
+      alert('Link direto da sala Zoom copiado!');
     }
 
-    // 5. Download de Arquivo
     function triggerDownload(fileName) {
-      alert(`Download de "${fileName}" iniciado com sucesso.`);
+      alert(`Download do arquivo real "${fileName}" iniciado.`);
     }
 
-    // 6. Janela de Mensagens
-    function openChatWindow(contactName) {
-      alert(`Abrindo canal direto com: ${contactName}`);
+    function openChatWindow(contact) {
+      alert(`Abrindo chat direto com: ${contact}`);
     }
 
-    // 7. Detalhes de Disciplinas
-    function openDisciplineDetails(discName) {
-      alert(`Visualizando disciplina: ${discName}\nTodas as gravações e arquivos do bloco estão sincronizados.`);
+    function openDisciplineDetails(disc) {
+      alert(`Disciplina selecionada: ${disc}\nTodas as 8 aulas e TPs estão sincronizados.`);
     }
 
-    // 8. Notificações
     function openNotificationsModal() {
-      alert('Central de Notificações Infnet:\n\n1. Prof. Claudio Bonel postou a Aula 6.\n2. Profa. Maria Cecília publicou orientações do TP 1.\n3. Reitoria: Teste em beta do novo Manual do Aluno.');
+      alert('Central de Notificações:\n\n1. Prof. Claudio Bonel compartilhou Aula06.zip.\n2. Profa. Maria Cecília postou gabarito do TP 1.');
     }
 
-    // 9. Assistente Acadêmico (IA RAG)
-    const infnetRules = {
-      'media': '📊 <strong>Cálculo da Média Final na Infnet:</strong><br><br>A média final é obtida pela ponderação entre as entregas contínuas (TPs) e a prova final (AT):<br><br>• <strong>Média dos TPs:</strong> Peso 4 (40%)<br>• <strong>Nota do AT:</strong> Peso 6 (60%)<br><br><code>Fórmula: Média = (TPs × 0.4) + (AT × 0.6)</code><br><br>A nota mínima para aprovação direta é <strong>6,0</strong>.',
-      'falta': '🚨 <strong>Regra de Frequência e Presença:</strong><br><br>O aluno deve cumprir no mínimo <strong>75% de frequência</strong> nas aulas ao vivo (Zoom/Teams). O limite máximo de faltas no trimestre é de <strong>25%</strong> da carga horária da disciplina.',
-      'tp': '⏰ <strong>Regras dos TPs (Testes de Performance):</strong><br><br>Os TPs são trabalhos práticos entregues pelo GitHub até as 23:59 do dia limite. Atrasos podem acarretar perda de pontuação conforme a ementa do professor.',
-      'segunda chamada': '📄 <strong>Segunda Chamada de Avaliação (AT):</strong><br><br>Caso perca o AT por motivos de saúde ou trabalho justificado, o requerimento de 2ª chamada deve ser protocolado em até <strong>48 horas úteis</strong> após a data da avaliação.',
-      'complementar': '🎓 <strong>Atividades Complementares:</strong><br><br>São obrigatórias para colação de grau. Valem horas: cursos extracurriculares de tecnologia, certificações (AWS, Azure, GCP), monitoria e eventos acadêmicos.'
-    };
-
-    function askPreset(promptText) {
-      const input = document.getElementById('queryInput');
-      input.value = promptText;
-      document.getElementById('chatComposerForm').dispatchEvent(new Event('submit'));
-    }
-
-    function handleSendQuery(e) {
-      e.preventDefault();
-      const input = document.getElementById('queryInput');
-      const text = input.value.trim();
-      if (!text) return;
-
-      const stream = document.getElementById('chatStream');
-
-      const userMsg = document.createElement('div');
-      userMsg.className = 'chat-bubble bubble-user';
-      userMsg.textContent = text;
-      stream.appendChild(userMsg);
-      input.value = '';
-      stream.scrollTop = stream.scrollHeight;
-
-      setTimeout(() => {
-        const lower = text.toLowerCase();
-        let reply = 'Essa regra pode variar conforme a diretriz da sua coordenação. Recomendo abrir um protocolo na <em>Secretaria</em> ou contatar seu <em>Coaching Acadêmico</em> pela aba de Recados.';
-
-        if (lower.includes('média') || lower.includes('nota') || lower.includes('cálculo') || lower.includes('at')) {
-          reply = infnetRules['media'];
-        } else if (lower.includes('falta') || lower.includes('frequência') || lower.includes('presença') || lower.includes('75%')) {
-          reply = infnetRules['falta'];
-        } else if (lower.includes('tp') || lower.includes('prazo')) {
-          reply = infnetRules['tp'];
-        } else if (lower.includes('segunda chamada') || lower.includes('perdi')) {
-          reply = infnetRules['segunda chamada'];
-        } else if (lower.includes('complementar') || lower.includes('horas')) {
-          reply = infnetRules['complementar'];
-        }
-
-        const botMsg = document.createElement('div');
-        botMsg.className = 'chat-bubble bubble-bot';
-        botMsg.innerHTML = reply;
-        stream.appendChild(botMsg);
-        stream.scrollTop = stream.scrollHeight;
-      }, 300);
+    function sendAssistantQuery() {
+      const q = document.getElementById('queryInput').value.trim();
+      if (!q) return;
+      const box = document.getElementById('chatStreamBox');
+      box.innerHTML = `<strong>Você perguntou:</strong> "${q}"<br><br>📊 <strong>Regra Oficial Infnet:</strong> A média final é calculada com peso 4 nos TPs (40%) e peso 6 no AT (60%). O limite máximo de faltas no trimestre é 25% (frequência mínima exigida de 75%).`;
+      document.getElementById('queryInput').value = '';
     }
   </script>
 </body>
