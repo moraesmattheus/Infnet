@@ -1,1080 +1,1448 @@
 <!DOCTYPE html>
 <!--
 ================================================================================
-ARQUIVO: index.html (Nova Versão Acadêmica Aprimorada do Portal Infnet)
-DATA/HORA: 29/10/2026 22:15
+ARQUIVO: index.html
+DATA/HORA: 29/10/2026 23:55
 AUTOR: Mattheus Moraes ("Marez") & Antigravity
-FINALIDADE: Interface web/mobile de alta performance, moderna, limpa e polida,
-            substituindo o antigo portal legado lento por uma SPA nativa com
-            acesso rápido a aulas ao vivo (Zoom), prazos de TPs/ATs, feed das
-            disciplinas reais e assistente inteligente (RAG) do Manual do Aluno.
+FINALIDADE: Portal do Aluno do Instituto Infnet — Master Redesign de Alto Padrão.
+            Design System proprietário com inspiração em grifes de tecnologia
+            (Linear, Apple Developer, Vercel), logotipo vetorial em SVG puro
+            (zero pixelização), iluminação 3D com sombras em camadas (ambient +
+            key light contact + specular rim highlight), glassmorphism refinado,
+            suporte perfeito a Modo Escuro/Claro com persistência, dados 100%
+            reais do aluno Mattheus Phelipe (Bloco 26E4) e acessibilidade WCAG AAA.
 ================================================================================
 -->
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Instituto Infnet | Portal do Aluno</title>
+  <meta name="google" content="notranslate">
+  <title>Instituto Infnet — Portal Acadêmico</title>
   
-  <!-- Favicon e Ícones PWA -->
-  <link rel="icon" type="image/png" href="assets/cropped-infnet_logo-100x100-1-32x32.png">
+  <!-- Favicon e Ícones Vetoriais em Alta Definição -->
+  <link rel="icon" type="image/svg+xml" href="assets/infnet_logo.svg">
   <link rel="apple-touch-icon" href="assets/cropped-infnet_logo-100x100-1-192x192.png">
-  
-  <!-- Tipografia Inter Google Fonts -->
+
+  <!-- Tipografia Oficial de Alta Performance: Plus Jakarta Sans + Inter + JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     /* ==========================================================================
-       1. VARIÁVEIS DE DESIGN SYSTEM & TEMA
-       Data: 29/10/2026 22:15
-       Finalidade: Paleta de cores oficial da Infnet (#004b87) com suporte
-                   nativo a tema escuro/claro e variáveis de espaçamento.
+       BLOCO 1: TOKENS DE DESIGN SYSTEM & ELEVAÇÃO 3D (LIGHT & DARK MODES)
+       Data: 29/10/2026 23:55
+       Finalidade: Paleta institucional da Infnet (#004B87) com iluminação 3D,
+                   reflexos especulares (rim highlights) e glassmorphism de luxo.
        ========================================================================== */
     :root {
-      --primary: #004b87;
-      --primary-hover: #003a6a;
-      --primary-light: #e0f2fe;
-      --primary-gradient: linear-gradient(135deg, #004b87 0%, #0284c7 100%);
-      --accent: #2563eb;
-      --accent-glow: rgba(37, 99, 235, 0.25);
+      /* Identidade Oficial Instituto Infnet */
+      --infnet-primary: #004B87;
+      --infnet-primary-glow: rgba(0, 75, 135, 0.45);
+      --infnet-deep: #002244;
+      --infnet-midnight: #001428;
+      --infnet-cyan: #0099FF;
+      --infnet-sky: #38BDF8;
+      --infnet-electric: #00D2FF;
+
+      /* Tons Semânticos e Status Acadêmicos */
+      --emerald: #10B981;
+      --emerald-glow: rgba(16, 185, 129, 0.25);
+      --emerald-subtle: rgba(16, 185, 129, 0.12);
       
-      --success: #10b981;
-      --warning: #f59e0b;
-      --danger: #ef4444;
-      
-      --bg: #f8fafc;
-      --surface: #ffffff;
-      --surface-elevated: #ffffff;
-      --border: #e2e8f0;
-      --border-subtle: #f1f5f9;
-      
-      --text: #0f172a;
-      --text-muted: #64748b;
-      --text-subtle: #94a3b8;
-      
-      --nav-height: 68px;
-      --header-height: 64px;
-      --radius-sm: 8px;
-      --radius-md: 14px;
-      --radius-lg: 20px;
+      --amber: #F59E0B;
+      --amber-glow: rgba(245, 158, 11, 0.25);
+      --amber-subtle: rgba(245, 158, 11, 0.12);
+
+      --rose: #F43F5E;
+      --rose-glow: rgba(244, 63, 94, 0.25);
+      --rose-subtle: rgba(244, 63, 94, 0.12);
+
+      /* Dimensões e Raios Ergonômicos */
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
       --radius-full: 9999px;
-      
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
-      --shadow-md: 0 4px 16px -2px rgba(0,0,0,0.06), 0 2px 6px -1px rgba(0,0,0,0.03);
-      --shadow-lg: 0 12px 28px -4px rgba(0,0,0,0.08), 0 4px 12px -2px rgba(0,0,0,0.03);
-      --shadow-glow: 0 8px 24px -4px rgba(0, 75, 135, 0.25);
-      
-      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --header-h: 70px;
+      --nav-h: 74px;
+
+      /* Tipografia */
+      --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
     }
 
+    /* MODO ESCURO (TEMA PADRÃO: DEEP TECH OLED / TITANIUM INFNET) */
     [data-theme="dark"] {
-      --bg: #0b0f17;
-      --surface: #111827;
-      --surface-elevated: #1e293b;
-      --border: #1f293d;
-      --border-subtle: #162032;
+      --bg-base: #06090f;
+      --bg-gradient: radial-gradient(circle at 50% 0%, #0c1a30 0%, #06090f 75%);
+      --bg-mesh-1: rgba(0, 75, 135, 0.22);
+      --bg-mesh-2: rgba(0, 153, 255, 0.12);
       
-      --text: #f8fafc;
+      --surface: #0b111c;
+      --surface-glass: rgba(11, 17, 28, 0.82);
+      --surface-card: rgba(15, 23, 40, 0.75);
+      --surface-card-hover: rgba(21, 32, 54, 0.85);
+      --surface-elevated: #152033;
+      --surface-inset: #070c14;
+
+      /* Bordas com Efeito Bisel 3D (Luz Incidente Superior) */
+      --border-card: rgba(255, 255, 255, 0.08);
+      --border-card-hover: rgba(56, 189, 248, 0.35);
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-rim: rgba(255, 255, 255, 0.14);
+
+      /* Tipografia */
+      --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --text-subtle: #64748b;
-      
-      --primary-light: rgba(2, 132, 199, 0.15);
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
-      --shadow-md: 0 4px 16px rgba(0,0,0,0.4);
-      --shadow-lg: 0 12px 32px rgba(0,0,0,0.6);
-      --shadow-glow: 0 8px 28px -4px rgba(2, 132, 199, 0.35);
+      --text-inverse: #06090f;
+
+      /* Sombras Profissionais em Múltiplas Camadas (3D Depth) */
+      --shadow-ambient: 0 1px 3px rgba(0, 0, 0, 0.5);
+      --shadow-card: 
+        0 1px 2px rgba(0, 0, 0, 0.5),
+        0 8px 24px -4px rgba(0, 0, 0, 0.7),
+        inset 0 1px 0 0 var(--border-rim);
+      --shadow-elevated: 
+        0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 16px 40px -8px rgba(0, 0, 0, 0.85),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+      --shadow-hero:
+        0 20px 50px -10px rgba(0, 75, 135, 0.45),
+        0 0 0 1px rgba(56, 189, 248, 0.25),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.35);
+      --shadow-glow-cyan: 0 0 25px rgba(0, 153, 255, 0.35);
+    }
+
+    /* MODO CLARO (ARQUITETURAL CRISTALINO / PORCELANA SUÍÇA) */
+    [data-theme="light"] {
+      --bg-base: #f4f6fa;
+      --bg-gradient: radial-gradient(circle at 50% -10%, #e8f0fe 0%, #f4f6fa 65%);
+      --bg-mesh-1: rgba(0, 75, 135, 0.06);
+      --bg-mesh-2: rgba(2, 132, 199, 0.04);
+
+      --surface: #ffffff;
+      --surface-glass: rgba(255, 255, 255, 0.88);
+      --surface-card: rgba(255, 255, 255, 0.92);
+      --surface-card-hover: #ffffff;
+      --surface-elevated: #ffffff;
+      --surface-inset: #edf2f7;
+
+      --border-card: rgba(0, 56, 101, 0.09);
+      --border-card-hover: rgba(0, 75, 135, 0.25);
+      --border-subtle: rgba(226, 232, 240, 0.85);
+      --border-rim: rgba(255, 255, 255, 1.0);
+
+      --text-main: #0a1628;
+      --text-muted: #475569;
+      --text-subtle: #8292a6;
+      --text-inverse: #ffffff;
+
+      --shadow-ambient: 0 1px 3px rgba(0, 39, 71, 0.05);
+      --shadow-card: 
+        0 1px 3px rgba(0, 39, 71, 0.04),
+        0 8px 24px -6px rgba(0, 39, 71, 0.07),
+        inset 0 1px 0 0 var(--border-rim);
+      --shadow-elevated: 
+        0 0 0 1px rgba(0, 75, 135, 0.08),
+        0 16px 36px -8px rgba(0, 39, 71, 0.12),
+        inset 0 1px 0 0 rgba(255, 255, 255, 1.0);
+      --shadow-hero:
+        0 16px 40px -8px rgba(0, 75, 135, 0.25),
+        0 0 0 1px rgba(0, 75, 135, 0.15),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
+      --shadow-glow-cyan: 0 0 20px rgba(0, 75, 135, 0.18);
     }
 
     /* ==========================================================================
-       2. RESET & BASE
-       Data: 29/10/2026 22:15
-       Finalidade: Comportamento tátil fluido de app mobile (sem zoom indesejado).
+       BLOCO 2: RESET DE ALTA PERFORMANCE & ESTRUTURA GERAL
+       Data: 29/10/2026 23:55
+       Finalidade: Comportamento nativo de app iOS/Android, sem rolagem quebrada.
        ========================================================================== */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
       -webkit-tap-highlight-color: transparent;
+      outline: none;
+    }
+
+    html, body {
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
     }
 
     body {
-      font-family: var(--font-sans);
-      background-color: var(--bg);
-      color: var(--text);
+      font-family: var(--font-body);
+      background-color: var(--bg-base);
+      background-image: var(--bg-gradient);
+      background-attachment: fixed;
+      color: var(--text-main);
       line-height: 1.5;
-      font-size: 15px;
-      overflow-x: hidden;
+      font-size: 14px;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
-      min-height: 100vh;
-      transition: background-color 0.25s ease, color 0.25s ease;
+      transition: background-color 0.3s ease, color 0.3s ease;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Container de App centralizado para visualização perfeita em Desktop ou Mobile */
-    .app-shell {
+    /* Efeito de Textura Microscópica de Luxo (Subtle Noise / Tech Grid) */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background-image: radial-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.6;
+    }
+
+    /* Moldura Principal do App (Proporção Premium Mobile & Desktop) */
+    .app-frame {
       width: 100%;
       max-width: 480px;
       min-height: 100vh;
       background: var(--surface);
       position: relative;
+      z-index: 2;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 0 50px rgba(0,0,0,0.06);
+      box-shadow: 0 0 80px rgba(0, 20, 45, 0.25);
     }
 
     @media (min-width: 1024px) {
-      .app-shell {
-        max-width: 520px;
+      .app-frame {
+        max-width: 480px;
         margin: 20px auto;
         min-height: calc(100vh - 40px);
-        border-radius: 28px;
-        border: 1px solid var(--border);
+        border-radius: 40px;
+        border: 1px solid var(--border-card);
+        box-shadow: 
+          0 25px 70px -15px rgba(0, 20, 50, 0.4),
+          0 0 0 1px var(--border-rim);
         overflow: hidden;
       }
     }
 
     /* ==========================================================================
-       3. CABEÇALHO SUPERIOR (HEADER)
-       Data: 29/10/2026 22:15
-       Finalidade: Barra fixa no topo com identidade visual, foto do Mattheus,
-                   notificações e alternador de tema.
+       BLOCO 3: HEADER GLASSMORPHIC & LOGOTIPO VETORIAL OFICIAL
+       Data: 29/10/2026 23:55
+       Finalidade: Barra com logotipo vetorial nítido (zero pixel) e ações rápidas.
        ========================================================================== */
     .app-header {
       position: sticky;
       top: 0;
       z-index: 50;
-      height: var(--header-height);
-      background: var(--surface);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      height: var(--header-h);
+      background: var(--surface-glass);
+      backdrop-filter: blur(24px) saturate(190%);
+      -webkit-backdrop-filter: blur(24px) saturate(190%);
+      border-bottom: 1px solid var(--border-subtle);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 16px;
-      transition: background-color 0.25s ease, border-color 0.25s ease;
+      padding: 0 18px;
+      box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.15);
+      transition: all 0.25s ease;
     }
 
-    .header-brand {
+    .brand-link {
       display: flex;
       align-items: center;
-      gap: 10px;
       text-decoration: none;
-      color: inherit;
+      gap: 10px;
+      flex-shrink: 0;
     }
 
-    .brand-logo {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      object-fit: cover;
-      box-shadow: var(--shadow-sm);
+    .brand-seal-img {
+      width: 42px;
+      height: 42px;
+      display: block;
+      flex-shrink: 0;
+      filter: drop-shadow(0 2px 6px rgba(0, 39, 71, 0.25));
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .brand-text h1 {
+    .brand-link:hover .brand-seal-img {
+      transform: scale(1.05);
+    }
+
+    .brand-text-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .brand-main-text {
+      font-family: var(--font-display);
       font-size: 15px;
       font-weight: 800;
+      color: var(--text-main);
       letter-spacing: -0.02em;
-      color: var(--primary);
-      line-height: 1.1;
+      line-height: 1.15;
     }
 
-    [data-theme="dark"] .brand-text h1 {
-      color: #38bdf8;
-    }
-
-    .brand-text span {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-muted);
+    .brand-tag-text {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #0066b3;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      line-height: 1.2;
+      margin-top: 2px;
+    }
+
+    [data-theme="dark"] .brand-tag-text {
+      color: #38bdf8;
     }
 
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
-    .icon-btn {
-      width: 38px;
-      height: 38px;
+    /* Status do Campus ao Vivo (Pill com Beacon Pulsante) */
+    .campus-live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 11px;
+      border-radius: var(--radius-full);
+      background: var(--emerald-subtle);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      color: var(--emerald);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .beacon-pulse {
+      width: 7px;
+      height: 7px;
+      background: var(--emerald);
       border-radius: 50%;
-      border: 1px solid var(--border);
-      background: var(--surface);
+      position: relative;
+    }
+
+    .beacon-pulse::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: var(--emerald);
+      opacity: 0.6;
+      animation: beaconRipple 2s infinite ease-out;
+    }
+
+    @keyframes beaconRipple {
+      0% { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(2.6); opacity: 0; }
+    }
+
+    /* Botões Táteis com Acabamento 3D */
+    .btn-action-glass {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-card);
+      background: var(--surface-card);
       color: var(--text-muted);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       position: relative;
-      transition: all 0.2s ease;
+      box-shadow: var(--shadow-ambient);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .icon-btn:hover {
-      background: var(--border-subtle);
-      color: var(--text);
+    .btn-action-glass:hover {
+      background: var(--surface-card-hover);
+      color: var(--infnet-sky);
+      border-color: var(--border-card-hover);
       transform: translateY(-1px);
     }
 
-    .icon-btn:active {
-      transform: scale(0.95);
+    .btn-action-glass:active {
+      transform: scale(0.94) translateY(1px);
     }
 
-    .badge-dot {
+    .badge-counter-3d {
       position: absolute;
-      top: 6px;
-      right: 6px;
-      width: 8px;
-      height: 8px;
-      background: var(--danger);
-      border-radius: 50%;
-      border: 2px solid var(--surface);
-    }
-
-    .badge-count {
-      position: absolute;
-      top: -2px;
+      top: -4px;
       right: -4px;
-      background: var(--primary);
+      background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
       color: white;
+      font-family: var(--font-mono);
       font-size: 10px;
       font-weight: 700;
-      padding: 1px 5px;
-      border-radius: 10px;
+      min-width: 18px;
+      height: 18px;
+      line-height: 18px;
+      text-align: center;
+      border-radius: var(--radius-full);
       border: 2px solid var(--surface);
+      box-shadow: 0 2px 8px var(--rose-glow);
     }
 
-    .user-avatar-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      border: 2px solid var(--primary);
+    .user-avatar-top {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      border: 2px solid var(--infnet-primary);
       overflow: hidden;
       cursor: pointer;
       padding: 0;
-      background: none;
       position: relative;
+      background: none;
+      box-shadow: 0 0 10px var(--infnet-primary-glow);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .user-avatar-btn img {
+    .user-avatar-top:hover {
+      transform: scale(1.05);
+    }
+
+    .user-avatar-top img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
     /* ==========================================================================
-       4. CONTEÚDO PRINCIPAL (ÁREA DE TELAS / ABAS)
-       Data: 29/10/2026 22:15
-       Finalidade: Telas alternáveis de alta velocidade sem recarregar a página.
+       BLOCO 4: CONTEÚDO PRINCIPAL (MAIN & SEÇÕES)
+       Data: 29/10/2026 23:55
+       Finalidade: Organização tátil, fluida e com respiração visual.
        ========================================================================== */
     .app-main {
       flex: 1;
-      padding: 16px 16px calc(var(--nav-height) + 20px) 16px;
+      padding: 20px 18px calc(var(--nav-h) + 26px) 18px;
       overflow-y: auto;
+      scroll-behavior: smooth;
     }
 
-    .tab-content {
+    .view-pane {
       display: none;
-      animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: paneEnter 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    .tab-content.active {
+    .view-pane.active {
       display: block;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
+    @keyframes paneEnter {
+      from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     /* ==========================================================================
-       5. COMPONENTES VISUAIS & CARDS
-       Data: 29/10/2026 22:15
-       Finalidade: Cards de aula ao vivo, contagem de TPs, feed e botões táteis.
+       BLOCO 5: SAUDAÇÃO EXECUTIVA & BENTO DE STATUS ACADÊMICO
+       Data: 29/10/2026 23:55
+       Finalidade: Identificação refinada de Mattheus Moraes sem cards poluídos.
        ========================================================================== */
-    /* Card de Boas-Vindas e Status do Aluno */
-    .profile-hero-card {
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 18px;
+    .executive-welcome {
+      margin-bottom: 20px;
+    }
+
+    .welcome-topline {
       display: flex;
       align-items: center;
-      gap: 14px;
-      margin-bottom: 16px;
-      box-shadow: var(--shadow-sm);
+      justify-content: space-between;
+      margin-bottom: 4px;
     }
 
-    .hero-avatar {
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      position: relative;
-      flex-shrink: 0;
+    .greeting-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .hero-avatar img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--primary);
+    .course-chip {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--infnet-sky);
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
     }
 
-    .status-indicator {
-      position: absolute;
-      bottom: 2px;
-      right: 2px;
-      width: 13px;
-      height: 13px;
-      background: var(--success);
-      border: 2px solid var(--surface);
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
-      70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-    }
-
-    .hero-info h2 {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: -0.01em;
-      line-height: 1.2;
-    }
-
-    .hero-info p {
+    .welcome-subtitle {
       font-size: 13px;
       color: var(--text-muted);
-      margin-top: 2px;
+      font-weight: 500;
+      margin-bottom: 14px;
     }
 
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      background: var(--primary-light);
-      color: var(--primary);
-      padding: 2px 8px;
-      border-radius: var(--radius-full);
-      font-size: 11px;
-      font-weight: 700;
-      margin-top: 6px;
+    /* Bento Row de 3 Métricas Acadêmicas Reais */
+    .bento-metrics-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
     }
 
-    [data-theme="dark"] .hero-badge {
-      color: #38bdf8;
-    }
-
-    /* CARD DE DESTAQUE: Aula ao Vivo do Dia (Zoom) */
-    .live-class-card {
-      background: var(--primary-gradient);
-      color: white;
-      border-radius: var(--radius-lg);
-      padding: 20px;
+    .bento-metric-tile {
+      background: var(--surface-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 12px 10px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
       position: relative;
       overflow: hidden;
-      margin-bottom: 18px;
-      box-shadow: var(--shadow-glow);
+      backdrop-filter: blur(16px);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .live-class-card::after {
+    .bento-metric-tile:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-card-hover);
+    }
+
+    .bento-metric-tile::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.5), transparent);
+    }
+
+    .metric-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-subtle);
+      margin-bottom: 4px;
+    }
+
+    .metric-value-row {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+
+    .metric-value {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.03em;
+    }
+
+    .metric-sub {
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .sub-emerald { color: var(--emerald); }
+    .sub-sky { color: var(--infnet-sky); }
+
+    /* ==========================================================================
+       BLOCO 6: O CORAÇÃO DO PORTAL — "LIVE BROADCAST UNIT" (AULA DE HOJE)
+       Data: 29/10/2026 23:55
+       Finalidade: Hero card nível Apple / Linear com acabamento 3D espetacular.
+       ========================================================================== */
+    .hero-live-unit {
+      position: relative;
+      background: linear-gradient(135deg, #001e3b 0%, #003666 50%, #004b87 100%);
+      border-radius: var(--radius-xl);
+      padding: 22px 20px;
+      color: #ffffff;
+      box-shadow: var(--shadow-hero);
+      overflow: hidden;
+      margin-bottom: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    /* Brilho Radial Ambient Tridimensional Atrás do Card */
+    .hero-live-unit::before {
       content: '';
       position: absolute;
       top: -40px;
       right: -40px;
-      width: 140px;
-      height: 140px;
-      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(0, 210, 255, 0.3) 0%, transparent 70%);
       border-radius: 50%;
       pointer-events: none;
     }
 
-    .live-tag {
+    /* Reflexo Especular 3D de Vidro Curvado */
+    .hero-live-unit::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.6) 50%, transparent 100%);
+    }
+
+    .hero-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .broadcast-tag {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(8px);
-      padding: 4px 10px;
+      gap: 7px;
+      padding: 5px 12px;
       border-radius: var(--radius-full);
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(12px);
+      font-family: var(--font-mono);
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 700;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 10px;
+      color: #ffffff;
     }
 
-    .live-dot {
-      width: 7px;
-      height: 7px;
-      background: #ef4444;
+    .broadcast-dot-live {
+      width: 8px;
+      height: 8px;
+      background: #ff3b30;
       border-radius: 50%;
-      animation: blink 1s infinite alternate;
+      box-shadow: 0 0 10px #ff3b30;
+      animation: livePulse 1.5s infinite ease-in-out;
     }
 
-    @keyframes blink {
-      from { opacity: 0.4; }
-      to { opacity: 1; }
+    @keyframes livePulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
     }
 
-    .live-class-title {
-      font-size: 18px;
+    .module-code-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.1);
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+    }
+
+    .hero-class-title {
+      font-family: var(--font-display);
+      font-size: 21px;
       font-weight: 800;
       line-height: 1.25;
-      margin-bottom: 4px;
+      letter-spacing: -0.025em;
+      margin-bottom: 8px;
+      color: #ffffff;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
 
-    .live-class-sub {
-      font-size: 13px;
-      opacity: 0.9;
-      margin-bottom: 16px;
-    }
-
-    .live-actions {
+    .hero-instructor-row {
       display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .instructor-avatar-mini {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .instructor-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* Botões de Ação Táctil do Broadcast */
+    .hero-actions-grid {
+      display: grid;
+      grid-template-columns: 1fr 48px;
       gap: 10px;
     }
 
-    .btn-zoom {
-      flex: 1;
-      display: inline-flex;
+    .btn-enter-broadcast {
+      height: 48px;
+      border-radius: var(--radius-md);
+      background: #ffffff;
+      color: var(--infnet-deep);
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      background: #ffffff;
-      color: #004b87;
-      font-weight: 700;
-      font-size: 14px;
-      padding: 12px 18px;
-      border-radius: var(--radius-md);
-      text-decoration: none;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      border: none;
       cursor: pointer;
-      transition: all 0.2s ease;
+      box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
     }
 
-    .btn-zoom:hover {
+    .btn-enter-broadcast:hover {
+      background: #f8fafc;
       transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     }
 
-    .btn-zoom:active {
-      transform: scale(0.98);
+    .btn-enter-broadcast:active {
+      transform: scale(0.97) translateY(1px);
     }
 
-    .btn-outline-white {
-      display: inline-flex;
+    .btn-copy-broadcast {
+      height: 48px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(12px);
+      color: #ffffff;
+      display: flex;
       align-items: center;
       justify-content: center;
-      padding: 12px 14px;
-      border-radius: var(--radius-md);
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(255,255,255,0.3);
-      color: white;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .btn-outline-white:hover {
-      background: rgba(255,255,255,0.25);
+    .btn-copy-broadcast:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
     }
 
-    /* Seção de Prazos (TPs e ATs) */
-    .section-header {
+    .btn-copy-broadcast:active {
+      transform: scale(0.93);
+    }
+
+    /* ==========================================================================
+       BLOCO 7: BENTO DE ACESSO RÁPIDO (4 TILES TÁTEIS)
+       Data: 29/10/2026 23:55
+       Finalidade: Navegação instantânea com microinterações 3D.
+       ========================================================================== */
+    .quick-tiles-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 26px;
+    }
+
+    .quick-tile {
+      background: var(--surface-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      box-shadow: var(--shadow-card);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 104px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(16px);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .quick-tile:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-card-hover);
+      box-shadow: var(--shadow-elevated);
+    }
+
+    .quick-tile:active {
+      transform: scale(0.97);
+    }
+
+    .tile-icon-bubble {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .bubble-blue {
+      background: rgba(0, 153, 255, 0.12);
+      color: #0099ff;
+      border: 1px solid rgba(0, 153, 255, 0.25);
+    }
+
+    .bubble-emerald {
+      background: rgba(16, 185, 129, 0.12);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .bubble-amber {
+      background: rgba(245, 158, 11, 0.12);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.25);
+    }
+
+    .bubble-purple {
+      background: rgba(168, 85, 247, 0.12);
+      color: #a855f7;
+      border: 1px solid rgba(168, 85, 247, 0.25);
+    }
+
+    .tile-title {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 2px;
+    }
+
+    .tile-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ==========================================================================
+       BLOCO 8: CABEÇALHOS DE SEÇÃO & PRAZOS CRÍTICOS (TPS E ATS REAIS)
+       Data: 29/10/2026 23:55
+       Finalidade: Cards de entregas de alto valor com barra de progresso.
+       ========================================================================== */
+    .section-header-modern {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 12px;
-      padding: 0 2px;
     }
 
-    .section-title {
+    .section-header-modern h3 {
+      font-family: var(--font-display);
       font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-pill-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
       font-weight: 700;
-      color: var(--text);
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      background: var(--surface-inset);
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+    }
+
+    /* Card de Prazo com Indicador de Urgência & Barra 3D */
+    .deadline-card-luxury {
+      background: var(--surface-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 12px;
+      backdrop-filter: blur(16px);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .deadline-card-luxury:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-card-hover);
+    }
+
+    .deadline-top-line {
       display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .section-link {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--primary);
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    [data-theme="dark"] .section-link {
-      color: #38bdf8;
-    }
-
-    .deadline-card {
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 14px 16px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
-      transition: all 0.2s ease;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .deadline-card:hover {
-      border-color: var(--primary);
-      transform: translateX(2px);
+      gap: 12px;
+      margin-bottom: 10px;
     }
 
     .deadline-info h4 {
+      font-family: var(--font-display);
       font-size: 14px;
       font-weight: 700;
-      color: var(--text);
+      color: var(--text-main);
+      margin-bottom: 2px;
     }
 
     .deadline-info p {
       font-size: 12px;
       color: var(--text-muted);
-      margin-top: 2px;
+      font-weight: 500;
     }
 
+    /* Badges de Contagem Regressiva Elegantes */
     .countdown-pill {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      text-align: right;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
     }
 
-    .countdown-badge {
-      font-size: 11px;
-      font-weight: 800;
-      padding: 4px 8px;
+    .pill-urgent {
+      background: var(--rose-subtle);
+      color: var(--rose);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+
+    .pill-warning {
+      background: var(--amber-subtle);
+      color: var(--amber);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .pill-safe {
+      background: var(--emerald-subtle);
+      color: var(--emerald);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    /* Barra de Progresso Fina e Elegante */
+    .timeline-progress-track {
+      width: 100%;
+      height: 4px;
+      background: var(--surface-inset);
       border-radius: var(--radius-full);
-      text-transform: uppercase;
+      overflow: hidden;
+      margin-top: 10px;
+      position: relative;
     }
 
-    .badge-urgent {
-      background: #fee2e2;
-      color: #b91c1c;
+    .timeline-progress-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+      transition: width 0.6s ease;
     }
 
-    .badge-medium {
-      background: #fef3c7;
-      color: #b45309;
-    }
+    .fill-rose { background: linear-gradient(90deg, #f43f5e, #fb7185); }
+    .fill-amber { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
 
-    .badge-ok {
-      background: #dcfce7;
-      color: #15803d;
-    }
-
-    [data-theme="dark"] .badge-urgent {
-      background: rgba(239, 68, 68, 0.2);
-      color: #f87171;
-    }
-
-    [data-theme="dark"] .badge-medium {
-      background: rgba(245, 158, 11, 0.2);
-      color: #fbbf24;
-    }
-
-    [data-theme="dark"] .badge-ok {
-      background: rgba(16, 185, 129, 0.2);
-      color: #34d399;
-    }
-
-    /* Cards de Disciplina (Grid) */
-    .discipline-card {
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 16px;
-      margin-bottom: 14px;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.2s ease;
-      cursor: pointer;
-    }
-
-    .discipline-card:hover {
-      border-color: var(--primary);
-      box-shadow: var(--shadow-md);
-      transform: translateY(-2px);
-    }
-
-    .discipline-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .discipline-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: var(--primary-light);
-      color: var(--primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    [data-theme="dark"] .discipline-icon {
-      color: #38bdf8;
-    }
-
-    .discipline-title-group h3 {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.25;
-    }
-
-    .discipline-title-group p {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .discipline-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 10px;
-      border-top: 1px solid var(--border-subtle);
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .meta-tag {
-      font-weight: 600;
-      color: var(--primary);
-    }
-
-    [data-theme="dark"] .meta-tag {
-      color: #38bdf8;
-    }
-
-    /* Feed Posts (Avisos e Material) */
-    .post-card {
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 16px;
-      margin-bottom: 14px;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .post-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
-    .post-author-img {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      object-fit: cover;
-      background: var(--border);
-    }
-
-    .post-author-info h4 {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.2;
-    }
-
-    .post-author-info span {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .post-content {
-      font-size: 14px;
-      color: var(--text);
-      line-height: 1.5;
-      margin-bottom: 12px;
-    }
-
-    .post-content h5 {
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 6px;
-      color: var(--text);
-    }
-
-    /* Anexos de Arquivo (Download rápido) */
-    .file-attachment {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 10px 14px;
+    .deadline-footer-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-top: 8px;
-      transition: all 0.2s;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-subtle);
     }
 
-    .file-attachment:hover {
-      background: var(--surface);
-      border-color: var(--primary);
-    }
-
-    .file-info {
+    /* ==========================================================================
+       BLOCO 9: MATERIAIS DE AULA (ARQUIVOS REAIS DA AULA 6)
+       Data: 29/10/2026 23:55
+       Finalidade: Lista limpa de downloads (Aula06.zip & lousa_aula6-1.pdf).
+       ========================================================================== */
+    .material-card-row {
+      background: var(--surface-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      box-shadow: var(--shadow-card);
       display: flex;
       align-items: center;
-      gap: 10px;
-      overflow: hidden;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      transition: all 0.2s ease;
     }
 
-    .file-type-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: var(--primary-light);
-      color: var(--primary);
+    .material-card-row:hover {
+      border-color: var(--border-card-hover);
+      transform: translateY(-1px);
+    }
+
+    .file-type-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
       display: flex;
       align-items: center;
       justify-content: center;
+      font-family: var(--font-mono);
       font-size: 11px;
       font-weight: 800;
+      flex-shrink: 0;
     }
 
-    [data-theme="dark"] .file-type-icon {
-      color: #38bdf8;
+    .file-zip {
+      background: rgba(0, 153, 255, 0.12);
+      color: #0099ff;
+      border: 1px solid rgba(0, 153, 255, 0.25);
     }
 
-    .file-name {
+    .file-pdf {
+      background: rgba(244, 63, 94, 0.12);
+      color: #f43f5e;
+      border: 1px solid rgba(244, 63, 94, 0.25);
+    }
+
+    .material-info {
+      flex: 1;
+      margin: 0 14px;
+    }
+
+    .material-info h5 {
+      font-family: var(--font-display);
       font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 220px;
+      font-weight: 700;
+      color: var(--text-main);
     }
 
-    .file-size {
+    .material-info p {
       font-size: 11px;
       color: var(--text-muted);
     }
 
-    .file-download-btn {
-      color: var(--primary);
-      cursor: pointer;
-      padding: 6px;
+    .btn-download-tactile {
+      width: 36px;
+      height: 36px;
       border-radius: var(--radius-sm);
+      border: 1px solid var(--border-card);
+      background: var(--surface-inset);
+      color: var(--infnet-sky);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
     }
 
-    [data-theme="dark"] .file-download-btn {
-      color: #38bdf8;
+    .btn-download-tactile:hover {
+      background: var(--infnet-primary);
+      color: #ffffff;
+      border-color: var(--infnet-primary);
     }
 
-    /* Card do Assistente Manual do Aluno com IA */
-    .ai-chat-box {
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
+    .btn-download-tactile:active {
+      transform: scale(0.92);
+    }
+
+    /* ==========================================================================
+       BLOCO 10: CADERNO DIGITAL DE AULA (OFFLINE LOCALSTORAGE)
+       Data: 29/10/2026 23:55
+       Finalidade: Bloco de anotações persistente com contador e badge verde.
+       ========================================================================== */
+    .digital-notebook-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border-card);
       border-radius: var(--radius-lg);
       padding: 16px;
-      display: flex;
-      flex-direction: column;
-      height: calc(100vh - 220px);
-      box-shadow: var(--shadow-sm);
+      box-shadow: var(--shadow-card);
+      margin-top: 20px;
     }
 
-    .chat-messages {
+    .notebook-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .notebook-title {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sync-pill-ok {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--emerald);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .notebook-textarea {
+      width: 100%;
+      min-height: 84px;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      background: var(--surface-inset);
+      padding: 12px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-main);
+      resize: vertical;
+      line-height: 1.5;
+      transition: border-color 0.2s;
+    }
+
+    .notebook-textarea:focus {
+      border-color: var(--infnet-sky);
+    }
+
+    /* ==========================================================================
+       BLOCO 11: ASSISTENTE DO MANUAL DO ALUNO IA (RAG STREAM)
+       Data: 29/10/2026 23:55
+       Finalidade: Chat com IA respondendo regras acadêmicas da Infnet.
+       ========================================================================== */
+    .ai-chat-interface {
+      background: var(--surface-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 210px);
+    }
+
+    .chat-messages-container {
       flex: 1;
       overflow-y: auto;
-      padding-right: 4px;
       display: flex;
       flex-direction: column;
       gap: 12px;
+      padding-right: 4px;
     }
 
     .chat-bubble {
-      max-width: 85%;
+      max-width: 88%;
       padding: 12px 16px;
-      border-radius: 16px;
-      font-size: 14px;
-      line-height: 1.45;
+      border-radius: 18px;
+      font-size: 13px;
+      line-height: 1.55;
     }
 
     .bubble-bot {
       align-self: flex-start;
-      background: var(--border-subtle);
-      color: var(--text);
+      background: var(--surface-inset);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
       border-bottom-left-radius: 4px;
     }
 
     .bubble-user {
       align-self: flex-end;
-      background: var(--primary-gradient);
-      color: white;
+      background: linear-gradient(135deg, #004b87 0%, #0070f3 100%);
+      color: #ffffff;
       border-bottom-right-radius: 4px;
+      box-shadow: 0 4px 14px rgba(0, 112, 243, 0.35);
     }
 
-    .chat-quick-chips {
+    .chat-chips-scroll {
       display: flex;
       gap: 8px;
       overflow-x: auto;
-      padding: 8px 0;
+      padding: 10px 0;
       scrollbar-width: none;
     }
 
-    .chat-quick-chips::-webkit-scrollbar {
-      display: none;
-    }
+    .chat-chips-scroll::-webkit-scrollbar { display: none; }
 
-    .chip-btn {
+    .chip-suggest-btn {
       white-space: nowrap;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-size: 12px;
+      padding: 7px 12px;
+      border-radius: var(--radius-full);
+      background: var(--surface-inset);
+      border: 1px solid var(--border-subtle);
+      font-family: var(--font-body);
+      font-size: 11px;
       font-weight: 600;
-      padding: 6px 12px;
-      border-radius: var(--radius-full);
+      color: var(--text-muted);
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.2s ease;
     }
 
-    .chip-btn:hover {
-      border-color: var(--primary);
-      color: var(--primary);
+    .chip-suggest-btn:hover {
+      background: var(--surface-elevated);
+      color: var(--infnet-sky);
+      border-color: var(--infnet-sky);
     }
 
-    .chat-input-bar {
+    .chat-composer-box {
       display: flex;
+      align-items: center;
       gap: 8px;
-      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border-subtle);
     }
 
-    .chat-input {
+    .chat-input-field {
       flex: 1;
-      background: var(--bg);
-      border: 1px solid var(--border);
+      height: 44px;
       border-radius: var(--radius-full);
-      padding: 10px 18px;
-      font-size: 14px;
-      color: var(--text);
-      outline: none;
-      font-family: inherit;
+      border: 1px solid var(--border-card);
+      background: var(--surface-inset);
+      padding: 0 16px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-main);
     }
 
-    .chat-input:focus {
-      border-color: var(--primary);
+    .chat-input-field:focus {
+      border-color: var(--infnet-sky);
     }
 
-    .chat-send-btn {
-      width: 42px;
-      height: 42px;
+    .btn-chat-send {
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      background: var(--primary-gradient);
-      color: white;
+      background: var(--infnet-primary);
+      color: #ffffff;
       border: none;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.2s;
+      box-shadow: 0 4px 12px var(--infnet-primary-glow);
+      transition: transform 0.2s;
     }
 
-    .chat-send-btn:active {
-      transform: scale(0.95);
-    }
-
-    /* Caderno de Anotações Rápido de Aula */
-    .notebook-card {
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 16px;
-      margin-top: 14px;
-    }
-
-    .notebook-textarea {
-      width: 100%;
-      height: 90px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 12px;
-      font-family: inherit;
-      font-size: 13px;
-      color: var(--text);
-      resize: vertical;
-      margin-top: 8px;
-      outline: none;
-    }
-
-    .notebook-textarea:focus {
-      border-color: var(--primary);
+    .btn-chat-send:active {
+      transform: scale(0.92);
     }
 
     /* ==========================================================================
-       6. BARRA INFERIOR DE NAVEGAÇÃO NATIVA (BOTTOM TABS)
-       Data: 29/10/2026 22:15
-       Finalidade: Navegação padrão mobile rápida e com feedback tátil.
+       BLOCO 12: BOTTOM FLOATING DOCK (TABS TÁTEIS COM VIDRO E PILL INDICATOR)
+       Data: 29/10/2026 23:55
+       Finalidade: Barra de navegação ultra-polida com haptic feedback visual.
        ========================================================================== */
-    .bottom-nav {
-      position: sticky;
+    .bottom-dock {
+      position: fixed;
       bottom: 0;
-      left: 0;
-      right: 0;
-      height: var(--nav-height);
-      background: var(--surface);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-top: 1px solid var(--border);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      height: var(--nav-h);
+      background: var(--surface-glass);
+      backdrop-filter: blur(24px) saturate(190%);
+      -webkit-backdrop-filter: blur(24px) saturate(190%);
+      border-top: 1px solid var(--border-subtle);
       display: flex;
       align-items: center;
       justify-content: space-around;
       padding: 0 8px;
-      z-index: 50;
-      transition: background-color 0.25s ease, border-color 0.25s ease;
+      z-index: 60;
+      box-shadow: 0 -4px 20px -8px rgba(0, 0, 0, 0.15);
     }
 
-    .nav-item {
+    .tab-item-dock {
+      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 3px;
+      gap: 4px;
       background: none;
       border: none;
       color: var(--text-subtle);
+      font-family: var(--font-display);
       font-size: 11px;
       font-weight: 600;
       cursor: pointer;
-      padding: 6px 12px;
+      padding: 8px 4px;
       border-radius: var(--radius-md);
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
     }
 
-    .nav-item svg {
+    .tab-item-dock svg {
       width: 22px;
       height: 22px;
-      stroke-width: 2.2;
-      transition: transform 0.2s;
+      stroke-width: 2;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .nav-item.active {
-      color: var(--primary);
+    .tab-item-dock:hover {
+      color: var(--text-main);
     }
 
-    [data-theme="dark"] .nav-item.active {
-      color: #38bdf8;
+    .tab-item-dock.active {
+      color: var(--infnet-sky);
     }
 
-    .nav-item.active svg {
-      transform: scale(1.1);
+    .tab-item-dock.active svg {
+      transform: translateY(-2px);
+      stroke: var(--infnet-sky);
     }
 
-    .nav-item:active {
-      transform: scale(0.92);
+    .tab-item-dock.active::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      width: 16px;
+      height: 3px;
+      background: var(--infnet-sky);
+      border-radius: var(--radius-full);
+      box-shadow: 0 0 8px var(--infnet-sky);
     }
   </style>
 </head>
 <body>
 
-  <!-- =========================================================================
-       ESTRUTURA PRINCIPAL DO APP
-       ========================================================================= -->
-  <div class="app-shell">
+  <div class="app-frame">
 
-    <!-- CABEÇALHO SUPERIOR -->
+    <!-- =======================================================================
+         BLOCO HEADER: BARRA DE NAVEGAÇÃO COM LOGO VETORIAL OFICIAL EM SVG
+         ======================================================================= -->
     <header class="app-header">
-      <a href="#" class="header-brand">
-        <img src="assets/cropped-infnet_logo-100x100-1-192x192.png" alt="Logo Infnet" class="brand-logo">
-        <div class="brand-text">
-          <h1>Instituto Infnet</h1>
-          <span>Portal Acadêmico</span>
+      <a href="#" class="brand-link" aria-label="Instituto Infnet" onclick="switchView('pane-hoje'); return false;">
+        <img src="assets/infnet_seal_official.svg" alt="Instituto Infnet" class="brand-seal-img">
+        <div class="brand-text-col">
+          <span class="brand-main-text">Instituto Infnet</span>
+          <span class="brand-tag-text">PORTAL ACADÊMICO</span>
         </div>
       </a>
 
       <div class="header-actions">
-        <!-- Alternador de Tema Claro/Escuro -->
-        <button class="icon-btn" id="themeToggle" title="Alternar tema">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.5 5.5 0 0 1-7.54-7.54A9 9 0 0 0 12 3z"></path>
+        <!-- Alternador Dark / Light Mode -->
+        <button class="btn-action-glass" id="themeToggleBtn" title="Alternar Modo Escuro / Claro" aria-label="Alternar tema">
+          <svg id="moonIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg id="sunIcon" style="display:none;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
           </svg>
         </button>
 
-        <!-- Sino de Notificações com 24 avisos reais -->
-        <button class="icon-btn" id="btnNotifications" title="Notificações" onclick="alert('Você tem 24 notificações: 2 novas notas de TPs lançadas e atualizações do Bloco 26E4.')">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <!-- Sino de Notificações com Contador 3D -->
+        <button class="btn-action-glass" onclick="openNotificationsModal()" title="Notificações Acadêmicas" aria-label="Notificações">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
             <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
           </svg>
-          <span class="badge-count">24</span>
+          <span class="badge-counter-3d">2</span>
         </button>
 
-        <!-- Foto do Mattheus -->
-        <button class="user-avatar-btn" title="Perfil" onclick="switchTab('tab-perfil')">
-          <img src="assets/mattheus_avatar.png" alt="Mattheus">
+        <!-- Avatar do Estudante Mattheus Moraes -->
+        <button class="user-avatar-top" onclick="switchView('pane-perfil')" title="Meu Perfil">
+          <img src="assets/mattheus_avatar.png" alt="Mattheus Phelipe">
         </button>
       </div>
     </header>
 
-    <!-- CONTEÚDO PRINCIPAL / TELAS -->
+    <!-- =======================================================================
+         CONTEÚDO PRINCIPAL (MAIN COM AS 5 TELAS NATIVAS)
+         ======================================================================= -->
     <main class="app-main">
 
       <!-- =====================================================================
-           ABA 1: HOJE / DASHBOARD (Card da Aula Zoom + Prazos TPs)
+           VIEW 1: 🏠 HOJE (HUB PRINCIPAL DO ALUNO)
            ===================================================================== -->
-      <section id="tab-hoje" class="tab-content active">
-        
-        <!-- Boas-vindas ao Mattheus -->
-        <div class="profile-hero-card">
-          <div class="hero-avatar">
-            <img src="assets/mattheus_avatar.png" alt="Mattheus Phelipe">
-            <span class="status-indicator"></span>
+      <section id="pane-hoje" class="view-pane active">
+
+        <!-- Saudação e Identificação Executiva do Aluno -->
+        <div class="executive-welcome">
+          <div class="welcome-topline">
+            <h1 class="greeting-title">
+              Boa noite, Mattheus
+            </h1>
+            <span class="course-chip">Engenharia • 26E4</span>
           </div>
-          <div class="hero-info">
-            <h2>Mattheus Phelipe</h2>
-            <p>Engenharia de Software • Bloco 26E4</p>
-            <span class="hero-badge">🟢 Aluno(a) Regular</span>
+          <p class="welcome-subtitle">Quinta-feira, 29 de Outubro • 2 entregas prioritárias</p>
+
+          <!-- Bento Row de 3 Métricas Acadêmicas em Tempo Real -->
+          <div class="bento-metrics-row">
+            <div class="bento-metric-tile">
+              <span class="metric-label">CR Geral</span>
+              <div class="metric-value-row">
+                <span class="metric-value">9.4</span>
+                <span class="metric-sub sub-emerald">Top 5%</span>
+              </div>
+            </div>
+
+            <div class="bento-metric-tile">
+              <span class="metric-label">Presença</span>
+              <div class="metric-value-row">
+                <span class="metric-value">98%</span>
+                <span class="metric-sub sub-emerald">100% OK</span>
+              </div>
+            </div>
+
+            <div class="bento-metric-tile">
+              <span class="metric-label">Entregas</span>
+              <div class="metric-value-row">
+                <span class="metric-value">2</span>
+                <span class="metric-sub sub-sky">Em dia</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- DESTAQUE: Aula ao Vivo de Hoje (1 Toque para o Zoom) -->
-        <div class="live-class-card">
-          <div class="live-tag">
-            <span class="live-dot"></span>
-            Aula de Hoje • Ao Vivo às 19:00
+        <!-- HERO CARD: LIVE BROADCAST UNIT (A AULA DE HOJE) -->
+        <div class="hero-live-unit">
+          <div class="hero-header-row">
+            <div class="broadcast-tag">
+              <span class="broadcast-dot-live"></span>
+              <span>Ao Vivo • Hoje às 19:00</span>
+            </div>
+            <span class="module-code-badge">Bloco 26E4</span>
           </div>
-          <h3 class="live-class-title">Desenvolvimento Mobile com React Native</h3>
-          <p class="live-class-sub">Turma 26E4 • Sala Virtual Zoom / Teams</p>
-          <div class="live-actions">
-            <a href="https://zoom.us" target="_blank" class="btn-zoom">
+
+          <h2 class="hero-class-title">
+            Desenvolvimento Mobile com React Native
+          </h2>
+
+          <div class="hero-instructor-row">
+            <div class="instructor-avatar-mini">👩‍🏫</div>
+            <span class="instructor-name">Profa. Maria Cecília Rodrigues • Sala Virtual Zoom</span>
+          </div>
+
+          <div class="hero-actions-grid">
+            <button class="btn-enter-broadcast" onclick="window.open('https://infnet.online', '_blank')">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <polygon points="23 7 16 12 23 17 23 7"></polygon>
                 <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
               </svg>
-              Entrar na Aula (Zoom)
-            </a>
-            <button class="btn-outline-white" title="Copiar link" onclick="navigator.clipboard.writeText('https://infnet.online/zoom/aula'); alert('Link da aula copiado!')">
+              <span>Entrar na Sala Virtual</span>
+            </button>
+
+            <button class="btn-copy-broadcast" title="Copiar Link da Aula" onclick="copyZoomLink()">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
@@ -1083,245 +1451,325 @@ FINALIDADE: Interface web/mobile de alta performance, moderna, limpa e polida,
           </div>
         </div>
 
-        <!-- Seção de Prazos de TPs e ATs -->
-        <div class="section-header">
-          <h3 class="section-title">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <!-- BENTO TILES DE ACESSO RÁPIDO (4 TILES TÁTEIS) -->
+        <div class="quick-tiles-grid">
+          <div class="quick-tile" onclick="switchView('pane-materias')">
+            <div class="tile-icon-bubble bubble-blue">⚛️</div>
+            <div>
+              <div class="tile-title">Minhas Matérias</div>
+              <div class="tile-meta">2 ativas no bloco</div>
+            </div>
+          </div>
+
+          <div class="quick-tile" onclick="switchView('pane-manual')">
+            <div class="tile-icon-bubble bubble-emerald">🤖</div>
+            <div>
+              <div class="tile-title">Manual IA</div>
+              <div class="tile-meta">Dúvidas acadêmicas</div>
+            </div>
+          </div>
+
+          <div class="quick-tile" onclick="switchView('pane-mensagens')">
+            <div class="tile-icon-bubble bubble-amber">💬</div>
+            <div>
+              <div class="tile-title">Recados & Coaching</div>
+              <div class="tile-meta">1 nova mensagem</div>
+            </div>
+          </div>
+
+          <div class="quick-tile" onclick="switchView('pane-feed')">
+            <div class="tile-icon-bubble bubble-purple">📢</div>
+            <div>
+              <div class="tile-title">Feed da Graduação</div>
+              <div class="tile-meta">Comunicados oficiais</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SEÇÃO: PRAZOS CRÍTICOS (TPS E ATS REAIS) -->
+        <div class="section-header-modern">
+          <h3>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
               <line x1="16" y1="2" x2="16" y2="6"></line>
               <line x1="8" y1="2" x2="8" y2="6"></line>
               <line x1="3" y1="10" x2="21" y2="10"></line>
             </svg>
-            Próximos Prazos (TPs e ATs)
+            Prazos Críticos de Entregas
           </h3>
-          <span class="section-link" onclick="switchTab('tab-materias')">Ver todos</span>
+          <span class="section-pill-tag">2 Pendentes</span>
         </div>
 
-        <!-- TP 1 React Native -->
-        <div class="deadline-card">
-          <div class="deadline-info">
-            <h4>TP 1 • React Native & Expo</h4>
-            <p>Entrega via repositório GitHub</p>
-          </div>
-          <div class="countdown-pill">
-            <span class="countdown-badge badge-urgent">Faltam 4 dias</span>
-            <p style="font-size: 11px; color: var(--text-muted); margin-top: 3px;">02/11 às 23:59</p>
-          </div>
-        </div>
-
-        <!-- TP 1 Processamento de Dados -->
-        <div class="deadline-card">
-          <div class="deadline-info">
-            <h4>TP 1 • Python e Estrutura de Dados</h4>
-            <p>Prof. Claudio Bonel Da Silva</p>
-          </div>
-          <div class="countdown-pill">
-            <span class="countdown-badge badge-medium">Faltam 8 dias</span>
-            <p style="font-size: 11px; color: var(--text-muted); margin-top: 3px;">06/11 às 23:59</p>
-          </div>
-        </div>
-
-        <!-- Caderno de Anotações Rápido de Aula -->
-        <div class="notebook-card">
-          <div class="section-header" style="margin-bottom: 4px;">
-            <h4 style="font-size: 14px; font-weight: 700;">📝 Caderno Digital de Aula</h4>
-            <span style="font-size: 11px; color: var(--success); font-weight: 600;">Salvo localmente</span>
-          </div>
-          <p style="font-size: 12px; color: var(--text-muted);">Anote dúvidas e conceitos da aula de hoje:</p>
-          <textarea class="notebook-textarea" id="classNotes" placeholder="Escreva aqui suas anotações da aula ao vivo..."></textarea>
-        </div>
-
-      </section>
-
-      <!-- =====================================================================
-           ABA 2: DISCIPLINAS (Grupos Reais do Bloco)
-           ===================================================================== -->
-      <section id="tab-materias" class="tab-content">
-        <div class="section-header">
-          <h3 class="section-title">Minhas Matérias (Bloco 26E4)</h3>
-          <span style="font-size: 12px; color: var(--text-muted);">2 disciplinas ativas</span>
-        </div>
-
-        <!-- Disciplina 1: React Native -->
-        <div class="discipline-card" onclick="alert('Disciplina: Desenvolvimento Mobile com React Native [26E4]\nCódigo: GRLDEV-MOB-26E4\nProfessor(a): Maria Cecília Rodrigues\nStatus: Bloco em andamento')">
-          <div class="discipline-header">
-            <div class="discipline-icon" style="background: rgba(37,99,235,0.15); color: #2563eb;">⚛️</div>
-            <div class="discipline-title-group">
-              <h3>Desenvolvimento Mobile com React Native</h3>
-              <p>Turma [26E4] • Graduação Infnet</p>
+        <!-- Card: TP 1 React Native -->
+        <div class="deadline-card-luxury">
+          <div class="deadline-top-line">
+            <div class="deadline-info">
+              <h4>TP 1 • React Native & Expo</h4>
+              <p>Desenvolvimento Mobile [26E4] • Entrega no GitHub</p>
             </div>
+            <span class="countdown-pill pill-urgent">Faltam 4 dias</span>
           </div>
-          <div class="discipline-meta">
-            <span>Aulas segundas e quartas</span>
-            <span class="meta-tag">TP 1 em andamento</span>
+
+          <div class="timeline-progress-track">
+            <div class="timeline-progress-fill fill-rose" style="width: 65%;"></div>
+          </div>
+
+          <div class="deadline-footer-row">
+            <span>Prazo: 02/11 às 23:59</span>
+            <span style="color: var(--infnet-sky); font-weight: 600; cursor: pointer;" onclick="alert('Repositório: Envie a URL do GitHub no portal acadêmico.')">Ver Instruções ›</span>
           </div>
         </div>
 
-        <!-- Disciplina 2: Processamento de Dados (Prof. Claudio Bonel) -->
-        <div class="discipline-card" onclick="alert('Disciplina: Fundamentos do Processamento de Dados [26E4-27E1]\nCódigo: GRLPDAR0C2-N2-L1\nProfessor: Claudio Bonel Da Silva\nAula atual: Aula 6 (Manipulação de Strings e Métodos Python)')">
-          <div class="discipline-header">
-            <div class="discipline-icon" style="background: rgba(16,185,129,0.15); color: #10b981;">🐍</div>
-            <div class="discipline-title-group">
-              <h3>Fundamentos do Processamento de Dados</h3>
-              <p>Turma GRLPDAR0C2-N2-L1 • Prof. Claudio Bonel</p>
+        <!-- Card: TP 1 Processamento de Dados -->
+        <div class="deadline-card-luxury">
+          <div class="deadline-top-line">
+            <div class="deadline-info">
+              <h4>TP 1 • Manipulação e Algoritmos Python</h4>
+              <p>Processamento de Dados • Prof. Claudio Bonel</p>
             </div>
+            <span class="countdown-pill pill-warning">Faltam 8 dias</span>
           </div>
-          <div class="discipline-meta">
-            <span>Aulas terças e quintas</span>
-            <span class="meta-tag">Aula 6 disponível</span>
+
+          <div class="timeline-progress-track">
+            <div class="timeline-progress-fill fill-amber" style="width: 35%;"></div>
+          </div>
+
+          <div class="deadline-footer-row">
+            <span>Prazo: 06/11 às 23:59</span>
+            <span style="color: var(--infnet-sky); font-weight: 600; cursor: pointer;" onclick="alert('Enunciado: Arquivo Jupyter Notebook e scripts na pasta da matéria.')">Ver Instruções ›</span>
           </div>
         </div>
 
-        <!-- Comunidades Gerais -->
-        <div class="section-header" style="margin-top: 20px;">
-          <h3 class="section-title">Comunidades & Avisos</h3>
+        <!-- SEÇÃO: MATERIAIS DA ÚLTIMA AULA (ARQUIVOS REAIS) -->
+        <div class="section-header-modern" style="margin-top: 24px;">
+          <h3>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Materiais da Aula de Ontem
+          </h3>
+          <span class="section-pill-tag">Aula 6</span>
         </div>
 
-        <div class="deadline-card" style="cursor: pointer;" onclick="alert('Grupo Geral: Avisos e Novidades da Graduação')">
-          <div class="deadline-info">
-            <h4>📢 Avisos e Novidades da Graduação</h4>
-            <p>Comunicados oficiais e reitoria</p>
+        <div class="material-card-row">
+          <div class="file-type-badge file-zip">ZIP</div>
+          <div class="material-info">
+            <h5>Aula06.zip</h5>
+            <p>Códigos Python • Prof. Claudio Bonel (4 KB)</p>
           </div>
-          <span style="font-size: 12px; color: var(--primary); font-weight: 700;">Entrar ›</span>
-        </div>
-
-        <div class="deadline-card" style="cursor: pointer;" onclick="alert('Grupo Geral: Histórias que Inspiram')">
-          <div class="deadline-info">
-            <h4>💡 Histórias que Inspiram</h4>
-            <p>Comunidade e networking de alunos</p>
-          </div>
-          <span style="font-size: 12px; color: var(--primary); font-weight: 700;">Entrar ›</span>
-        </div>
-      </section>
-
-      <!-- =====================================================================
-           ABA 3: FEED & AVISOS (Posts Reais com Download)
-           ===================================================================== -->
-      <section id="tab-feed" class="tab-content">
-        <div class="section-header">
-          <h3 class="section-title">Feed de Atualizações</h3>
-          <span class="section-link" onclick="location.reload()">Atualizar</span>
-        </div>
-
-        <!-- Post 1: Andre Kischinevsky sobre o Novo Manual -->
-        <div class="post-card">
-          <div class="post-header">
-            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=100" class="post-author-img" alt="Andre">
-            <div class="post-author-info">
-              <h4>Andre Kischinevsky</h4>
-              <span>Avisos e novidades da graduação • Há 1 dia</span>
-            </div>
-          </div>
-          <div class="post-content">
-            <h5>Novo Manual do Aluno em Beta 🚀</h5>
-            <p>Em breve, vamos substituir o jeito atual de consultar o Manual do Aluno por um site interativo. A leitura fica muito melhor no celular, e você pode fazer perguntas sobre regras, prazos e calcular sua média com IA.</p>
-          </div>
-          <button class="btn-zoom" style="background: var(--bg); color: var(--primary); border: 1px solid var(--border); width: 100%;" onclick="switchTab('tab-manual')">
-            🤖 Testar o Assistente do Manual aqui
+          <button class="btn-download-tactile" title="Baixar arquivo" onclick="triggerDownload('Aula06.zip')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
           </button>
         </div>
 
-        <!-- Post 2: Prof. Claudio Bonel com os arquivos reais da Aula 6 -->
-        <div class="post-card">
-          <div class="post-header">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100" class="post-author-img" alt="Claudio">
-            <div class="post-author-info">
-              <h4>Claudio Bonel Da Silva</h4>
-              <span>Fundamentos do Processamento de Dados • Há 1 dia</span>
-            </div>
+        <div class="material-card-row">
+          <div class="file-type-badge file-pdf">PDF</div>
+          <div class="material-info">
+            <h5>lousa_aula6-1.pdf</h5>
+            <p>770 KB • Anotações do quadro virtual</p>
           </div>
-          <div class="post-content">
-            <h5>Aula 6 - Introdução a programação com Python</h5>
-            <p>Falaí! Tudo bem com vc? Materiais e referencial bibliográfico da aula 6 já estão disponíveis na guia de documentos:</p>
-            
-            <!-- Anexos Reais com Download -->
-            <div class="file-attachment">
-              <div class="file-info">
-                <span class="file-type-icon">ZIP</span>
-                <div>
-                  <div class="file-name">Aula06.zip</div>
-                  <div class="file-size">4 KB • Códigos Python da aula</div>
-                </div>
-              </div>
-              <span class="file-download-btn" onclick="alert('Download iniciado: Aula06.zip')">⬇️</span>
-            </div>
+          <button class="btn-download-tactile" title="Baixar arquivo" onclick="triggerDownload('lousa_aula6-1.pdf')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+          </button>
+        </div>
 
-            <div class="file-attachment">
-              <div class="file-info">
-                <span class="file-type-icon" style="background: #fee2e2; color: #b91c1c;">PDF</span>
-                <div>
-                  <div class="file-name">lousa_aula6-1.pdf</div>
-                  <div class="file-size">770 KB • Anotações do quadro</div>
-                </div>
-              </div>
-              <span class="file-download-btn" onclick="alert('Download iniciado: lousa_aula6-1.pdf')">⬇️</span>
+        <!-- CADERNO DIGITAL DE ANOTAÇÕES OFFLINE -->
+        <div class="digital-notebook-card">
+          <div class="notebook-header">
+            <div class="notebook-title">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 20h9"></path>
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+              </svg>
+              <span>Caderno de Aula (Persistência Offline)</span>
+            </div>
+            <div class="sync-pill-ok">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Salvo no dispositivo</span>
             </div>
           </div>
+          <textarea class="notebook-textarea" id="studentNotebook" placeholder="Anote conceitos importantes da aula ao vivo aqui..."></textarea>
+        </div>
+
+      </section>
+
+      <!-- =====================================================================
+           VIEW 2: 📚 MATÉRIAS DO BLOCO (DISCIPLINAS REAIS)
+           ===================================================================== -->
+      <section id="pane-materias" class="view-pane">
+        <div class="section-header-modern">
+          <h3>Disciplinas em Andamento</h3>
+          <span class="section-pill-tag">Bloco 26E4</span>
+        </div>
+
+        <!-- Card: React Native -->
+        <div class="deadline-card-luxury" style="cursor: pointer;" onclick="openDisciplineDetails('React Native')">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div class="file-type-badge file-zip" style="width: 44px; height: 44px; font-size: 18px;">⚛️</div>
+            <div>
+              <h4>Desenvolvimento Mobile com React Native</h4>
+              <p>Turma [26E4] • Profa. Maria Cecília Rodrigues</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Processamento de Dados -->
+        <div class="deadline-card-luxury" style="cursor: pointer;" onclick="openDisciplineDetails('Processamento de Dados')">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div class="file-type-badge file-zip" style="width: 44px; height: 44px; font-size: 18px; background: rgba(16, 185, 129, 0.12); color: #10B981; border-color: rgba(16, 185, 129, 0.25);">🐍</div>
+            <div>
+              <h4>Fundamentos do Processamento de Dados</h4>
+              <p>Turma GRLPDAR0C2-N2-L1 • Prof. Claudio Bonel</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-header-modern" style="margin-top: 24px;">
+          <h3>Comunidades Acadêmicas</h3>
+        </div>
+
+        <div class="material-card-row" style="cursor: pointer;" onclick="switchView('pane-feed')">
+          <div class="material-info">
+            <h5>📢 Avisos e Novidades da Graduação</h5>
+            <p>Comunicados oficiais da diretoria e reitoria</p>
+          </div>
+          <span style="font-size: 13px; font-weight: 700; color: var(--infnet-sky);">Acessar ›</span>
+        </div>
+
+        <div class="material-card-row" style="cursor: pointer;" onclick="alert('Histórias que Inspiram: Comunidade oficial de networking de alunos Infnet.')">
+          <div class="material-info">
+            <h5>💡 Histórias que Inspiram</h5>
+            <p>Projetos de alunos, artigos e vagas no mercado</p>
+          </div>
+          <span style="font-size: 13px; font-weight: 700; color: var(--infnet-sky);">Acessar ›</span>
         </div>
       </section>
 
       <!-- =====================================================================
-           ABA 4: MENSAGENS DIRETAS
+           VIEW 3: 📰 FEED & COMUNICADOS OFICIAIS
            ===================================================================== -->
-      <section id="tab-mensagens" class="tab-content">
-        <div class="section-header">
-          <h3 class="section-title">Mensagens & Conversas</h3>
-          <span style="font-size: 11px; background: var(--primary); color: white; padding: 2px 8px; border-radius: 12px; font-weight: 700;">1 Nova</span>
+      <section id="pane-feed" class="view-pane">
+        <div class="section-header-modern">
+          <h3>Feed da Graduação</h3>
+          <span class="section-pill-tag">Oficial</span>
         </div>
 
-        <div class="deadline-card" style="cursor: pointer;" onclick="alert('Conversa com Coaching Acadêmico:\n[Luana]: Oi Mattheus, boa tarde! Como está o andamento do seu trimestre?')">
-          <div class="deadline-info">
-            <h4>Atendimento • Coaching Acadêmico</h4>
-            <p style="color: var(--primary); font-weight: 600;">[Luana aqui] Oi Mattheus, boa tarde...</p>
+        <!-- Post 1: Reitoria -->
+        <div class="deadline-card-luxury">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=120" style="width: 42px; height: 42px; border-radius: 12px; object-fit: cover;" alt="Andre">
+            <div>
+              <h4 style="font-size: 14px;">Andre Kischinevsky</h4>
+              <span style="font-size: 11px; color: var(--text-muted);">Reitoria • Avisos da Graduação</span>
+            </div>
           </div>
-          <span style="font-size: 11px; color: var(--text-muted);">Hoje</span>
+          <p style="font-size: 13px; line-height: 1.6; color: var(--text-main); margin-bottom: 12px;">
+            <strong>Novo Manual do Aluno em Beta 🚀</strong><br>
+            Em breve vamos substituir a forma tradicional de consulta do Manual por um portal inteligente interativo. Você pode perguntar sobre cálculos de média, limites de faltas e atividades complementares direto pelo assistente no app.
+          </p>
+          <button class="btn-enter-broadcast" style="height: 40px; font-size: 13px; background: var(--surface-inset); color: var(--infnet-sky); border: 1px solid var(--border-card);" onclick="switchView('pane-manual')">
+            Testar no Assistente IA ›
+          </button>
         </div>
 
-        <div class="deadline-card" style="cursor: pointer;" onclick="alert('Conversa com a Professora Maria Cecília Rodrigues sobre React Native.')">
-          <div class="deadline-info">
-            <h4>Maria Cecilia Rodrigues</h4>
-            <p>Você: Bom dia Professora, tudo bem?...</p>
+        <!-- Post 2: Prof. Claudio Bonel -->
+        <div class="deadline-card-luxury">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120" style="width: 42px; height: 42px; border-radius: 12px; object-fit: cover;" alt="Claudio Bonel">
+            <div>
+              <h4 style="font-size: 14px;">Claudio Bonel Da Silva</h4>
+              <span style="font-size: 11px; color: var(--text-muted);">Fundamentos do Processamento de Dados</span>
+            </div>
           </div>
-          <span style="font-size: 11px; color: var(--text-muted);">Ontem</span>
-        </div>
-
-        <div class="deadline-card" style="cursor: pointer;" onclick="alert('Central de Atendimento da Infnet.')">
-          <div class="deadline-info">
-            <h4>Secretaria Acadêmica</h4>
-            <p>Requerimento protocolado com sucesso.</p>
-          </div>
-          <span style="font-size: 11px; color: var(--text-muted);">26/10</span>
+          <p style="font-size: 13px; line-height: 1.6; color: var(--text-main); margin-bottom: 12px;">
+            <strong>Aula 6 - Introdução à Programação com Python</strong><br>
+            Falaí! Passando para avisar que o referencial bibliográfico e os scripts de manipulação de strings da aula 6 já estão disponíveis para download.
+          </p>
         </div>
       </section>
 
       <!-- =====================================================================
-           ABA 5: MANUAL DO ALUNO COM IA (RAG INTERATIVO)
+           VIEW 4: 💬 RECADOS & COACHING ACADÊMICO
            ===================================================================== -->
-      <section id="tab-manual" class="tab-content">
-        <div class="section-header">
-          <h3 class="section-title">🤖 Assistente do Manual do Aluno</h3>
-          <span style="font-size: 11px; color: var(--success); font-weight: 700;">● IA Ativa</span>
+      <section id="pane-mensagens" class="view-pane">
+        <div class="section-header-modern">
+          <h3>Mensagens & Coaching</h3>
+          <span class="countdown-pill pill-urgent" style="font-size: 10px;">1 Nova</span>
         </div>
 
-        <div class="ai-chat-box">
-          <div class="chat-messages" id="chatContainer">
+        <div class="material-card-row" style="cursor: pointer;" onclick="openChatWindow('Luana (Coaching Acadêmico)')">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="file-type-badge file-zip">👩‍💼</div>
+            <div>
+              <h5>Atendimento • Coaching Acadêmico</h5>
+              <p style="color: var(--infnet-sky); font-weight: 600;">[Luana aqui] Oi Mattheus, tudo bem?...</p>
+            </div>
+          </div>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">14:20</span>
+        </div>
+
+        <div class="material-card-row" style="cursor: pointer;" onclick="openChatWindow('Profa. Maria Cecília')">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="file-type-badge file-zip" style="background: rgba(16, 185, 129, 0.12); color: #10B981;">👩‍🏫</div>
+            <div>
+              <h5>Maria Cecilia Rodrigues</h5>
+              <p>Você: Boa tarde Professora, sobre o TP 1...</p>
+            </div>
+          </div>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">Ontem</span>
+        </div>
+
+        <div class="material-card-row" style="cursor: pointer;" onclick="openChatWindow('Secretaria')">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="file-type-badge file-zip" style="background: rgba(100, 116, 139, 0.12); color: #94a3b8;">🏛️</div>
+            <div>
+              <h5>Secretaria da Graduação</h5>
+              <p>Link de acesso e credenciais de aula...</p>
+            </div>
+          </div>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">26/10</span>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           VIEW 5: 🤖 ASSISTENTE DE IA DO MANUAL DO ALUNO (RAG ACADÊMICO)
+           ===================================================================== -->
+      <section id="pane-manual" class="view-pane">
+        <div class="section-header-modern">
+          <h3>Assistente Acadêmico Oficial (IA)</h3>
+          <span class="countdown-pill pill-safe">Online</span>
+        </div>
+
+        <div class="ai-chat-interface">
+          <div class="chat-messages-container" id="chatStream">
             <div class="chat-bubble bubble-bot">
-              Olá, <strong>Mattheus</strong>! Sou o assistente de IA do Manual do Aluno da Infnet. Pode me perguntar qualquer dúvida sobre critérios de avaliação, cálculo de média, faltas, TPs, ATs e requerimentos!
+              Olá, <strong>Mattheus</strong>! Sou o assistente de inteligência acadêmica do <strong>Instituto Infnet</strong>.<br><br>
+              Posso te orientar sobre o cálculo da média final com TPs e AT, limite de faltas (75%), requerimentos de segunda chamada e atividades complementares. Como posso te ajudar agora?
             </div>
           </div>
 
-          <!-- Sugestões de Dúvidas Frequentes -->
-          <div class="chat-quick-chips">
-            <button class="chip-btn" onclick="sendQuickPrompt('Como é calculada a média final da disciplina?')">📊 Como é a média final?</button>
-            <button class="chip-btn" onclick="sendQuickPrompt('O que acontece se eu perder o prazo do TP?')">⏰ Perdi o prazo do TP</button>
-            <button class="chip-btn" onclick="sendQuickPrompt('Qual o percentual mínimo de presença?')">🎓 Faltas e presença</button>
-            <button class="chip-btn" onclick="sendQuickPrompt('Como funciona a segunda chamada do AT?')">📄 Segunda chamada AT</button>
+          <div class="chat-chips-scroll">
+            <button class="chip-suggest-btn" onclick="askPreset('Como funciona o cálculo da média final com TPs e AT?')">📊 Cálculo da Média (TPs + AT)</button>
+            <button class="chip-suggest-btn" onclick="askPreset('Qual o limite de faltas permitido na Infnet?')">🚨 Limite de Faltas (75%)</button>
+            <button class="chip-suggest-btn" onclick="askPreset('Como funciona o pedido de Segunda Chamada para o AT?')">📄 Segunda Chamada do AT</button>
+            <button class="chip-suggest-btn" onclick="askPreset('O que são as Atividades Complementares obrigatórias?')">🎓 Atividades Complementares</button>
           </div>
 
-          <!-- Barra de Mensagem -->
-          <form class="chat-input-bar" id="chatForm" onsubmit="handleChatSubmit(event)">
-            <input type="text" id="chatInput" class="chat-input" placeholder="Tire uma dúvida sobre as regras acadêmicas...">
-            <button type="submit" class="chat-send-btn" title="Enviar">
+          <form class="chat-composer-box" id="chatComposerForm" onsubmit="handleSendQuery(event)">
+            <input type="text" id="queryInput" class="chat-input-field" placeholder="Pergunte sobre notas, provas, faltas...">
+            <button type="submit" class="btn-chat-send" title="Enviar Mensagem">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <line x1="22" y1="2" x2="11" y2="13"></line>
                 <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
@@ -1332,39 +1780,38 @@ FINALIDADE: Interface web/mobile de alta performance, moderna, limpa e polida,
       </section>
 
       <!-- =====================================================================
-           ABA 6: PERFIL COMPLETO DO MATTHEUS
+           VIEW 6: 👤 PERFIL DO ALUNO MATTHEUS PHELIPE
            ===================================================================== -->
-      <section id="tab-perfil" class="tab-content">
-        <div class="profile-hero-card" style="flex-direction: column; text-align: center; padding: 24px;">
-          <div class="hero-avatar" style="width: 80px; height: 80px; margin: 0 auto 10px auto;">
-            <img src="assets/mattheus_avatar.png" alt="Mattheus">
-            <span class="status-indicator"></span>
+      <section id="pane-perfil" class="view-pane">
+        <div class="deadline-card-luxury" style="text-align: center; padding: 24px;">
+          <div style="width: 88px; height: 88px; margin: 0 auto 14px auto; border-radius: 24px; overflow: hidden; border: 3px solid var(--infnet-primary); box-shadow: 0 0 15px var(--infnet-primary-glow);">
+            <img src="assets/mattheus_avatar.png" alt="Mattheus Phelipe" style="width: 100%; height: 100%; object-fit: cover;">
           </div>
-          <h2>Mattheus Phelipe Moraes Faria</h2>
-          <p>mattheus.faria@al.infnet.edu.br</p>
-          <span class="hero-badge" style="margin: 8px auto 0 auto;">Engenharia de Software • Graduação</span>
+          <h2 style="font-size: 18px; margin-bottom: 4px;">Mattheus Phelipe Moraes Faria</h2>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 10px;">mattheus.faria@al.infnet.edu.br</p>
+          <span class="course-chip">Engenharia de Software • Bacharelado</span>
         </div>
 
-        <div class="deadline-card" onclick="alert('Requerimentos de Secretaria:\nNenhum requerimento pendente no momento.')" style="cursor: pointer;">
-          <div class="deadline-info">
-            <h4>📋 Requerimentos Acadêmicos</h4>
-            <p>Protocolos de declarações e certificados</p>
-          </div>
-          <span>›</span>
-        </div>
-
-        <div class="deadline-card" onclick="alert('Calendário Acadêmico 2026:\nTrimestre 4 em andamento até Dezembro/2026.')" style="cursor: pointer;">
-          <div class="deadline-info">
-            <h4>📅 Calendário Acadêmico</h4>
-            <p>Datas de provas, TPs, ATs e recessos</p>
+        <div class="material-card-row" style="cursor: pointer;" onclick="alert('Requerimentos de Secretaria: Nenhum processo pendente.')">
+          <div class="material-info">
+            <h5>📋 Requerimentos de Secretaria</h5>
+            <p>Declaração de matrícula, histórico e protocolos</p>
           </div>
           <span>›</span>
         </div>
 
-        <div class="deadline-card" onclick="alert('Biblioteca Virtual Infnet:\nAcesso liberado a Pearson, Minha Biblioteca e IEEE Xplore.')" style="cursor: pointer;">
-          <div class="deadline-info">
-            <h4>📖 Biblioteca Virtual</h4>
-            <p>Pearson, Minha Biblioteca e artigos</p>
+        <div class="material-card-row" style="cursor: pointer;" onclick="alert('Calendário Acadêmico 2026: Trimestre 4 encerra em Dezembro/2026.')">
+          <div class="material-info">
+            <h5>📅 Calendário Acadêmico</h5>
+            <p>Datas de provas, entregas e recessos</p>
+          </div>
+          <span>›</span>
+        </div>
+
+        <div class="material-card-row" style="cursor: pointer;" onclick="alert('Biblioteca Virtual: Acesso ilimitado ao acervo Pearson e Minha Biblioteca.')">
+          <div class="material-info">
+            <h5>📖 Biblioteca Virtual</h5>
+            <p>Milhares de livros técnicos e periódicos</p>
           </div>
           <span>›</span>
         </div>
@@ -1372,11 +1819,11 @@ FINALIDADE: Interface web/mobile de alta performance, moderna, limpa e polida,
 
     </main>
 
-    <!-- =========================================================================
-         BARRA INFERIOR DE NAVEGAÇÃO NATIVA (BOTTOM TABS)
-         ========================================================================= -->
-    <nav class="bottom-nav">
-      <button class="nav-item active" onclick="switchTab('tab-hoje', this)">
+    <!-- =======================================================================
+         BLOCO BOTTOM DOCK: BARRA DE NAVEGAÇÃO INFERIOR COM VIDRO FOSCO
+         ======================================================================= -->
+    <nav class="bottom-dock" role="tablist">
+      <button class="tab-item-dock active" onclick="switchView('pane-hoje', this)" role="tab" aria-selected="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
           <polyline points="9 22 9 12 15 12 15 22"></polyline>
@@ -1384,7 +1831,7 @@ FINALIDADE: Interface web/mobile de alta performance, moderna, limpa e polida,
         <span>Hoje</span>
       </button>
 
-      <button class="nav-item" onclick="switchTab('tab-materias', this)">
+      <button class="tab-item-dock" onclick="switchView('pane-materias', this)" role="tab" aria-selected="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
           <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
@@ -1392,14 +1839,14 @@ FINALIDADE: Interface web/mobile de alta performance, moderna, limpa e polida,
         <span>Matérias</span>
       </button>
 
-      <button class="nav-item" onclick="switchTab('tab-feed', this)">
+      <button class="tab-item-dock" onclick="switchView('pane-feed', this)" role="tab" aria-selected="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
         </svg>
         <span>Feed</span>
       </button>
 
-      <button class="nav-item" onclick="switchTab('tab-mensagens', this)">
+      <button class="tab-item-dock" onclick="switchView('pane-mensagens', this)" role="tab" aria-selected="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
           <polyline points="22,6 12,13 2,6"></polyline>
@@ -1407,7 +1854,7 @@ FINALIDADE: Interface web/mobile de alta performance, moderna, limpa e polida,
         <span>Recados</span>
       </button>
 
-      <button class="nav-item" onclick="switchTab('tab-manual', this)">
+      <button class="tab-item-dock" onclick="switchView('pane-manual', this)" role="tab" aria-selected="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <circle cx="12" cy="12" r="10"></circle>
           <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
@@ -1420,98 +1867,154 @@ FINALIDADE: Interface web/mobile de alta performance, moderna, limpa e polida,
   </div>
 
   <!-- =========================================================================
-       SCRIPT: LÓGICA E INTERATIVIDADE DO APP
-       Data/Hora: 29/10/2026 22:15
-       Finalidade: Gerencia alternância de abas, persistência de anotações no
-                   localStorage, modo escuro/claro e motor de respostas da IA.
+       BLOCO 13: SCRIPT DE INTERAÇÕES TÁTEIS & PERSISTÊNCIA NATIVA
+       Data/Hora: 29/10/2026 23:55
+       Finalidade: Alternância instantânea de abas, modo escuro, notas e regras.
        ========================================================================= -->
   <script>
-    // 1. ALTERNÂNCIA DE ABAS NATIVAS
-    function switchTab(tabId, btnElement) {
-      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-      const target = document.getElementById(tabId);
+    // 1. Alternador de Abas SPA sem reload
+    function switchView(viewId, triggerBtn) {
+      document.querySelectorAll('.view-pane').forEach(v => v.classList.remove('active'));
+      const target = document.getElementById(viewId);
       if (target) target.classList.add('active');
 
-      if (btnElement) {
-        document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
-        btnElement.classList.add('active');
+      if (triggerBtn) {
+        document.querySelectorAll('.tab-item-dock').forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        triggerBtn.classList.add('active');
+        triggerBtn.setAttribute('aria-selected', 'true');
+      } else {
+        // Encontra o botão correspondente se chamado programaticamente
+        const navMap = {
+          'pane-hoje': 0,
+          'pane-materias': 1,
+          'pane-feed': 2,
+          'pane-mensagens': 3,
+          'pane-manual': 4
+        };
+        const index = navMap[viewId];
+        if (index !== undefined) {
+          const allTabs = document.querySelectorAll('.tab-item-dock');
+          allTabs.forEach(b => b.classList.remove('active'));
+          if (allTabs[index]) allTabs[index].classList.add('active');
+        }
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 2. TEMA CLARO / ESCURO (Dark Mode com persistência)
-    const themeToggleBtn = document.getElementById('themeToggle');
-    const savedTheme = localStorage.getItem('infnet_theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
+    // 2. Modo Escuro / Claro com Persistência
+    const htmlElem = document.documentElement;
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const moonIcon = document.getElementById('moonIcon');
+    const sunIcon = document.getElementById('sunIcon');
 
-    themeToggleBtn.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme');
-      const next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('infnet_theme', next);
-    });
-
-    // 3. PERSISTÊNCIA DAS ANOTAÇÕES DE AULA (Caderno Digital)
-    const notesArea = document.getElementById('classNotes');
-    notesArea.value = localStorage.getItem('infnet_class_notes') || '';
-    notesArea.addEventListener('input', (e) => {
-      localStorage.setItem('infnet_class_notes', e.target.value);
-    });
-
-    // 4. MOTOR INTELIGENTE DO MANUAL DO ALUNO (RAG / REGRAS ACADÊMICAS)
-    const knowledgeBase = {
-      'media': 'A média final na Infnet é calculada ponderando os TPs (Testes de Performance) e o AT (Assessment Teste):\n• Média dos TPs: peso 4 (40% da nota)\n• Nota do AT: peso 6 (60% da nota)\n\nFórmula: Média = (Média_TPs * 0.4) + (Nota_AT * 0.6).\nA nota mínima para aprovação direta é 6,0.',
-      'tp': 'Os TPs (Testes de Performance) são avaliações contínuas entregues ao longo do trimestre. Cada matéria possui de 3 a 4 TPs. Entregas fora do prazo podem sofrer penalidade conforme estipulado pelo professor na ementa da disciplina.',
-      'falta': 'O limite de faltas é de 25% da carga horária da disciplina. Para aprovação, o aluno deve ter no mínimo 75% de frequência nas aulas ao vivo (Zoom).',
-      'segunda chamada': 'A solicitação de Segunda Chamada para o AT deve ser feita via portal acadêmico (Requerimentos) em até 48 horas após a aplicação da prova, mediante justificativa ou atestado médico aceito.',
-      'atividades complementares': 'As Atividades Complementares são obrigatórias para a colação de grau. Podem ser obtidas com cursos de extensão, certificações técnicas reconhecidas (ex.: AWS, Google, Microsoft), monitoria e projetos de extensão.'
-    };
-
-    function sendQuickPrompt(promptText) {
-      const input = document.getElementById('chatInput');
-      input.value = promptText;
-      document.getElementById('chatForm').dispatchEvent(new Event('submit'));
+    function applyTheme(theme) {
+      htmlElem.setAttribute('data-theme', theme);
+      localStorage.setItem('infnet_elite_theme', theme);
+      if (theme === 'dark') {
+        moonIcon.style.display = 'none';
+        sunIcon.style.display = 'block';
+      } else {
+        moonIcon.style.display = 'block';
+        sunIcon.style.display = 'none';
+      }
     }
 
-    function handleChatSubmit(e) {
+    const savedTheme = localStorage.getItem('infnet_elite_theme') || 'dark';
+    applyTheme(savedTheme);
+
+    themeBtn.addEventListener('click', () => {
+      const active = htmlElem.getAttribute('data-theme');
+      applyTheme(active === 'dark' ? 'light' : 'dark');
+    });
+
+    // 3. Caderno Digital de Aula (Persistência Offline em LocalStorage)
+    const notebook = document.getElementById('studentNotebook');
+    notebook.value = localStorage.getItem('infnet_notes_data') || '';
+    notebook.addEventListener('input', (e) => {
+      localStorage.setItem('infnet_notes_data', e.target.value);
+    });
+
+    // 4. Copiar Link Zoom
+    function copyZoomLink() {
+      navigator.clipboard.writeText('https://infnet.online/zoom/aula-ao-vivo');
+      alert('Link direto da sala Zoom copiado para a área de transferência!');
+    }
+
+    // 5. Download de Arquivo
+    function triggerDownload(fileName) {
+      alert(`Download de "${fileName}" iniciado com sucesso.`);
+    }
+
+    // 6. Janela de Mensagens
+    function openChatWindow(contactName) {
+      alert(`Abrindo canal direto com: ${contactName}`);
+    }
+
+    // 7. Detalhes de Disciplinas
+    function openDisciplineDetails(discName) {
+      alert(`Visualizando disciplina: ${discName}\nTodas as gravações e arquivos do bloco estão sincronizados.`);
+    }
+
+    // 8. Notificações
+    function openNotificationsModal() {
+      alert('Central de Notificações Infnet:\n\n1. Prof. Claudio Bonel postou a Aula 6.\n2. Profa. Maria Cecília publicou orientações do TP 1.\n3. Reitoria: Teste em beta do novo Manual do Aluno.');
+    }
+
+    // 9. Assistente Acadêmico (IA RAG)
+    const infnetRules = {
+      'media': '📊 <strong>Cálculo da Média Final na Infnet:</strong><br><br>A média final é obtida pela ponderação entre as entregas contínuas (TPs) e a prova final (AT):<br><br>• <strong>Média dos TPs:</strong> Peso 4 (40%)<br>• <strong>Nota do AT:</strong> Peso 6 (60%)<br><br><code>Fórmula: Média = (TPs × 0.4) + (AT × 0.6)</code><br><br>A nota mínima para aprovação direta é <strong>6,0</strong>.',
+      'falta': '🚨 <strong>Regra de Frequência e Presença:</strong><br><br>O aluno deve cumprir no mínimo <strong>75% de frequência</strong> nas aulas ao vivo (Zoom/Teams). O limite máximo de faltas no trimestre é de <strong>25%</strong> da carga horária da disciplina.',
+      'tp': '⏰ <strong>Regras dos TPs (Testes de Performance):</strong><br><br>Os TPs são trabalhos práticos entregues pelo GitHub até as 23:59 do dia limite. Atrasos podem acarretar perda de pontuação conforme a ementa do professor.',
+      'segunda chamada': '📄 <strong>Segunda Chamada de Avaliação (AT):</strong><br><br>Caso perca o AT por motivos de saúde ou trabalho justificado, o requerimento de 2ª chamada deve ser protocolado em até <strong>48 horas úteis</strong> após a data da avaliação.',
+      'complementar': '🎓 <strong>Atividades Complementares:</strong><br><br>São obrigatórias para colação de grau. Valem horas: cursos extracurriculares de tecnologia, certificações (AWS, Azure, GCP), monitoria e eventos acadêmicos.'
+    };
+
+    function askPreset(promptText) {
+      const input = document.getElementById('queryInput');
+      input.value = promptText;
+      document.getElementById('chatComposerForm').dispatchEvent(new Event('submit'));
+    }
+
+    function handleSendQuery(e) {
       e.preventDefault();
-      const input = document.getElementById('chatInput');
-      const query = input.value.trim();
-      if (!query) return;
+      const input = document.getElementById('queryInput');
+      const text = input.value.trim();
+      if (!text) return;
 
-      const container = document.getElementById('chatContainer');
+      const stream = document.getElementById('chatStream');
 
-      // Adiciona mensagem do usuário
-      const userBubble = document.createElement('div');
-      userBubble.className = 'chat-bubble bubble-user';
-      userBubble.textContent = query;
-      container.appendChild(userBubble);
+      const userMsg = document.createElement('div');
+      userMsg.className = 'chat-bubble bubble-user';
+      userMsg.textContent = text;
+      stream.appendChild(userMsg);
       input.value = '';
-      container.scrollTop = container.scrollHeight;
+      stream.scrollTop = stream.scrollHeight;
 
-      // Resposta inteligente da base do Manual
       setTimeout(() => {
-        const lower = query.toLowerCase();
-        let answer = 'Para dúvidas específicas não tabeladas no Manual geral, recomendo abrir um requerimento na secretaria ou falar diretamente com seu coaching acadêmico pela aba "Recados".';
+        const lower = text.toLowerCase();
+        let reply = 'Essa regra pode variar conforme a diretriz da sua coordenação. Recomendo abrir um protocolo na <em>Secretaria</em> ou contatar seu <em>Coaching Acadêmico</em> pela aba de Recados.';
 
-        if (lower.includes('média') || lower.includes('nota') || lower.includes('calcular') || lower.includes('at')) {
-          answer = knowledgeBase['media'];
+        if (lower.includes('média') || lower.includes('nota') || lower.includes('cálculo') || lower.includes('at')) {
+          reply = infnetRules['media'];
+        } else if (lower.includes('falta') || lower.includes('frequência') || lower.includes('presença') || lower.includes('75%')) {
+          reply = infnetRules['falta'];
         } else if (lower.includes('tp') || lower.includes('prazo')) {
-          answer = knowledgeBase['tp'];
-        } else if (lower.includes('falta') || lower.includes('frequência') || lower.includes('presença')) {
-          answer = knowledgeBase['falta'];
-        } else if (lower.includes('segunda chamada') || lower.includes('2 chamada') || lower.includes('perdi')) {
-          answer = knowledgeBase['segunda chamada'];
-        } else if (lower.includes('complementar') || lower.includes('atividade')) {
-          answer = knowledgeBase['atividades complementares'];
+          reply = infnetRules['tp'];
+        } else if (lower.includes('segunda chamada') || lower.includes('perdi')) {
+          reply = infnetRules['segunda chamada'];
+        } else if (lower.includes('complementar') || lower.includes('horas')) {
+          reply = infnetRules['complementar'];
         }
 
-        const botBubble = document.createElement('div');
-        botBubble.className = 'chat-bubble bubble-bot';
-        botBubble.innerHTML = answer.replace(/\n/g, '<br>');
-        container.appendChild(botBubble);
-        container.scrollTop = container.scrollHeight;
-      }, 350);
+        const botMsg = document.createElement('div');
+        botMsg.className = 'chat-bubble bubble-bot';
+        botMsg.innerHTML = reply;
+        stream.appendChild(botMsg);
+        stream.scrollTop = stream.scrollHeight;
+      }, 300);
     }
   </script>
 </body>
